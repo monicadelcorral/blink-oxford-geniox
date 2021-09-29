@@ -1,0 +1,351 @@
+// Text
+
+.ox-title--1 {
+    @include font-size(7);
+}
+
+.ox-title--2 {
+    @include font-size(3);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $color_b_5;
+}
+
+.ox-title--3 {
+    font-family: $font_family_1;
+    @include font-size(2.5);
+    line-height: 1.36;
+    font-weight: bold;
+}
+
+.ox-module {
+    color: $color_b_5;
+}
+
+.ox-module--header {
+    color: $color_white;
+
+    .ox-module__inner {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.ox-card { 
+  border-radius: $border_radius;
+  box-shadow: $box_shadow;
+}
+
+.ox-card__inner {
+    justify-content: flex-start;
+    align-items: flex-end;
+    text-align: right;
+    padding: 20px 30px;
+
+    &.ox-ta-left-up {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    &.ox-ta-center-up {
+        align-items: center;
+        text-align: center;
+    }
+
+    &.ox-ta-center {
+        align-items: center;
+        text-align: center;
+        justify-content: flex-end;
+    }
+}
+
+.ox-navigation--1 .ox-navigation__item__inner {
+  border-radius: $border_radius;
+}
+
+// Pages
+
+.ox-page {
+    scroll-behavior: smooth;
+}
+
+.offline-pc .ox-page {
+    height: calc(100% - 106px);
+}
+
+.ox-bubbleVisible {
+    .ox-page {
+        overflow: hidden;
+    }
+}
+
+// Bubble Help for teachers
+
+#ox-module-bys {
+    position: fixed;
+    background: $color_b_1;
+    z-index: 1250;
+    width: 155px;
+    height: 155px;
+    bottom: 60px;
+    right: 60px;
+    border-radius: 100px 100px 6px 100px;
+    transition: bottom 0.3s linear;
+
+    & > .ox-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+    }
+
+    .ox-module__header {
+        margin-bottom: 0;
+
+        .ox-title {
+            @include font-size(2);
+            line-height: 1.35;
+            font-weight: bold;
+            text-align: center;
+            color: $color_b_3;
+        }
+        .ox-floatingbubble__footer {
+            position: absolute;
+            opacity: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 20;
+            width: 100%;
+            height: 100%;
+        }
+        .ox-link {
+            position: absolute;
+            opacity: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 20;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .ox-module__content {
+        display: none;
+        /*position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: $color_white;
+        z-index: 1200;
+        opacity: 0;
+        pointer-events: none;*/
+        /*transition: opacity .3s linear;*/
+        /*max-height: 100%;*/
+    }
+
+    &:not(.ox-visible) {
+        bottom: calc(var(--st) * -1 + 20px);
+
+        .ox-container {
+            max-width: 100%;
+            padding: 0;
+        }
+    }
+
+    &.ox-visible {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $color_white;
+        border-radius: 0;
+        flex-direction: column;
+        max-height: calc(100vh - #{$footerbar_index_height});
+
+        & > .ox-container {
+            max-height: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .ox-module__content {
+            @include scrollable();
+            opacity: 1;
+            pointer-events: auto;
+            display: block;
+            flex-grow: 2;
+            padding-bottom: 100px;
+        }
+
+        .ox-floatingbubble__footer {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: $color_white;
+            box-shadow: 0 0 15px 0 #02285c29;
+            opacity: 1;
+        }
+
+        .ox-module__header {
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+            .ox-title {
+                @include font-size(4.5);
+                line-height: 1.36;
+                font-weight: bold;
+                text-align: left;
+                color: $color_b_3;
+                text-transform: uppercase;
+            }
+
+            .ox-link {
+                opacity: 1;
+                position: relative;
+                top: 25px;
+                left: 0;
+                width: auto;
+                color: $color_b_5;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 24px;
+                    height: 20px;
+                    background: url(images/goback.svg) 0 0 no-repeat;
+                    background-size: contain;
+                    margin-right: 4px;
+                    margin-top: -4px;
+                }
+            }
+        }
+    }
+
+    .ox-list--1 {
+        @include font-size(3);
+        font-weight: 600;
+        line-height: 1.37;
+        color: $color_b_2;
+        max-width: calc(#{$container_max_width} - #{$container_gutter * 2});
+        margin: 0 auto;
+
+        li {
+            display: block;
+            margin-bottom: 50px;
+            &:after {
+                content: none;
+            }
+            &::before {
+                content: "";
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid $color_b_2;
+                margin-right: 16px;
+            }
+
+            a {
+                color: $color_b_2;
+            }
+        }
+    }
+}
+
+// Searchform
+
+.ox-searchform {
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+    padding: 38px 0;
+
+    @media screen and (max-width: $mq_max_width_mobile) {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    &__field {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: stretch;
+        width: 100%;
+        margin: 0;
+        box-shadow: $box_shadow;
+        border-radius: 70px;
+
+        &__input {
+            @include font-size(2);
+            font-weight: bold;
+            line-height: 1.35;
+            color: $color_b_4;
+            background: $color_white;
+            border: 0;
+            border-radius: 70px 0 0 70px;
+            height: 70px;
+            padding: 22px 22px 21px;
+            width: 100%;
+            text-indent: 4px;
+
+            @include placeholder() {
+                color: $color_b_4;
+            }
+        }
+
+        &__button {
+            display: inline-block;
+            background: url(images/search.svg) 2px center no-repeat $color_white;
+            background-size: 40px 40px;
+            border-radius: 0 70px 70px 0;
+            width: 70px;
+            min-width: 70px;
+            height: 70px;
+        }
+    }
+
+    &__results {
+        top: 130px;
+
+        &__inner {
+            border-radius: 6px;
+            @include scrollable();
+        }
+    }
+}
+
+// Dropdowns modules
+
+.ox-module--togglable { 
+    .ox-module__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+
+        .ox-link {
+            @include font-size(2);
+            font-weight: 600;
+            color: $color_b_5;
+            text-decoration: underline;
+        }
+    }
+
+    .ox-module__content {
+        margin-left: -30px;
+        margin-right: -30px;
+        margin-bottom: -30px;
+    
+        & > * {
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 30px;
+        }
+    }
+}

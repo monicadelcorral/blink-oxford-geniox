@@ -1,0 +1,177 @@
+//----------------------------------------//
+//                                        //
+//  Config and variables                  //
+//                                        //
+//----------------------------------------//
+
+$mq_max_width_tablet : 1030px;
+$mq_max_width_tablet_blink : 1023px;
+$mq_max_width_tablet_portrait : 990px;
+$mq_max_width_mobile_large : 760px;
+$mq_max_width_mobile : 700px;
+$mq_max_width_mobile_small : 450px;
+$mq_max_height_small : 760px;
+
+$navbar_margin : 58px;
+$navbar_height : 44px;
+$footerbar_height : 24px;
+$addresourcebutton_height : 76px;
+$addresourcebutton_height_tablet : 54px;
+$topbar_height: 56px;
+$footerbar_index_height : 62px;
+
+$button_mobile_size : 30px;
+
+$border_radius : 45px;
+$box_shadow: 0 5px 20px 0 #6c757d3b;;
+
+$gutter : 16px;
+
+$module_vs : 50px;
+
+$container_max_width: 1380px;
+$container_gutter: 50px;
+$container_gutter_mobile: 20px;
+
+$card_min_height: 295px;
+$card_min_height_lower: 200px;
+$card_min_height_tablet : 210px;
+$card_min_height_mobile: 212px;
+$card_min_height_lower_mobile : 154px;
+$card_min_height_lower_mobile_2: 58px;
+$card_min_height_exam_mobile: $card_min_height_lower_mobile_2;
+
+$color_white: #fff;
+$color_extradark: #000000;
+$color_darkgray: #4D4D4D;
+$color_mediumgray: #808080;
+$color_mediumgray_2: #707070;
+$color_gray: #999999;
+$color_gray_2: #cccccc;
+$color_lightgray: #EBEBEB;
+$color_oxford: #02285C;
+
+$color_1: #2BA2B7; //Lightblue
+$color_2: #2d3d8b; //Darkblue
+$color_3: #e51d64; // Fucsia
+$color_4: #FC3498;
+$color_5: #8A88E2;
+$color_6: #fbd5c2; //Lightpeach
+$color_7: #4e88ba;
+$color_8: #55c187;
+$color_9: #1f44dd;
+$color_10: #1e65c6;
+$color_11: #94D192;
+$color_12: #21a7b6; //former #66d5e1
+$color_13: #98c3f9; //former #F26D6D
+$color_14: #f7b122;
+
+
+$color_thumb: #999999;
+$color_track: #cccccc;
+
+$color_ok_1: #93d192;
+$color_ok_2: #008b60;
+$color_error_1: #ff5353;
+$color_error_2: #b40946;
+$color_solution_1 : #BEE1EF;
+$color_solution_2: #3195BB;
+
+$color_b_1 : #e1f4f3; //Lightblue
+$color_b_2: #2ba2b7; //Tealish
+$color_b_3: #02285c; // Marine
+$color_b_4: #5d647f; //Steal
+$color_b_5: #313131; //Darkgrey
+
+$font_family_1 : 'Open Sans', sans-serif;
+
+
+:root {
+  --st : 0;
+}
+
+
+/**
+ * Prefixed styeles fot placehoders
+ *
+ * Usage:
+ * .selector {
+ *   @include placeholder {
+ *     font-style:italic;
+ *     color: white;
+ *     font-weight:100;
+ *   }
+ * }
+ */
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+   @content;
+  }
+  @include optional-at-root(':-moz-placeholder') {
+   @content;
+  }
+  @include optional-at-root('::-moz-placeholder') {
+   @content;
+  }
+  @include optional-at-root(':-ms-input-placeholder') {
+   @content;
+  }
+  @include optional-at-root('::placeholder ') {
+   @content;
+  }
+
+}
+
+// Screen Reader Text
+
+@mixin screen-reader-text() {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+// Font size
+
+@mixin font-size($sizeValue) {
+	$remValue: $sizeValue;
+	$pxValue: ($sizeValue * 10);
+	font-size: $pxValue+px;
+	//-font-size: $remValue+rem;
+}
+
+
+// Scrollable
+
+@mixin scrollable($x: hidden, $y: auto) {
+  overflow-x: $x;
+  overflow-y: $y;
+  -webkit-overflow-scrolling: touch;
+
+  // Scrollbars
+  &::-webkit-scrollbar {
+      width: 4px !important;
+      height: 4px !important;
+      background: fade-out($color_track, 0.75);
+  }
+  &::-webkit-scrollbar-thumb {
+      background-color: $color_thumb;
+      border-radius: 20px;
+  }
+  &::-webkit-scrollbar-track {
+      background-color: $color_track;
+  }
+}
