@@ -31,9 +31,9 @@
     }
 }
 
-.ox-card { 
-  border-radius: $border_radius;
-  box-shadow: $box_shadow;
+.ox-card {
+    border-radius: $border_radius;
+    box-shadow: $box_shadow;
 }
 
 .ox-card__inner {
@@ -60,13 +60,14 @@
 }
 
 .ox-navigation--1 .ox-navigation__item__inner {
-  border-radius: $border_radius;
+    border-radius: $border_radius;
 }
 
 // Pages
 
 .ox-page {
     scroll-behavior: smooth;
+    height: calc(100% - 106px);
 }
 
 .offline-pc .ox-page {
@@ -322,7 +323,7 @@
 
 // Dropdowns modules
 
-.ox-module--togglable { 
+.ox-module--togglable {
     .ox-module__header {
         display: flex;
         justify-content: space-between;
@@ -341,11 +342,17 @@
         margin-left: -30px;
         margin-right: -30px;
         margin-bottom: -30px;
-    
+
         & > * {
             padding-left: 30px;
             padding-right: 30px;
             padding-bottom: 30px;
+        }
+    }
+
+    &.ox-visible .ox-module__content {
+        @media (max-width: $mq_max_width_mobile) {
+            max-height: 3000px;
         }
     }
 }

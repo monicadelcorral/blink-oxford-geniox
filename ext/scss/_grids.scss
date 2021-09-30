@@ -37,6 +37,27 @@
                 grid-area: 1 / 5 / 2 / 6;
             }
         }
+
+        @media (max-width: $mq_max_width_mobile) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .ox-grid__item {
+                min-height: 0;
+                min-width: 100%;
+
+                .ox-card {
+                    min-height: 0;
+
+                    &__inner {
+                        min-height: 0;
+                        position: absolute;
+                    }
+                }
+            }
+        }
     }
     &--4items-nowrap {
         grid-template-columns: repeat(4, 1fr);
@@ -62,6 +83,27 @@
             }
             &:nth-child(5) {
                 grid-area: 1 / 5 / 2 / 6;
+            }
+        }
+
+        @media (max-width: $mq_max_width_mobile) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            .ox-grid__item {
+                min-height: 0;
+                min-width: 100%;
+
+                .ox-card {
+                    min-height: 0;
+
+                    &__inner {
+                        min-height: 0;
+                        position: absolute;
+                    }
+                }
             }
         }
     }
