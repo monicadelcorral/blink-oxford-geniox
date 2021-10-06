@@ -34,6 +34,7 @@
 .ox-card {
     border-radius: $border_radius;
     box-shadow: $box_shadow;
+    background-position: center center;
 }
 
 .ox-card__inner {
@@ -85,7 +86,7 @@
 #ox-module-bys {
     position: fixed;
     background: $color_b_1;
-    z-index: 1250;
+    z-index: 280;
     width: 155px;
     height: 155px;
     bottom: 60px;

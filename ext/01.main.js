@@ -80,20 +80,14 @@ oxfApp.getTemplate = function (templateName) {
 
 // Get text align
 oxfApp.getTextAlign = function (array) {
-  for (var i = 0; i < array.length; i++) {
-    switch (array[i]) {
-      case oxfApp.config.tagTextCenter:
-        return "ox-ta-center";
-        break;
-      case oxfApp.config.tagTextUpCenter:
-        return "ox-ta-center-up";
-        break;
-      case oxfApp.config.tagTextUpLeft:
-        return "ox-ta-left-up";
-        break;
-      default:
-        return "";
-    }
+  if (array.indexOf(oxfApp.config.tagTextCenter) >= 0) {
+    return "ox-ta-center";
+  } else if (array.indexOf(oxfApp.config.tagTextUpCenter) >= 0) {
+    return "ox-ta-center-up";
+  } else if (array.indexOf(oxfApp.config.tagTextUpLeft) >= 0) {
+    return "ox-ta-left-up";
+  } else {
+    return "";
   }
 };
 
