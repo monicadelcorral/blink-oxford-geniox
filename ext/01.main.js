@@ -2,6 +2,8 @@ oxfApp.config.tagDropdown = "block_dropdown";
 oxfApp.config.tagTextCenter = "block_text_center";
 oxfApp.config.tagTextUpCenter = "block_text_up_center";
 oxfApp.config.tagTextUpLeft = "block_text_up_left";
+oxfApp.config.tagBackgroundColorHelp = "home_help_background_color_";
+oxfApp.config.tagBorderColorHelp = " home_help_border_color_";
 
 // Get template
 
@@ -149,7 +151,9 @@ oxfApp.blockDropdown = function (block) {
           //nBlocks content
           var unitID = unit.id;
           var textAlign = oxfApp.getTextAlign(unitTagsArray);
-          $('.ox-card__inner[data-unitid="'+unitID+'"]').addClass(textAlign);
+          $('.ox-card__inner[data-unitid="' + unitID + '"]').addClass(
+            textAlign
+          );
         }
       });
     }
@@ -160,6 +164,33 @@ oxfApp.loadHomeGeniox = function () {
   $(".ox-module--header").after(oxfApp.createSearchBar());
 
   var $moduleFLoatingBubble = $("#ox-module-bys");
+
+  var tagsCover = oxfApp.courseData.units[0].subunits[0].tags,
+    tagsCoverArray =
+      typeof tagsCover !== "undefined" ? tagsCover.split(" ") : [];
+
+  var backgroundColor = "#e1f4f3";
+  var borderColor = "#e1f4f3";
+
+  $.each(tagsCoverArray, function (index, value) {
+    value = value.toLowerCase();
+
+    if (oxfApp.startsWith(value, oxfApp.config.tagBackgroundColorHelp)) {
+      backgroundColor = value.replace(
+        oxfApp.config.tagBackgroundColorHelp,
+        "#"
+      );
+    }
+    if (oxfApp.startsWith(value, oxfApp.config.tagBorderColorHelp)) {
+      borderColor = value.replace(oxfApp.config.tagBorderColorHelp, "#");
+    }
+  });
+
+  var styleNode = document.createElement("style");
+  var styleText = document.createTextNode("#ox-module-bys:not(.ox-visible) {background-color: "+ backgroundColor +"; border-color: "+ borderColor +"}");
+  styleNode.appendChild(styleText);
+  document.getElementsByTagName("head")[0].appendChild(styleNode);
+
   var $floatingBubbleButton = $moduleFLoatingBubble.find(".ox--js-toggleBlock");
   $moduleFLoatingBubble
     .addClass("ox-floatingbubble")
