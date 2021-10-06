@@ -2,6 +2,7 @@ oxfApp.config.tagDropdown = "block_dropdown";
 oxfApp.config.tagTextCenter = "block_text_center";
 oxfApp.config.tagTextUpCenter = "block_text_up_center";
 oxfApp.config.tagTextUpLeft = "block_text_up_left";
+oxfApp.config.tagTextUpRight = "block_text_up_right";
 oxfApp.config.tagBackgroundColorHelp = "home_help_background_color_";
 oxfApp.config.tagBorderColorHelp = " home_help_border_color_";
 
@@ -88,8 +89,10 @@ oxfApp.getTextAlign = function (array) {
     return "ox-ta-center-up";
   } else if (array.indexOf(oxfApp.config.tagTextUpLeft) >= 0) {
     return "ox-ta-left-up";
+  } else if (array.indexOf(oxfApp.config.tagTextUpRight) >= 0) {
+    return "ox-ta-right-up";
   } else {
-    return "";
+    return "ox-ta-left-up";
   }
 };
 
@@ -125,10 +128,10 @@ oxfApp.blockDropdown = function (block) {
 
           if (isDropdown) {
             var currentBlockID = "ox-nblock-" + unitInd;
-            var isShown = oxfApp.getBoolean(
-                oxfApp.storage.getItem(currentBlockID)
-              ),
-              visibleClass = isShown ? "ox-visible" : "",
+            var isShown = oxfApp.storage.getItem(currentBlockID)
+                ? oxfApp.getBoolean(oxfApp.storage.getItem(currentBlockID))
+                : true,
+              visibleClass = !isShown ? "" : "ox-visible",
               toggleButtonText = isShown
                 ? oxfApp.text.oxford_zona_recursos_2020_hide
                 : oxfApp.text.oxford_zona_recursos_2020_show,
@@ -187,7 +190,13 @@ oxfApp.loadHomeGeniox = function () {
   });
 
   var styleNode = document.createElement("style");
-  var styleText = document.createTextNode("#ox-module-bys:not(.ox-visible) {background-color: "+ backgroundColor +"; border-color: "+ borderColor +"}");
+  var styleText = document.createTextNode(
+    "#ox-module-bys:not(.ox-visible) {background-color: " +
+      backgroundColor +
+      "; border-color: " +
+      borderColor +
+      "}"
+  );
   styleNode.appendChild(styleText);
   document.getElementsByTagName("head")[0].appendChild(styleNode);
 
