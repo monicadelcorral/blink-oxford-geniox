@@ -351,6 +351,7 @@
 
         &__inner {
             border-radius: 6px;
+            box-shadow: $box_shadow;
             @include scrollable();
         }
     }
