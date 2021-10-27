@@ -23,7 +23,7 @@ $footerbar_index_height : 62px;
 $button_mobile_size : 30px;
 
 $border_radius : 45px;
-$box_shadow: 0 5px 20px 0 #6c757d3b;;
+$box_shadow: 0 5px 20px 0 #6c757d3b;
 
 $gutter : 16px;
 
@@ -176,5 +176,31 @@ $font_family_1 : 'Open Sans', sans-serif;
   }
   &::-webkit-scrollbar-track {
       background-color: $color_track;
+  }
+}
+
+
+
+// Mixin for scrollable
+
+@mixin scrollable($x: hidden, $y: auto) {
+  overflow: hidden;
+  overflow-x: $x;
+  overflow-y: $y;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: $color_b_6 $color-white;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color_b_6;
+    border-radius: 20px;
   }
 }

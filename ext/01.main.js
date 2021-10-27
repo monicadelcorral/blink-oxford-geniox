@@ -15,6 +15,7 @@ oxfApp.text.oxford_geniox_resourcesperunit = "Recursos por unidad";
 oxfApp.text.oxford_geniox_showpins = "Mostrar pines";
 oxfApp.text.oxford_geniox_showbookmenu = "Mostrar menú";
 oxfApp.text.oxford_geniox_hidebookmenu = "Ocultar menú";
+oxfApp.text.oxford_geniox_close = "Cerrar";
 
 // Get template
 
@@ -122,16 +123,86 @@ oxfApp.createSearchBar = function () {
   return barSearch;
 };
 
+oxfApp.initBookUnitsSidebar = function() {
+  var data = oxfApp.courseData;
+  var currentBook = -1;
+  var currentBookIndex = -1;
+
+  data.units.map((unit, index) => {
+    unit.subunits.map((subunit) => {
+      if(subunit.id == window.idclase){
+        for (n = index; n > 0; n--) {
+
+          var unitTags = data.units[n].tags,
+          unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
+
+          if (unitTagsArray.indexOf(oxfApp.config.tagBlockEbooks) >= 0) {
+            currentBook = data.units[n].id;
+            currentBookIndex = n;
+            return;
+          }
+        }
+      }
+    });
+  });
+
+  var $bookwrapper = $(".content-wrapper.libro");
+
+  var bookUnits = "";
+  var bookThumbs = "";
+
+  $.each(data.units, function(i, unit) {
+
+    if (i > currentBookIndex) {
+      
+      var unitTags = unit.tags,
+      unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
+      
+      if (unitTagsArray.indexOf(oxfApp.config.tagBlockEbook) >= 0) {
+        
+        var unitTitle = unit.title,
+        onlyVisibleTeachers = unit.onlyVisibleTeachers;
+        
+        if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+          var unitItem = '<li><a href="javascript:void(0)" title="'+unitTitle+'">'+unitTitle+'</a></li>';
+          bookUnits += unitItem;
+
+          var subunit = unit.subunits[0];
+          if (typeof subunit === 'undefined') return;
+
+          var pags = Array.isArray(subunit.pags) ? subunit.pags : [];
+          var subunitThumb = "";
+
+          $.each(pags, function(i, pag) {
+            var thumb = '<article>'+pag+'</article>';
+            subunitThumb += thumb;
+          });
+
+          var unitThumbs = '<div class="ox-sidebar__thumbs"><div class="ox-sidebar__thumbs__title">'+unitTitle+'</div>'+subunitThumb+'</div>';
+          bookThumbs += unitThumbs;
+        }
+        
+      } else {
+        return false;
+      }
+      
+    }
+  });
+
+  var bookUnitsSidebar = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden">'+bookThumbs+'</div></div>';
+
+  $bookwrapper.append(bookUnitsSidebar);
+}
+
 oxfApp.initBookHTML = function () {
   var data = oxfApp.courseData;
 
-  var $bookwrapper = $(".content-wrapper.libro"); // Former #actividad
+  var $bookwrapper = $(".content-wrapper.libro");
+  
   var barAbove = oxfApp.createBarAbove(data.title);
-
-  //var closeButton = '<a href="javascript:void(0)" class="ox-link ox-link--goback ox--js-closeActivity">'+oxfApp.icons.goback+oxfApp.text.oxford_zona_recursos_2020_exit+'</a>';
-
+  
   var bookMenuIndex =
-    '<a href="javascript:void(0)" class="ox-link-icon">' +
+    '<a href="javascript:void(0)" class="ox-link-icon js--toggleBookUnits">' +
     oxfApp.icons.units +
     oxfApp.text.oxford_geniox_pageperunit +
     "</a>";
@@ -189,6 +260,8 @@ oxfApp.initBookHTML = function () {
     "</div></div>";
 
   $bookwrapper.prepend(barAbove).append(barNavigation).append(viewnotsupported);
+
+  oxfApp.initBookUnitsSidebar();
 };
 
 oxfApp.blockDropdown = function (block) {
@@ -402,12 +475,26 @@ $(document).ready(function () {
 
     if ($nav.hasClass('--hidden')) {
       $nav.removeClass('--hidden');
+      $('body').addClass('oxBookNavigationShown');
       var text = $(this).attr('data-text-hide');
       $(this).text(text);
     } else {
       $nav.addClass('--hidden');
+      $('body').removeClass('oxBookNavigationShown');
       var text = $(this).attr('data-text-show');
       $(this).text(text);
     }
-  })
+  });
+
+  $("body").on("click", ".js--toggleBookUnits", function(e) {
+    e.preventDefault();
+    $('#ox-BookUnits').toggleClass('--hidden');
+  });
+
+  $("body").on("click", ".js--closeSidebar", function(e) {
+    e.preventDefault();
+    $('.ox-sidebar').addClass('--hidden');
+  });
+
+
 });
