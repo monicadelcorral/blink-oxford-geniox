@@ -16,6 +16,8 @@ oxfApp.text.oxford_geniox_showpins = "Mostrar pines";
 oxfApp.text.oxford_geniox_showbookmenu = "Mostrar menú";
 oxfApp.text.oxford_geniox_hidebookmenu = "Ocultar menú";
 oxfApp.text.oxford_geniox_close = "Cerrar";
+oxfApp.text.oxford_geniox_addresource = "Añade tu recurso";
+
 
 // Get template
 
@@ -150,6 +152,7 @@ oxfApp.initBookUnitsSidebar = function() {
 
   var bookUnits = "";
   var bookThumbs = "";
+  var bookResources = "";
 
   $.each(data.units, function(i, unit) {
 
@@ -159,12 +162,13 @@ oxfApp.initBookUnitsSidebar = function() {
       unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
       
       if (unitTagsArray.indexOf(oxfApp.config.tagBlockEbook) >= 0) {
-        
+        var unitID = unit.id;
+
         var unitTitle = unit.title,
         onlyVisibleTeachers = unit.onlyVisibleTeachers;
         
         if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
-          var unitItem = '<li><a href="javascript:void(0)" title="'+unitTitle+'">'+unitTitle+'</a></li>';
+          var unitItem = '<li><a href="javascript:void(0)" title="'+unitTitle+'" data-target="'+unitID+'">'+unitTitle+'</a></li>';
           bookUnits += unitItem;
 
           var subunit = unit.subunits[0];
@@ -180,6 +184,24 @@ oxfApp.initBookUnitsSidebar = function() {
 
           var unitThumbs = '<div class="ox-sidebar__thumbs"><div class="ox-sidebar__thumbs__title">'+unitTitle+'</div>'+subunitThumb+'</div>';
           bookThumbs += unitThumbs;
+
+          // Resources of the UNIT (siblings subunits)
+          var subunits = unit.subunits;
+          console.log(unit.subunits, subunits);
+          var resourceList = "";
+
+          $.each(subunits, function(i, resource) {
+
+            var title = resource.title;
+            var type = resource.type;
+            var onClick = resource.onclickTitle;
+            var resource = '<li class="ox-sidebar__list__item --'+type+'"><a href="javascript:void(0)" onClick="'+onClick+'">'+title+'</a></li>';
+            resourceList += resource;
+  
+
+          });
+
+          bookResources += '<ul class="ox-sidebar__list --hidden" data-parent="'+unitID+'">'+resourceList+'</ul>';
         }
         
       } else {
@@ -189,9 +211,15 @@ oxfApp.initBookUnitsSidebar = function() {
     }
   });
 
-  var bookUnitsSidebar = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden">'+bookThumbs+'</div></div>';
+  var buttonAddRecources = "";
+  if (!oxfApp.config.isStudent) {
+    buttonAddRecources = '<a href="javascript:void();" class="ox-button ox-button--addresource">'+oxfApp.text.oxford_geniox_addresource+'</a>';
+  }
 
-  $bookwrapper.append(bookUnitsSidebar);
+  var bookUnitsSidebarUnits = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--goToUnitList">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden">'+bookThumbs+'</div></div>';
+  var bookUnitsSidebarResources = '<div class="ox-sidebar --hidden" id="ox-BookResources"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_resourcesperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--openResourcesList">'+bookUnits+'</ol>'+buttonAddRecources+'</div><div class="ox-sidebar__resources__wrapper --hidden" id="ox-BookResourcesList">'+bookResources+'</div></div>';
+
+  $bookwrapper.append(bookUnitsSidebarUnits).append(bookUnitsSidebarResources);
 }
 
 oxfApp.initBookHTML = function () {
@@ -207,7 +235,7 @@ oxfApp.initBookHTML = function () {
     oxfApp.text.oxford_geniox_pageperunit +
     "</a>";
   var bookMenuResources =
-    '<a href="javascript:void(0)" class="ox-link-icon">' +
+    '<a href="javascript:void(0)" class="ox-link-icon js--toggleBookResources">' +
     oxfApp.icons.resources +
     oxfApp.text.oxford_geniox_resourcesperunit +
     "</a>";
@@ -488,12 +516,44 @@ $(document).ready(function () {
 
   $("body").on("click", ".js--toggleBookUnits", function(e) {
     e.preventDefault();
+    $('.ox-sidebar:not(#ox-BookUnits)').addClass('--hidden');
     $('#ox-BookUnits').toggleClass('--hidden');
+  });
+
+  $("body").on("click", ".js--toggleBookResources", function(e) {
+    e.preventDefault();
+    
+    if (!$('#ox-BookResources').hasClass('--hidden')) {
+      $('#ox-BookResourcesList').addClass('--hidden');
+    }
+
+    $('.ox-sidebar:not(#ox-BookResources)').addClass('--hidden');
+    $('#ox-BookResources').toggleClass('--hidden');
+
+
   });
 
   $("body").on("click", ".js--closeSidebar", function(e) {
     e.preventDefault();
     $('.ox-sidebar').addClass('--hidden');
+    $('#ox-BookResourcesList').addClass('--hidden')
+  });
+
+
+  $("body").on("click", ".js--openResourcesList a", function(e) {
+    e.preventDefault();
+    var target = $(this).attr('data-target');
+    if ($('[data-parent="'+target+'"]').hasClass('--hidden')) {
+      $('#ox-BookResourcesList').removeClass('--hidden');
+      $('[data-parent="'+target+'"]').removeClass('--hidden').siblings().addClass('--hidden');
+  
+    } else {
+      $('#ox-BookResourcesList').addClass('--hidden');  
+      setTimeout(function() {
+        $('[data-parent="'+target+'"]').addClass('--hidden');
+      }, 300); 
+    }
+
   });
 
 

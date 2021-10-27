@@ -165,7 +165,9 @@
     padding: 0;
     height: auto;
     box-shadow: 0 0 15px 0 #02285c29;
+    z-index: 550;
 }
+
 .ox-book-navigation {
     display: flex;
     justify-content: center;
@@ -201,6 +203,8 @@
 }
 
 
+// Sidebars
+
 .ox-sidebar {
     position: fixed;
     left: 0;
@@ -233,6 +237,16 @@
         width: 100%;
         background: $color-white;
         z-index: 200;
+        padding: 15px 24px;
+    }
+
+    .ox-button--addresource {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 55px;
+        z-index: 200;
     }
 
     &__title {
@@ -241,6 +255,7 @@
         line-height: 1.33;
         color: $color_b_2;
         text-transform: uppercase;
+        margin: 0;
     }
 
     .ox-link {
@@ -249,8 +264,8 @@
 
     &__body {
         flex-grow: 2;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 55px;
+        padding-bottom: 55px;
         @include scrollable();
         position: relative;
         z-index: 150;
@@ -265,6 +280,10 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        
+        li {
+            border-bottom: 2px solid $color_b_9;
+        }
 
         a {
             color: $color_b_3;
@@ -281,7 +300,7 @@
                 border-top: 10px solid $color_b_7;
                 position: absolute;
                 top: 50%;
-                right: 16px;
+                right: 2px;
                 transform: translate(-50%, -50%) rotate(-90deg);
                 z-index: 10;
             }
@@ -309,8 +328,63 @@
     transform: translate(0, 0);
     transition: transform .3s ease-in-out;
     z-index: 100;
-
+    box-shadow: 0 3px 15px 0 #00000029;
+    
     &.--hidden {
         transform: translate(-200%, 0);
     }
+}
+
+.ox-sidebar__resources__wrapper {
+    position: fixed;
+    left: 340px;
+    top: 0;
+    height: 100%;
+    width: 340px;
+    background: $color-white;
+    transform: translate(0, 0);
+    transition: transform .3s ease-in-out;
+    z-index: 100;
+    box-shadow: 0 3px 15px 0 #00000029;
+
+    &.--hidden {
+        transform: translate(-340px, 0);
+    }
+
+    .ox-sidebar__list {
+        li {
+            border-bottom-color: $color_b_11;
+
+            &::before {
+                content: none;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 2px;
+                transform: translate(-50%, -50%);
+                z-index: 10;
+                width: 10px;
+                height: 10px;
+                border-radius: 20px;
+                background-color: red;
+            }
+        }
+
+        &.--hidden {
+           display: none;
+        }
+    }
+}
+
+// New buttons
+
+.ox-button--addresource {
+    background: $color_b_10;
+    color: $color_b_3;
+    @include font-size(2);
+    font-weight: bold;
+    line-height: 1.35;
 }
