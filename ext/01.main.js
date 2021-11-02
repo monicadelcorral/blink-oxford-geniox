@@ -182,7 +182,7 @@ oxfApp.initBookUnitsSidebar = function() {
             subunitThumb += thumb;
           });
 
-          var unitThumbs = '<div class="ox-sidebar__thumbs"><div class="ox-sidebar__thumbs__title">'+unitTitle+'</div>'+subunitThumb+'</div>';
+          var unitThumbs = '<div class="ox-sidebar__thumbs" data-thumbs="'+unitID+'"><div class="ox-sidebar__thumbs__title">'+unitTitle+'</div>'+subunitThumb+'</div>';
           bookThumbs += unitThumbs;
 
           // Resources of the UNIT (siblings subunits)
@@ -191,13 +191,14 @@ oxfApp.initBookUnitsSidebar = function() {
           var resourceList = "";
 
           $.each(subunits, function(i, resource) {
-
-            var title = resource.title;
-            var type = resource.type;
-            var onClick = resource.onclickTitle;
-            var resource = '<li class="ox-sidebar__list__item --'+type+'"><a href="javascript:void(0)" onClick="'+onClick+'">'+title+'</a></li>';
-            resourceList += resource;
-  
+            if (i > 0) {
+              var title = resource.title;
+              var type = resource.type;
+              var level = resource.level;
+              var onClick = resource.onclickTitle;
+              var resource = '<li class="ox-sidebar__list__item --'+type+' --level-'+level+'"><a href="javascript:void(0)" onClick="'+onClick+'">'+title+'</a></li>';
+              resourceList += resource;
+            }
 
           });
 
@@ -216,8 +217,8 @@ oxfApp.initBookUnitsSidebar = function() {
     buttonAddRecources = '<a href="javascript:void();" class="ox-button ox-button--addresource">'+oxfApp.text.oxford_geniox_addresource+'</a>';
   }
 
-  var bookUnitsSidebarUnits = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--goToUnitList">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden">'+bookThumbs+'</div></div>';
-  var bookUnitsSidebarResources = '<div class="ox-sidebar --hidden" id="ox-BookResources"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_resourcesperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--openResourcesList">'+bookUnits+'</ol>'+buttonAddRecources+'</div><div class="ox-sidebar__resources__wrapper --hidden" id="ox-BookResourcesList">'+bookResources+'</div></div>';
+  var bookUnitsSidebarUnits = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--goToUnitList">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden" id="ox-BookThumbs">'+bookThumbs+'</div></div>';
+  var bookUnitsSidebarResources = '<div class="ox-sidebar --hidden" id="ox-BookResources"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_resourcesperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--openResourcesList">'+bookUnits+'</ol></div><div class="ox-sidebar__footer">'+buttonAddRecources+'</div><div class="ox-sidebar__resources__wrapper --hidden" id="ox-BookResourcesList">'+bookResources+'</div></div>';
 
   $bookwrapper.append(bookUnitsSidebarUnits).append(bookUnitsSidebarResources);
 }
@@ -553,6 +554,19 @@ $(document).ready(function () {
         $('[data-parent="'+target+'"]').addClass('--hidden');
       }, 300); 
     }
+
+  });
+
+  $("body").on("click", ".js--goToUnitList a", function(e) {
+    e.preventDefault();
+    var target = $(this).attr('data-target');
+    if ($('#ox-BookThumbs').hasClass('--hidden')) {
+      $('#ox-BookThumbs').removeClass('--hidden');
+    }
+
+    var offset = $('[data-thumbs="'+target+'"').offset().top;
+
+    $('#ox-BookThumbs').scrollTop(offset);
 
   });
 

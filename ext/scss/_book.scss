@@ -217,6 +217,7 @@
     flex-direction: column;
     transition: bottom .3s ease-in, transform .3s ease-in-out;
     transform: translate(0, 0);
+    box-shadow: 0 3px 15px 0 #00000029;
 
     &.--hidden {
         transform: translate(-340px, 0);
@@ -240,13 +241,18 @@
         padding: 15px 24px;
     }
 
-    .ox-button--addresource {
+    &__footer {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 55px;
         z-index: 200;
+
+        .ox-button--addresource {
+            width: 100%;
+
+        }
     }
 
     &__title {
@@ -346,6 +352,7 @@
     transition: transform .3s ease-in-out;
     z-index: 100;
     box-shadow: 0 3px 15px 0 #00000029;
+    @include scrollable();
 
     &.--hidden {
         transform: translate(-340px, 0);
@@ -354,24 +361,51 @@
     .ox-sidebar__list {
         li {
             border-bottom-color: $color_b_11;
+            position: relative;
 
-            &::before {
+            a {
+                &::before {
                 content: none;
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: 2px;
+                    transform: translate(-50%, -50%);
+                    z-index: 10;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 20px;
+                    background-color: transparent;
+                }
             }
 
-            &:after {
-                content: '';
-                position: absolute;
-                top: 50%;
-                right: 2px;
-                transform: translate(-50%, -50%);
-                z-index: 10;
-                width: 10px;
-                height: 10px;
-                border-radius: 20px;
-                background-color: red;
+
+            &.--actividad {
+                a {
+                    &::after {background-color: blue}
+                }
             }
+
+            &.--level-1 {
+                background-color: $color_b_11;
+                @include font-size(1.8);
+
+                a::after {
+                    content: none;
+                }
+            }
+
+            &.--archivo {
+                a {
+                    &::after {background-color: green}
+                }
+            }
+
         }
+
 
         &.--hidden {
            display: none;
@@ -387,4 +421,5 @@
     @include font-size(2);
     font-weight: bold;
     line-height: 1.35;
+    padding: 14px 20px;
 }
