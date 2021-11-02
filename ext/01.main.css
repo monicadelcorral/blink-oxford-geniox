@@ -16,7 +16,7 @@
  * }
  */
 .ox-container {
-  max-width: 1380px;
+  max-width: 1060px;
   padding: 0 50px;
   margin: 0 auto;
 }
@@ -110,7 +110,7 @@
 }
 
 .ox-title--1 {
-  font-size: 70px;
+  font-size: 30px;
 }
 
 .ox-title--2 {
@@ -135,8 +135,8 @@
   color: #fff;
 }
 .ox-module--header .ox-module__inner {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .ox-card {
@@ -146,19 +146,19 @@
 }
 
 .ox-module--custom .ox-card .ox-card__inner .ox-title--3 {
-  font-size: 25px;
+  font-size: 12px;
   color: #777777;
   line-height: 1.35;
   font-weight: bold;
 }
 .ox-module--custom .ox-card .ox-card__inner .ox-title--5:not(:empty) + .ox-title--3 {
-  font-size: 45px;
+  font-size: 25px;
   color: #02285c;
   line-height: 1.35;
   font-weight: bold;
 }
 .ox-module--custom .ox-card .ox-card__inner .ox-title--5:not(:empty) {
-  font-size: 25px;
+  font-size: 12px;
   color: #313131;
   line-height: 1.35;
   font-weight: bold;
@@ -196,11 +196,11 @@
 
 .ox-page {
   scroll-behavior: smooth;
-  height: calc(100% - 106px);
+  height: calc(100% - 93px);
 }
 
 .offline-pc .ox-page {
-  height: calc(100% - 106px);
+  height: calc(100% - 93px);
 }
 
 .ox-bubbleVisible .ox-page {
@@ -212,8 +212,8 @@
   background: #e1f4f3;
   border: 4px solid #e1f4f3;
   z-index: 280;
-  width: 155px;
-  height: 155px;
+  width: 83px;
+  height: 83px;
   bottom: 60px;
   right: 60px;
   border-radius: 100px 100px 6px 100px;
@@ -231,11 +231,13 @@
   padding: 0 40px;
 }
 #ox-module-bys .ox-module__header .ox-title {
-  font-size: 20px;
+  font-size: 10px;
   line-height: 1.35;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   color: #02285c;
+  position: relative;
+  top: -8px;
 }
 #ox-module-bys .ox-module__header .ox-floatingbubble__footer {
   position: absolute;
@@ -286,6 +288,22 @@
   border-radius: 0;
   flex-direction: column;
   max-height: calc(100vh - 62px);
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: #777777 #fff;
+  scrollbar-width: thin;
+}
+#ox-module-bys.ox-visible::-webkit-scrollbar {
+  width: 6px;
+}
+#ox-module-bys.ox-visible::-webkit-scrollbar-track {
+  background: transparent;
+}
+#ox-module-bys.ox-visible::-webkit-scrollbar-thumb {
+  background-color: #777777;
+  border-radius: 20px;
 }
 #ox-module-bys.ox-visible > .ox-container {
   max-height: 100%;
@@ -293,27 +311,11 @@
   align-items: flex-start;
 }
 #ox-module-bys.ox-visible .ox-module__content {
-  overflow: hidden;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-color: #777777 #fff;
-  scrollbar-width: thin;
   opacity: 1;
   pointer-events: auto;
   display: block;
   flex-grow: 2;
   padding-bottom: 100px;
-}
-#ox-module-bys.ox-visible .ox-module__content::-webkit-scrollbar {
-  width: 6px;
-}
-#ox-module-bys.ox-visible .ox-module__content::-webkit-scrollbar-track {
-  background: transparent;
-}
-#ox-module-bys.ox-visible .ox-module__content::-webkit-scrollbar-thumb {
-  background-color: #777777;
-  border-radius: 20px;
 }
 #ox-module-bys.ox-visible .ox-floatingbubble__footer {
   width: 100%;
@@ -332,12 +334,13 @@
   padding-right: 0;
 }
 #ox-module-bys.ox-visible .ox-module__header .ox-title {
-  font-size: 45px;
+  font-size: 30px;
   line-height: 1.36;
   font-weight: bold;
   text-align: left;
   color: #02285c;
   text-transform: uppercase;
+  top: auto;
 }
 #ox-module-bys.ox-visible .ox-module__header .ox-link {
   opacity: 1;
@@ -358,16 +361,13 @@
   margin-top: -4px;
 }
 #ox-module-bys .ox-list--1 {
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 1.37;
   color: #2ba2b7;
-  max-width: calc(1380px - 100px);
+  max-width: calc(1060px - 100px);
   margin: 0 auto;
 }
 #ox-module-bys .ox-list--1 li {
   display: block;
-  margin-bottom: 50px;
+  margin-bottom: 18px;
 }
 #ox-module-bys .ox-list--1 li:after {
   content: none;
@@ -377,10 +377,12 @@
   display: inline-block;
   width: 0;
   height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid #2ba2b7;
-  margin-right: 16px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid #2ba2b7;
+  margin-right: 12px;
+  position: relative;
+  top: -3px;
 }
 #ox-module-bys .ox-list--1 li a {
   color: #2ba2b7;
@@ -390,7 +392,7 @@
   position: relative;
   width: 100%;
   margin-left: 0;
-  padding: 38px 0;
+  padding: 20px 0;
 }
 @media screen and (max-width: 700px) {
   .ox-searchform {
@@ -410,46 +412,51 @@
   border-radius: 70px;
 }
 .ox-searchform__field__input {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 400;
   line-height: 1.35;
   color: #5d647f;
   background: #fff;
   border: 0;
-  border-radius: 70px 0 0 70px;
-  height: 70px;
+  border-radius: 38px 0 0 38px;
+  height: 38px;
   padding: 22px 22px 21px;
   width: 100%;
   text-indent: 4px;
 }
 .ox-searchform__field__input::-webkit-input-placeholder {
   color: #5d647f;
+  font-weight: 400;
 }
 
 .ox-searchform__field__input:-moz-placeholder {
   color: #5d647f;
+  font-weight: 400;
 }
 
 .ox-searchform__field__input::-moz-placeholder {
   color: #5d647f;
+  font-weight: 400;
 }
 
 .ox-searchform__field__input:-ms-input-placeholder {
   color: #5d647f;
+  font-weight: 400;
 }
 
 .ox-searchform__field__input::placeholder {
   color: #5d647f;
+  font-weight: 400;
 }
 
 .ox-searchform__field__button {
   display: inline-block;
-  background: url(images/search.svg) 2px center no-repeat #fff;
-  background-size: 40px 40px;
-  border-radius: 0 70px 70px 0;
-  width: 70px;
-  min-width: 70px;
-  height: 70px;
+  background: url(images/search.svg) 15px center no-repeat #fff;
+  background-size: 21px 21px;
+  border-radius: 0 54px 54px 0;
+  width: 54px;
+  min-width: 54px;
+  height: 38px;
 }
 .ox-searchform__results {
   top: 130px;
@@ -501,6 +508,19 @@
   .ox-module--togglable.ox-visible .ox-module__content {
     max-height: 3000px;
   }
+}
+
+.ox-footer {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.ox-footer__credits ul {
+  font-size: 15px;
+}
+
+.ox-footer__logooxford {
+  height: 20px;
 }
 
 .ox-body-book #viewer {
