@@ -139,8 +139,8 @@
   padding-bottom: 16px;
 }
 .ox-module--header .ox-module__inner .ox-module--header-logo {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
 .ox-card {
@@ -200,10 +200,18 @@
 
 .ox-page {
   scroll-behavior: smooth;
-  height: calc(100% - 93px);
+  height: calc(100% - 68px);
 }
 
 .offline-pc .ox-page {
+  height: calc(100% - 68px);
+}
+
+.ox-page--home {
+  height: calc(100% - 93px);
+}
+
+.offline-pc .ox-page--home {
   height: calc(100% - 93px);
 }
 
@@ -922,6 +930,43 @@ input:checked + .ox-switch__slider:before {
   font-weight: bold;
   line-height: 1.35;
   padding: 14px 20px;
+}
+
+.ox-resourcessection-navbar {
+  box-shadow: 0 0 15px 0 #02285c29;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  bottom: calc(var(--st) * -1);
+  width: 100%;
+  left: 0;
+  z-index: 100;
+}
+.ox-resourcessection-navbar__title {
+  display: none;
+}
+
+.ox-resourcessection-header {
+  min-height: 32px;
+}
+.ox-resourcessection-header::before {
+  content: none;
+}
+.ox-resourcessection-header__description {
+  display: none;
+}
+.ox-resourcessection-header__title {
+  padding: 9px 0;
+}
+.ox-resourcessection-header .ox-title {
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.ox-resourceslist__inner {
+  padding-bottom: 64px;
 }
 
 /*# sourceMappingURL=01.main.css.map */

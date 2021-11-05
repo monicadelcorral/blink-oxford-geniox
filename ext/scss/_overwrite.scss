@@ -31,8 +31,8 @@
     }
 
     .ox-module__inner .ox-module--header-logo {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
     }
 }
 
@@ -102,10 +102,18 @@
 
 .ox-page {
     scroll-behavior: smooth;
-    height: calc(100% - 93px);
+    height: calc(100% - 68px);
 }
 
 .offline-pc .ox-page {
+    height: calc(100% - 68px);
+}
+
+
+.ox-page--home {
+    height: calc(100% - 93px);
+}
+.offline-pc .ox-page--home {
     height: calc(100% - 93px);
 }
 
