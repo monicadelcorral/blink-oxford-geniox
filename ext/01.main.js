@@ -7,6 +7,7 @@ oxfApp.config.tagBackgroundColorHelp = "home_help_background_color_";
 oxfApp.config.tagBorderColorHelp = "home_help_border_color_";
 oxfApp.config.tagBlockEbook = "block_ebook";
 oxfApp.config.tagBlockEbooks = "block_ebooks";
+oxfApp.config.cardView = "cards_view";
 
 oxfApp.icons.units = '<svg xmlns="http://www.w3.org/2000/svg" width="72.607" height="55.322"><path data-name="Libro tab bar" d="M68.122 48.414h-.672v-2a3.778 3.778 0 0 0-3.942-3.579H55.38a2.042 2.042 0 0 0-2.085-1.684H46.65a2.042 2.042 0 0 0-2.085 1.684h-.656a8.82 8.82 0 0 0-7.583 4.081 8.82 8.82 0 0 0-7.583-4.081H9.1a3.778 3.778 0 0 0-3.942 3.579v2h-.673A4.3 4.3 0 0 0 0 52.486V92.4a4.3 4.3 0 0 0 4.485 4.07h63.637a4.3 4.3 0 0 0 4.485-4.07V52.486a4.3 4.3 0 0 0-4.485-4.072zm-24.213-3.651h.641v12.69a1.847 1.847 0 0 0 3.092 1.178l2.332-2.077 2.326 2.077a1.847 1.847 0 0 0 3.1-1.178v-5.817a1.069 1.069 0 0 0-2.127 0v5.148l-2.023-1.8a1.963 1.963 0 0 0-2.547 0l-2.023 1.8V43.079h6.592v13.159c0 .533.476-4.6 1.063-4.6s1.064.533 1.064 0v-6.875h8.112a1.739 1.739 0 0 1 1.815 1.647v41.823a1.739 1.739 0 0 1-1.815 1.647H37.39V50.635c.026-3.24 2.94-5.872 6.519-5.872zM70.479 92.4a2.26 2.26 0 0 1-2.358 2.141H4.485A2.26 2.26 0 0 1 2.127 92.4V52.486a2.26 2.26 0 0 1 2.358-2.141h.672V79.7a1.018 1.018 0 0 0 1.064.966 1.018 1.018 0 0 0 1.063-.966V46.411A1.739 1.739 0 0 1 9.1 44.763h19.642c3.579 0 6.493 2.632 6.52 5.876V89.88H9.1a1.739 1.739 0 0 1-1.814-1.647V79.7a.751.751 0 0 0-.83-.862c-.588 0-1.3.329-1.3.862v8.535A3.778 3.778 0 0 0 9.1 91.811h54.41a3.778 3.778 0 0 0 3.942-3.579V50.345h.672a2.26 2.26 0 0 1 2.358 2.141z" transform="translate(0 -41.148)" style="fill:#02285c"/></svg>';
 oxfApp.icons.resources = '<svg xmlns="http://www.w3.org/2000/svg" width="59.346" height="52.834"><defs><style>.cls-1{fill:#02285c}</style></defs><g id="ICON_contenidos_por_unidades" data-name="ICON contenidos por unidades" transform="translate(-5292.648 -791.102)"><g id="folder" transform="translate(5292.648 791.102)"><g id="Grupo_1216" data-name="Grupo 1216"><path id="Trazado_894" data-name="Trazado 894" class="cls-1" d="M55.39 178.69H3.956A4.1 4.1 0 0 1 0 174.475v-23.186c0-.582.442-.243.989-.243s.989-.338.989.243v23.186a2.048 2.048 0 0 0 1.978 2.108H55.39a2.048 2.048 0 0 0 1.978-2.108V140.75a2.048 2.048 0 0 0-1.978-2.108H3.956a2.048 2.048 0 0 0-1.978 2.108v10.539a1.023 1.023 0 0 1-.989 1.054A1.023 1.023 0 0 1 0 151.289V140.75a4.1 4.1 0 0 1 3.956-4.216H55.39a4.1 4.1 0 0 1 3.956 4.216v33.725a4.1 4.1 0 0 1-3.956 4.216" transform="translate(0 -125.856)"/><path id="Trazado_896" data-name="Trazado 896" class="cls-1" d="M36.264 44.725h51.117V42.96a1.975 1.975 0 0 0-2.13-1.765H55.988a2.4 2.4 0 0 1-1.733-.69l-4.128-4.276a1.149 1.149 0 0 0-.827-.329H38.394a1.975 1.975 0 0 0-2.13 1.765zm52.182 1.765H35.2c-.589 0-1.065 2.507-1.065 2.02V37.664c0-1.947 1.911-3.53 4.26-3.53H49.3a3.456 3.456 0 0 1 2.49.992l4.127 4.274 29.334.028c2.349 0 4.26 1.583 4.26 3.53v2.648a.986.986 0 0 1-1.065.883z" transform="translate(-34.134 -34.134)"/></g></g><path id="Trazado_897" data-name="Trazado 897" d="m221.4 144.324-12.926-8.079a1.616 1.616 0 0 0-2.472 1.37v16.158a1.615 1.615 0 0 0 2.472 1.37l12.926-8.079a1.616 1.616 0 0 0 0-2.74z" transform="translate(5110.242 677.102)" style="fill:none;stroke:#02285c;stroke-width:2px"/></g></svg>';
@@ -187,7 +188,6 @@ oxfApp.initBookUnitsSidebar = function() {
 
           // Resources of the UNIT (siblings subunits)
           var subunits = unit.subunits;
-          console.log(unit.subunits, subunits);
           var resourceList = "";
 
           $.each(subunits, function(i, resource) {
@@ -392,6 +392,77 @@ oxfApp.prepareToEbooks = function () {
   });
 };
 
+oxfApp.cardView = function () {
+  var currentHash = window.location.hash.replace('#','');
+  if (currentHash.startsWith(oxfApp.config.tree[3].hash)) { // Resources
+
+    var unitID = currentHash.replace(oxfApp.config.tree[3].hash, ''),
+        unitIDExists = (oxfApp.config.unitsNblockIDs.indexOf(unitID) >= 0);
+
+    if (unitID !== '' && unitID !== null && unitIDExists) {
+      var resourceInfo = oxfApp.getResourcesInfo(unitID);
+    
+      // Resources
+      var subunits = resourceInfo[1].data.subunits,
+          subunitsItems = '',
+          subunitsItemsSkeleton = '';
+    
+      var backgroundColorImage = '#ffffff';
+
+      var parentTags = resourceInfo[1].data.tags;
+      var parentTags = (typeof parentTags !== 'undefined') ? parentTags.split(" ") : [];
+
+      var hasCardsView = parentTags.indexOf(oxfApp.config.cardView) > -1;
+
+      if (!hasCardsView) return false;
+
+      if (parentTags != null && parentTags.length) {
+        $.each(parentTags, function(index, value) {
+          value = value.toLowerCase();
+          if (oxfApp.startsWith(value, oxfApp.config.boxBg )) {
+            backgroundColorImage = value.replace(oxfApp.config.boxBg, '#');
+          }
+        });
+      }
+
+      if (subunits.length) {
+        $.each(subunits, function(i, subunit) {
+    
+          var title = subunit.title,
+              id = subunit.id,
+              onclickTitle = subunit.onclickTitle,
+              type = subunit.type,
+              onlyVisibleTeachers = subunit.onlyVisibleTeachers,
+              image = subunit.image,
+              description = subunit.description;
+    
+          if (type === 'archivo') {
+            var fileurl = subunit.fileurl,
+                type = oxfApp.getFileType(fileurl);
+          }
+    
+          if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+            subunitsItems += '<article class="ox-resource ox-resource--card --'+type+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__image" style="background-color: '+backgroundColorImage+'; background-image: url('+image+'); "></div><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div></a></article>';
+          }
+    
+        });
+    
+        var subunitsItemsSkeleton = (subunitsItems !== '') ? '<section class="ox-resourceslist ox-resourceslist--cards"><div class="ox-container"><div class="ox-resourceslist__inner">'+subunitsItems+'</div></div></section>' : '';
+    
+        setTimeout(function() {
+          $('.ox-page--resourcessection .ox-resourceslist').remove();
+          $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
+        }, 200);
+      }
+    }
+
+  }
+
+}
+
+window.addEventListener("hashchange", oxfApp.cardView, false);
+
+
 oxfApp.loadHomeGeniox = function () {
   $(".ox-module--header").after(oxfApp.createSearchBar());
 
@@ -468,11 +539,13 @@ $(document).ready(function () {
   function initGeniox() {
     var coverID = oxfApp.config.coverID;
 
-    if (coverID && oxfApp.courseData !== "") {
+    if (coverID && oxfApp.courseData !== "") {      
       var isBookCover = idclase.toString() === coverID;
 
       if (isBookCover) {
         oxfApp.loadHomeGeniox();
+      } else {
+        oxfApp.cardView();
       }
       clearInterval(intervalLoadHome);
     }
