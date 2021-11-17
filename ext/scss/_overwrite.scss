@@ -44,7 +44,7 @@
 
 .ox-module--custom .ox-card .ox-card__inner {
     .ox-title--3 {
-        @include font-size(1.2);
+        @include font-size(2.5);
         color: $color_b_6;
         line-height: 1.35;
         font-weight: bold;
@@ -96,6 +96,17 @@
 
 .ox-navigation--1 .ox-navigation__item__inner {
     border-radius: $border_radius;
+}
+
+// Buttons 
+
+.ox-button--icon--close-2 {
+    &::before {
+        width: 22px;
+        height: 22px;
+        background: url(images/close.svg) center center no-repeat;
+        background-size: contain;
+    }
 }
 
 // Pages
@@ -375,6 +386,14 @@
     }
 }
 
+// Section titles
+
+.ox-module__header > .ox-title--2 {
+    @include font-size(1.5);
+    font-weight: bold;
+    line-height: 1.33;
+}
+
 // Dropdowns modules
 
 .ox-module--togglable {
@@ -385,7 +404,7 @@
         margin-bottom: 0;
 
         .ox-link {
-            @include font-size(2);
+            @include font-size(1.2);
             font-weight: 600;
             color: $color_b_5;
             text-decoration: underline;

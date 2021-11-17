@@ -167,6 +167,7 @@
     height: auto;
     box-shadow: 0 0 15px 0 #02285c29;
     z-index: 550;
+    
 }
 
 .ox-book-navigation {
@@ -176,6 +177,10 @@
     transition: height .3s ease-in;
     overflow: hidden;
     height: 110px;
+
+    .ox-loading & {
+        display: none;
+    }
 
     .ox-switch,
     .ox-link-icon {
@@ -219,6 +224,10 @@
     transition: bottom .3s ease-in, transform .3s ease-in-out;
     transform: translate(0, 0);
     box-shadow: 0 3px 15px 0 #00000029;
+    
+    .ox-loading & {
+        display: none;
+    }
 
     &.--hidden {
         transform: translate(-340px, 0);
@@ -325,6 +334,7 @@
 }
 
 .ox-sidebar__thumbs__wrapper {
+    @include scrollable();
     position: fixed;
     left: 340px;
     top: 0;
@@ -423,4 +433,63 @@
     font-weight: bold;
     line-height: 1.35;
     padding: 14px 20px;
+}
+
+// Thumbs
+
+.ox-sidebar__thumbs {
+    margin-bottom: 32px;
+    padding: 32px;
+
+    .ox-button {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+    }
+}
+
+.ox-thumb__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: 0 -8px -16px;
+}
+
+.ox-thumb {
+    border-radius: 10px;
+    margin-bottom: 16px;
+    padding: 8px;
+    width: 128px;
+
+    &__inner {
+        color: $color-white;
+        @include font-size(1.5);
+        line-height: 1.33;
+
+        &:hover {
+            color: $color-white;
+        }
+    }
+
+    &__media {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+
+        img {
+            min-width: 50%;
+            width: 50%;
+            height: auto;
+            display: block;
+        }
+    }
+
+    &__pages {
+        margin-top: 5px;
+    }
+
+    &.current {
+        box-shadow: 0 0 0 4px $color-white;
+    }
 }
