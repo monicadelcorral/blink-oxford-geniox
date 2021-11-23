@@ -150,13 +150,13 @@
 }
 
 .ox-module--custom .ox-card .ox-card__inner .ox-title--3 {
-  font-size: 25px;
+  font-size: 22px;
   color: #777777;
   line-height: 1.35;
   font-weight: bold;
 }
 .ox-module--custom .ox-card .ox-card__inner .ox-title--5:not(:empty) + .ox-title--3 {
-  font-size: 25px;
+  font-size: 22px;
   color: #02285c;
   line-height: 1.35;
   font-weight: bold;
