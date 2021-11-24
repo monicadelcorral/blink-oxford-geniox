@@ -63,12 +63,14 @@
     padding: 0;
     border-radius: 32px;
     overflow: hidden;
+    align-items: flex-start;
 
     .ox-resource__inner {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
+        color: $color_b_5!important;
     }
 
     .ox-resource__image {
@@ -77,6 +79,13 @@
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
+        position: relative;
+
+        .ox-badge {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+        }
     }
 
     .ox-resource__body {
@@ -91,4 +100,25 @@
         text-transform: uppercase;
         margin-top: 0;
     }
+
+    &--2 {
+        .ox-resource__title {
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 1.33;
+            color: $color_b_3;
+        }
+    }
+}
+
+
+.ox-badge {
+    display: inline-block;
+    background: $color_b_12;
+    color: $color_b_3;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.42;
+    padding: 2px 9px;
+    border-radius: 30px;
 }
