@@ -1,0 +1,34 @@
+
+.ox-badge {
+    display: inline-block;
+    background: $color_b_12;
+    color: $color_b_3;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.42;
+    padding: 2px 9px;
+    border-radius: 30px;
+
+    &.--notification {
+        background: $color_b_14;
+        color: $color-white;
+        font-size: 25px;
+        font-weight: bold;
+        line-height: 1.36;
+        text-align: center;
+        width: 38px;
+    } 
+}
+
+.ox-button--toggleVisibility {
+    font-size: 12px;
+    font-weight: bold;
+
+    &.--unlocked {
+        color: $color_b_13;
+    } 
+
+    &.--locked {
+        color: $color_b_3;
+    }
+}

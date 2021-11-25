@@ -28,7 +28,8 @@ oxfApp.text.oxford_geniox_exam_name = "Nombre";
 oxfApp.text.oxford_geniox_exam_grade = "Nota";
 oxfApp.text.oxford_geniox_exam_status = "Estado";
 
-
+oxfApp.allExams = [];
+oxfApp.newExams = [];
 
 // Get template
 
@@ -582,7 +583,7 @@ oxfApp.secondLevelView = function () {
             var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
                 gradeBadgeWrapper = (gradeBadge) ? '<span class="ox-resource__grade">'+gradeBadge+'</span>' : '';
 
-            var isLocked = subunit.lock !== 16;
+            var isLocked = subunit.lock === 8;
             var classLocked = (isLocked) ? '--locked' : '--unlocked';
             var actionsTeachers = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--toggleVisibility '+classLocked+'" data-id="'+id+'"><span>'+oxfApp.text.oxford_geniox_toggleVisibility+'</span></button>' : '';
             
@@ -675,7 +676,52 @@ oxfApp.loadHomeGeniox = function () {
 
   // Remove Ebook content and prepare eBook link
   oxfApp.prepareToEbooks();
+
+  // Add notifications
+  oxfApp.showExamsNotifications();
+
 };
+
+
+oxfApp.getExamsNotifications = function() {
+  if (!oxfApp.config.isStudent || !oxfApp.courseData.hasExams) return;
+
+  // Get all the examns 
+
+  var units = oxfApp.courseData.units;
+  var studentActivities = window.actividades;
+
+  $.each(units, function(i, unit) {
+    var isExam = unit.isExam;
+    
+    if (isExam) {
+      var subunits = unit.subunits;
+      $.each(subunits, function(i, subunit) {
+      var isVisible = subunit.lock !== 8;
+        if (isVisible) {
+          var id = subunit.id;
+          oxfApp.allExams.push(id);
+          if (typeof studentActivities[id] === 'undefined') {
+            oxfApp.newExams.push(id);
+          }
+
+        }
+      })
+    }
+  });
+} 
+
+oxfApp.showExamsNotifications = function() {
+  var newExamsLength = oxfApp.newExams.length;
+
+  if (newExamsLength) {
+    var target = $('.ox-card .ox--js-goto-generatedexams');
+    var badge = '<span class="ox-badge --notification">'+newExamsLength+'</span>';
+
+    target.append(badge);
+  }
+  
+} 
 
 //----------------------------------//
 //                                  //
@@ -696,6 +742,9 @@ $(document).ready(function () {
         oxfApp.loadHomeGeniox();
         oxfApp.secondLevelView();
       }
+
+      oxfApp.getExamsNotifications();
+
       clearInterval(intervalLoadHome);
     }
   }

@@ -109,6 +109,12 @@
   }
 }
 
+.ox-card .ox-badge {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+}
+
 .ox-title--1 {
   font-size: 30px;
 }
@@ -548,6 +554,37 @@
 
 .ox-footer__logooxford {
   height: 20px;
+}
+
+.ox-badge {
+  display: inline-block;
+  background: #e5e9ee;
+  color: #02285c;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.42;
+  padding: 2px 9px;
+  border-radius: 30px;
+}
+.ox-badge.--notification {
+  background: #ff5353;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 1.36;
+  text-align: center;
+  width: 38px;
+}
+
+.ox-button--toggleVisibility {
+  font-size: 12px;
+  font-weight: bold;
+}
+.ox-button--toggleVisibility.--unlocked {
+  color: #8bcb71;
+}
+.ox-button--toggleVisibility.--locked {
+  color: #02285c;
 }
 
 .ox-body-book #viewer {
@@ -1154,28 +1191,6 @@ input:checked + .ox-switch__slider:before {
   font-size: 15px;
   font-weight: 600;
   line-height: 1.07;
-  color: #02285c;
-}
-
-.ox-badge {
-  display: inline-block;
-  background: #e5e9ee;
-  color: #02285c;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.42;
-  padding: 2px 9px;
-  border-radius: 30px;
-}
-
-.ox-button--toggleVisibility {
-  font-size: 12px;
-  font-weight: bold;
-}
-.ox-button--toggleVisibility.--unlocked {
-  color: #8bcb71;
-}
-.ox-button--toggleVisibility.--locked {
   color: #02285c;
 }
 
