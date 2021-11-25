@@ -22,6 +22,12 @@ oxfApp.text.oxford_geniox_hidebookmenu = "Ocultar menú";
 oxfApp.text.oxford_geniox_close = "Cerrar";
 oxfApp.text.oxford_geniox_addresource = "Añade tu recurso";
 oxfApp.text.oxford_geniox_pags = "Pág.";
+oxfApp.text.oxford_geniox_downloadFile = "Descargar imprimible";
+oxfApp.text.oxford_geniox_toggleVisibility = "Bloquear/Desbloquear examen";
+oxfApp.text.oxford_geniox_exam_name = "Nombre";
+oxfApp.text.oxford_geniox_exam_grade = "Nota";
+oxfApp.text.oxford_geniox_exam_status = "Estado";
+
 
 
 // Get template
@@ -527,28 +533,26 @@ oxfApp.secondLevelView = function () {
               currentUnitTitle = subunit.title;
               currentUnitImage = subunit.image;
             }
-            if (subunit.level !== "1") {
+            if (subunit.level !== "1" && subunit.type !== 'archivo') {
 
-                  var title = subunit.title,
-                  id = subunit.id,
-                  onclickTitle = subunit.onclickTitle,
-                  type = subunit.type,
-                  onlyVisibleTeachers = subunit.onlyVisibleTeachers,
-                  image = currentUnitImage,
-                  description = subunit.description;
-        
-              if (type === 'archivo') {
-                var fileurl = subunit.fileurl,
-                    type = oxfApp.getFileType(fileurl);
-              }
-        
-              var badge = '<span class="ox-badge">'+currentUnitTitle+'</span>';
+                var title = subunit.title,
+                id = subunit.id,
+                onclickTitle = subunit.onclickTitle,
+                type = subunit.type,
+                onlyVisibleTeachers = subunit.onlyVisibleTeachers,
+                image = currentUnitImage,
+                description = subunit.description;
+      
+                var nextSubunit = subunits[i + 1];
+                var isDownloadable = nextSubunit.type === 'archivo';
+                var downloadable = (isDownloadable) ? '<a class="ox-resource__download" href="'+nextSubunit.fileurl+'" download>'+oxfApp.text.oxford_geniox_downloadFile+'</a>' : '';
+      
+                var badge = '<span class="ox-badge">'+currentUnitTitle+'</span>';
 
-              if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
-                subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--2 --'+type+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__image" style="background-color: '+backgroundColorImage+'; background-image: url('+image+'); ">'+badge+'</div><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div></a></article>';
-              }
+                if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+                  subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--2 --'+type+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__image" style="background-color: '+backgroundColorImage+'; background-image: url('+image+'); ">'+badge+'</div><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div></a>'+downloadable+'</article>';
+                }
             }
-
       
           });
       
@@ -564,7 +568,40 @@ oxfApp.secondLevelView = function () {
 
       var hasExamOnlineView = parentTags.indexOf(oxfApp.config.examsOnline) > -1;
       if (hasExamOnlineView) {
+        if (subunits.length) {
 
+        
+          $.each(subunits, function(i, subunit) {
+            
+
+            var title = subunit.title,
+                id = subunit.id,
+                onclickTitle = subunit.onclickTitle,
+                onlyVisibleTeachers = subunit.onlyVisibleTeachers;      
+
+            var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
+                gradeBadgeWrapper = (gradeBadge) ? '<span class="ox-resource__grade">'+gradeBadge+'</span>' : '';
+
+            var isLocked = subunit.lock !== 16;
+            var classLocked = (isLocked) ? '--locked' : '--unlocked';
+            var actionsTeachers = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--toggleVisibility '+classLocked+'" data-id="'+id+'"><span>'+oxfApp.text.oxford_geniox_toggleVisibility+'</span></button>' : '';
+            
+            if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+              subunitsItems += '<article class="ox-resource ox-resource--exam"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><span class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3></span></a>'+gradeBadgeWrapper+actionsTeachers+'</article>';
+            }
+        
+      
+          });
+
+          var resourcesHeader = (oxfApp.config.isStudent) ? '<div class="ox-resourceslist__header"><span>'+oxfApp.text.oxford_geniox_exam_name+'</span><span>'+oxfApp.text.oxford_geniox_exam_grade+'</span></div>' : '<div class="ox-resourceslist__header"><span>'+oxfApp.text.oxford_geniox_exam_name+'</span><span>'+oxfApp.text.oxford_geniox_exam_status+'</span></div>';
+      
+          var subunitsItemsSkeleton = (subunitsItems !== '') ? '<section class="ox-resourceslist ox-resourceslist--exams"><div class="ox-container">'+resourcesHeader+'<div class="ox-resourceslist__inner">'+subunitsItems+'</div></div></section>' : '';
+          setTimeout(function() {
+
+            $('.ox-page--resourcessection .ox-resourceslist').remove();
+            $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
+          }, 400);
+        }
       }
 
     }

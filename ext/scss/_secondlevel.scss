@@ -40,6 +40,21 @@
     &__inner {
         padding-bottom: 64px;
     }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid $color_b_5;
+        padding: 0 0 7px 0;
+        margin: 50px 0 0 0;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+        color: $color_b_5;
+   
+    }
+
 }
 
 .ox-resourceslist--cards {
@@ -64,6 +79,7 @@
     border-radius: 32px;
     overflow: hidden;
     align-items: flex-start;
+    flex-direction: column;
 
     .ox-resource__inner {
         display: flex;
@@ -71,6 +87,7 @@
         align-items: flex-start;
         justify-content: flex-start;
         color: $color_b_5!important;
+        min-width: 100%;
     }
 
     .ox-resource__image {
@@ -101,15 +118,44 @@
         margin-top: 0;
     }
 
+    .ox-resource__download {
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.42;
+        color: $color_b_3;
+        min-width: 100%;
+        padding: 16px;
+        margin-bottom: 8px;
+    }
+
     &--2 {
+        
         .ox-resource__title {
             font-size: 15px;
             font-weight: bold;
             line-height: 1.33;
             color: $color_b_3;
+            min-height: 60px;
+        }
+
+        .ox-resource__image {
+            height: 97px;
         }
     }
 }
+
+.ox-resource--exam {
+    padding-right: 0;
+
+    .ox-resource__title {
+
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.07;
+        color: $color_b_3;
+    
+    }
+} 
 
 
 .ox-badge {
@@ -121,4 +167,17 @@
     line-height: 1.42;
     padding: 2px 9px;
     border-radius: 30px;
+}
+
+.ox-button--toggleVisibility {
+    font-size: 12px;
+    font-weight: bold;
+
+    &.--unlocked {
+        color: $color_b_13;
+    } 
+
+    &.--locked {
+        color: $color_b_3;
+    }
 }
