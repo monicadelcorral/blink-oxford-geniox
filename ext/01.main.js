@@ -214,12 +214,12 @@ oxfApp.initBookUnitsSidebar = function() {
             if (i % 2) {
               return;
             }
-            var thumb = pag.thumb;
+            var thumb = (pag) ? pag.thumb : [];
             var pageIndex = i + 1;
-            var thumbNext = pags[pageIndex].thumb;
+            var thumbNext = (pags[pageIndex]) ? pags[pageIndex].thumb : '';
             var page = pag.label;
             var page = (page === null || page === "null") ? "0" : page;
-            var pageNext = pags[pageIndex].label;
+            var pageNext = (pags[pageIndex]) ?  pags[pageIndex].label : '';
             var otherBook = (window.idclase !== Number(subunitId)) ? 'data-onclick="' + subunit.onclickTitle + '"': '';
             var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+'-'+pageNext+'</div></a></article>';
             subunitThumb += thumbWithPage;
