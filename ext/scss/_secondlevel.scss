@@ -1,3 +1,9 @@
+.ox-page--resourcessection   { 
+    &.loading {
+        visibility: hidden;
+    }
+}
+
 .ox-resourcessection-navbar {
     box-shadow: 0 0 15px 0 #02285c29;
     background: $color-white;
@@ -37,6 +43,8 @@
 }
 
 .ox-resourceslist {
+
+
     &__inner {
         padding-bottom: 64px;
     }
@@ -68,6 +76,13 @@
         .ox-resource--card {
             width: calc(33.333% - 16px);
             margin: 0 8px 16px;
+
+            @media (max-width: $mq_max_width_tablet) {
+                width: calc(50% - 16px);
+            }
+            @media (max-width: $mq_max_width_tablet_portrait) {
+                width: calc(100% - 16px);
+            }
         }
     }
 }

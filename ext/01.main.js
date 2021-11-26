@@ -450,7 +450,7 @@ oxfApp.prepareToEbooks = function () {
 oxfApp.secondLevelView = function () {
   var currentHash = window.location.hash.replace('#','');
   if (currentHash.startsWith(oxfApp.config.tree[3].hash)) { // Resources
-
+    $('.ox-page--resourcessection').addClass('loading');
     var unitID = currentHash.replace(oxfApp.config.tree[3].hash, ''),
         unitIDExists = (oxfApp.config.unitsNblockIDs.indexOf(unitID) >= 0);
 
@@ -507,7 +507,7 @@ oxfApp.secondLevelView = function () {
           setTimeout(function() {
             $('.ox-page--resourcessection .ox-resourceslist').remove();
             $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
-          }, 400);
+          }, 200);
         }
 
       }
@@ -534,7 +534,12 @@ oxfApp.secondLevelView = function () {
               currentUnitTitle = subunit.title;
               currentUnitImage = subunit.image;
             }
-            if (subunit.level !== "1" && subunit.type !== 'archivo') {
+
+            var nextSubunit = subunits[i + 1];
+            var prevSubunit = subunits[i - 1];
+            var examType = (prevSubunit && prevSubunit.level === "6");
+
+            if (subunit.level !== "1" && !examType && subunit.type !== 'archivo') {
 
                 var title = subunit.title,
                 id = subunit.id,
@@ -544,8 +549,8 @@ oxfApp.secondLevelView = function () {
                 image = currentUnitImage,
                 description = subunit.description;
       
-                var nextSubunit = subunits[i + 1];
-                var isDownloadable = nextSubunit.type === 'archivo';
+                var downloadableSubunit = subunits[i + 2];
+                var isDownloadable = (downloadableSubunit) ? downloadableSubunit.type === 'archivo' : false;
                 var downloadable = (isDownloadable) ? '<a class="ox-resource__download" href="'+nextSubunit.fileurl+'" download>'+oxfApp.text.oxford_geniox_downloadFile+'</a>' : '';
       
                 var badge = '<span class="ox-badge">'+currentUnitTitle+'</span>';
@@ -562,6 +567,7 @@ oxfApp.secondLevelView = function () {
 
             $('.ox-page--resourcessection .ox-resourceslist').remove();
             $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
+
           }, 400);
         }
 
@@ -601,9 +607,13 @@ oxfApp.secondLevelView = function () {
 
             $('.ox-page--resourcessection .ox-resourceslist').remove();
             $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
-          }, 400);
+          }, 600);
         }
       }
+
+      setTimeout(function() {
+         $('.ox-page--resourcessection').removeClass('loading');
+      }, 650);
 
     }
 

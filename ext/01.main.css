@@ -1062,6 +1062,10 @@ input:checked + .ox-switch__slider:before {
   box-shadow: 0 0 0 4px #fff;
 }
 
+.ox-page--resourcessection.loading {
+  visibility: hidden;
+}
+
 .ox-resourcessection-navbar {
   box-shadow: 0 0 15px 0 #02285c29;
   background: #fff;
@@ -1121,6 +1125,16 @@ input:checked + .ox-switch__slider:before {
 .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card {
   width: calc(33.333% - 16px);
   margin: 0 8px 16px;
+}
+@media (max-width: 1030px) {
+  .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card {
+    width: calc(50% - 16px);
+  }
+}
+@media (max-width: 990px) {
+  .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card {
+    width: calc(100% - 16px);
+  }
 }
 
 .ox-resource--card {
