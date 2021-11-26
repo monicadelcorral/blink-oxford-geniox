@@ -407,7 +407,7 @@ oxfApp.prepareToEbooks = function () {
 
   $.each(data.units, function (index, unit) {
     var unitID = unit.id;
-    var tags = unit.tags;
+    var tags = (typeof unit.tags !== 'undefined') ? unit.tags : [];
 
     var pattern = oxfApp.config.tagBlockEbook;
     var pattern2 = oxfApp.config.tagBlockEbooks;
@@ -415,18 +415,27 @@ oxfApp.prepareToEbooks = function () {
       tags.indexOf(pattern) >= 0 && tags.indexOf(pattern2) < 0;
 
     if (isEbookContent) {
+      var onclick = (unit.subunits.length) ? unit.subunits[0].onclickTitle : 'nothing';
       $('.ox-card__inner[data-unitid="' + unitID + '"]')
         .closest(".ox-grid__item")
         .remove();
-    } else if (index > 1) {
+      
+      $('.ox-card__inner[onclick="' + onclick + '"]')
+        .closest(".ox-grid__item:not(:first-child)")
+        .remove();
+
+     
+    } 
+    
+    if (index > 1) {
       var prevIndex = index - 1;
-      var previousTags = data.units[prevIndex].tags;
+      var previousTags = (data.units[prevIndex] && typeof data.units[prevIndex].tags !== 'undefined') ? data.units[prevIndex].tags : [];
 
       var isAfterEbookContent =
         !isEbookContent &&
         previousTags.indexOf(pattern) >= 0 &&
         previousTags.indexOf(pattern2) < 0;
-
+      
       if (isAfterEbookContent) {
         $('.ox-card__inner[data-unitid="' + unitID + '"]')
           .closest(".ox-grid__item")
