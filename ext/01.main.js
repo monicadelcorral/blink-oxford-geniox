@@ -120,14 +120,28 @@ oxfApp.closeActivity = function() {
     if (window.esPopup) {
       window.top.cerrarIframe()
     } else {
-      if (modoactual == 'standalone' || ishtmlBook) {
+      if (modoactual == 'standalone') {
         window.history.back();
+      } else if (ishtmlBook) {
+        oxfApp.goHome();
       } else {
         closeActivity();
       }
     }
   }
 }
+
+// Go to home
+oxfApp.goHome = function() {
+  var isBookCover = idclase.toString() === oxfApp.config.coverID;
+  if (isBookCover) {
+    window.location.hash = oxfApp.config.tree[0].hash;
+  } else {
+    var bookCoverAction = oxfApp.courseData.units[0].subunits[0].onclickTitle;
+    eval(bookCoverAction);
+  }
+}
+
 
 // Get text align
 oxfApp.getTextAlign = function (array) {
