@@ -711,9 +711,9 @@ oxfApp.getExamsNotifications = function() {
   var studentActivities = window.actividades;
 
   $.each(units, function(i, unit) {
-    var isExam = unit.isExam;
+    var isExams = unit.isExams;
     
-    if (isExam) {
+    if (isExams) {
       var subunits = unit.subunits;
       $.each(subunits, function(i, subunit) {
       var isVisible = subunit.lock !== 8;
@@ -734,7 +734,7 @@ oxfApp.showExamsNotifications = function() {
   var newExamsLength = oxfApp.newExams.length;
 
   if (newExamsLength) {
-    var target = $('.ox-card .ox--js-goto-generatedexams');
+    var target = $('.ox-card .ox--js-goto-generatedexams').parent();
     var badge = '<span class="ox-badge --notification">'+newExamsLength+'</span>';
 
     target.append(badge);
