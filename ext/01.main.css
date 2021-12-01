@@ -556,6 +556,45 @@
   height: 20px;
 }
 
+.ox-button--2 {
+  background-color: #02285c;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.35;
+  padding: 11px 18px;
+}
+
+.ox-button--lock.disabled, .ox-button--lock:disabled {
+  opacity: 1;
+}
+.ox-button--lock.--locked {
+  color: #02285c;
+}
+.ox-button--lock.--locked .ox-button__icon.--locked {
+  display: block;
+}
+.ox-button--lock.--locked .ox-button__icon.--unlocked {
+  display: none;
+}
+.ox-button--lock.--unlocked {
+  color: #8bcb71;
+}
+.ox-button--lock.--unlocked .ox-button__icon.--unlocked {
+  display: block;
+}
+.ox-button--lock.--unlocked .ox-button__icon.--locked {
+  display: none;
+}
+
+.ox-button--view {
+  color: #548fde;
+}
+.ox-button--view svg {
+  width: 24px;
+  height: auto;
+}
+
 .ox-badge {
   display: inline-block;
   background: #e5e9ee;
@@ -585,6 +624,25 @@
 }
 .ox-button--toggleVisibility.--locked {
   color: #02285c;
+}
+
+.ox-modal__inner {
+  box-shadow: 0 4px 20px 0 #0003;
+  border-radius: 25px;
+}
+.ox-modal__message {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.33;
+  text-align: center;
+  color: #001d1f;
+}
+.ox-modal--lockstatus .ox-modal__message {
+  background-image: url(images/locked.svg);
+  background-size: 35px 50px;
+}
+.ox-modal--lockstatus .ox-modal__footer {
+  justify-content: center;
 }
 
 .ox-body-book #viewer {
@@ -1115,24 +1173,28 @@ input:checked + .ox-switch__slider:before {
   color: #313131;
 }
 
-.ox-resourceslist--cards .ox-resourceslist__inner {
+.ox-resourceslist--cards .ox-resourceslist__inner,
+.ox-resourceslist--cards--2 .ox-resourceslist__inner {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   justify-content: flex-start;
   margin: 0 -8px;
 }
-.ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card {
+.ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card,
+.ox-resourceslist--cards--2 .ox-resourceslist__inner .ox-resource--card {
   width: calc(33.333% - 16px);
   margin: 0 8px 16px;
 }
 @media (max-width: 1030px) {
-  .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card {
+  .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card,
+.ox-resourceslist--cards--2 .ox-resourceslist__inner .ox-resource--card {
     width: calc(50% - 16px);
   }
 }
 @media (max-width: 990px) {
-  .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card {
+  .ox-resourceslist--cards .ox-resourceslist__inner .ox-resource--card,
+.ox-resourceslist--cards--2 .ox-resourceslist__inner .ox-resource--card {
     width: calc(100% - 16px);
   }
 }
@@ -1197,6 +1259,39 @@ input:checked + .ox-switch__slider:before {
 .ox-resource--card--2 .ox-resource__image {
   height: 97px;
 }
+.ox-resource--card--3 {
+  position: relative;
+  min-height: 134px;
+  padding-bottom: 20px;
+}
+.ox-resource--card--3.--student.--locked {
+  opacity: 0.7;
+}
+.ox-resource--card--3 .ox-resource__title {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.33;
+  color: #02285c;
+  padding-right: 30px;
+}
+.ox-resource--card--3 .ox-resource__description {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.42;
+  color: #02285c;
+}
+.ox-resource--card--3 .ox-button--lock {
+  position: absolute;
+  z-index: 10;
+  right: 18px;
+  top: 10px;
+}
+.ox-resource--card--3 .ox-button--view {
+  position: absolute;
+  z-index: 10;
+  right: 18px;
+  bottom: 10px;
+}
 
 .ox-resource--exam {
   padding-right: 0;
@@ -1206,6 +1301,22 @@ input:checked + .ox-switch__slider:before {
   font-weight: 600;
   line-height: 1.07;
   color: #02285c;
+}
+
+.ox-resource-header__title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.07;
+  color: #02285c;
+}
+
+.ox-resourceslist--cards--2 .ox-resource-header {
+  min-width: 100%;
+  margin: 0 0 10px 0;
+  margin: 0 8px 16px;
+}
+.ox-resourceslist--cards--2 .ox-resourceslist__inner .ox-resource--card {
+  width: 174px;
 }
 
 /*# sourceMappingURL=01.main.css.map */

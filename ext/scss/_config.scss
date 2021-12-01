@@ -89,9 +89,10 @@ $color_b_9: #d1d8e1;
 $color_b_10: #cdecec; 
 $color_b_11: #e6f5f5;
 $color_b_12: #e5e9ee;
-
 $color_b_13: #8bcb71;
 $color_b_14: #ff5353;
+$color_b_15: #548fde;
+$color_b_16: #001d1f; //Extradark
 
 
 $font_family_1 : 'Open Sans', sans-serif;
@@ -211,4 +212,14 @@ $font_family_1 : 'Open Sans', sans-serif;
     background-color: $color_b_6;
     border-radius: 20px;
   }
+}
+
+
+// Text and titles 
+
+@mixin text--title-2() {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.07;
+  color: $color_b_3;
 }

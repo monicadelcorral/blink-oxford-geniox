@@ -15,6 +15,10 @@ oxfApp.config.examsOnline = "exams_online";
 
 oxfApp.icons.units = '<svg xmlns="http://www.w3.org/2000/svg" width="72.607" height="55.322"><path data-name="Libro tab bar" d="M68.122 48.414h-.672v-2a3.778 3.778 0 0 0-3.942-3.579H55.38a2.042 2.042 0 0 0-2.085-1.684H46.65a2.042 2.042 0 0 0-2.085 1.684h-.656a8.82 8.82 0 0 0-7.583 4.081 8.82 8.82 0 0 0-7.583-4.081H9.1a3.778 3.778 0 0 0-3.942 3.579v2h-.673A4.3 4.3 0 0 0 0 52.486V92.4a4.3 4.3 0 0 0 4.485 4.07h63.637a4.3 4.3 0 0 0 4.485-4.07V52.486a4.3 4.3 0 0 0-4.485-4.072zm-24.213-3.651h.641v12.69a1.847 1.847 0 0 0 3.092 1.178l2.332-2.077 2.326 2.077a1.847 1.847 0 0 0 3.1-1.178v-5.817a1.069 1.069 0 0 0-2.127 0v5.148l-2.023-1.8a1.963 1.963 0 0 0-2.547 0l-2.023 1.8V43.079h6.592v13.159c0 .533.476-4.6 1.063-4.6s1.064.533 1.064 0v-6.875h8.112a1.739 1.739 0 0 1 1.815 1.647v41.823a1.739 1.739 0 0 1-1.815 1.647H37.39V50.635c.026-3.24 2.94-5.872 6.519-5.872zM70.479 92.4a2.26 2.26 0 0 1-2.358 2.141H4.485A2.26 2.26 0 0 1 2.127 92.4V52.486a2.26 2.26 0 0 1 2.358-2.141h.672V79.7a1.018 1.018 0 0 0 1.064.966 1.018 1.018 0 0 0 1.063-.966V46.411A1.739 1.739 0 0 1 9.1 44.763h19.642c3.579 0 6.493 2.632 6.52 5.876V89.88H9.1a1.739 1.739 0 0 1-1.814-1.647V79.7a.751.751 0 0 0-.83-.862c-.588 0-1.3.329-1.3.862v8.535A3.778 3.778 0 0 0 9.1 91.811h54.41a3.778 3.778 0 0 0 3.942-3.579V50.345h.672a2.26 2.26 0 0 1 2.358 2.141z" transform="translate(0 -41.148)" style="fill:#02285c"/></svg>';
 oxfApp.icons.resources = '<svg xmlns="http://www.w3.org/2000/svg" width="59.346" height="52.834"><defs><style>.cls-1{fill:#02285c}</style></defs><g id="ICON_contenidos_por_unidades" data-name="ICON contenidos por unidades" transform="translate(-5292.648 -791.102)"><g id="folder" transform="translate(5292.648 791.102)"><g id="Grupo_1216" data-name="Grupo 1216"><path id="Trazado_894" data-name="Trazado 894" class="cls-1" d="M55.39 178.69H3.956A4.1 4.1 0 0 1 0 174.475v-23.186c0-.582.442-.243.989-.243s.989-.338.989.243v23.186a2.048 2.048 0 0 0 1.978 2.108H55.39a2.048 2.048 0 0 0 1.978-2.108V140.75a2.048 2.048 0 0 0-1.978-2.108H3.956a2.048 2.048 0 0 0-1.978 2.108v10.539a1.023 1.023 0 0 1-.989 1.054A1.023 1.023 0 0 1 0 151.289V140.75a4.1 4.1 0 0 1 3.956-4.216H55.39a4.1 4.1 0 0 1 3.956 4.216v33.725a4.1 4.1 0 0 1-3.956 4.216" transform="translate(0 -125.856)"/><path id="Trazado_896" data-name="Trazado 896" class="cls-1" d="M36.264 44.725h51.117V42.96a1.975 1.975 0 0 0-2.13-1.765H55.988a2.4 2.4 0 0 1-1.733-.69l-4.128-4.276a1.149 1.149 0 0 0-.827-.329H38.394a1.975 1.975 0 0 0-2.13 1.765zm52.182 1.765H35.2c-.589 0-1.065 2.507-1.065 2.02V37.664c0-1.947 1.911-3.53 4.26-3.53H49.3a3.456 3.456 0 0 1 2.49.992l4.127 4.274 29.334.028c2.349 0 4.26 1.583 4.26 3.53v2.648a.986.986 0 0 1-1.065.883z" transform="translate(-34.134 -34.134)"/></g></g><path id="Trazado_897" data-name="Trazado 897" d="m221.4 144.324-12.926-8.079a1.616 1.616 0 0 0-2.472 1.37v16.158a1.615 1.615 0 0 0 2.472 1.37l12.926-8.079a1.616 1.616 0 0 0 0-2.74z" transform="translate(5110.242 677.102)" style="fill:none;stroke:#02285c;stroke-width:2px"/></g></svg>';
+oxfApp.icons.lockUnlock = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M21.53 13.8H6.73V9a5.15 5.15 0 0 1 4-5.1A5 5 0 0 1 16.52 8c.051.28.078.565.08.85a1.65 1.65 0 1 0 3.29 0A8.25 8.25 0 0 0 11.63.6h-.78a8.53 8.53 0 0 0-7.4 8.55v4.6H1.8A1.65 1.65 0 0 0 .16 15.4v16.49a1.76 1.76 0 0 0 1.64 1.64h19.73a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64h-.19Zm-8.22 11V27A1.655 1.655 0 1 1 10 27v-2.18A3.4 3.4 0 0 1 8.38 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11A3.72 3.72 0 0 1 15 21.36a3.21 3.21 0 0 1-1.69 3.46v-.02Z" fill="#8EC371" fill-rule="nonzero"/></svg>';
+oxfApp.icons.lockLocked = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M22 13.8H7.24V9a5.15 5.15 0 0 1 3.95-5.1A5 5 0 0 1 17 8c.051.28.078.565.08.85v6h2l1.3.53V8.87A8.26 8.26 0 0 0 12.12.61h-.78A8.54 8.54 0 0 0 4 9.19v4.6H2.31a1.65 1.65 0 0 0-1.64 1.65v16.45a1.76 1.76 0 0 0 1.64 1.64H22a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64H22Zm-8.22 11V27a1.65 1.65 0 1 1-3.29 0v-2.18A3.43 3.43 0 0 1 8.89 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11a3.72 3.72 0 0 1 2.47 2.47 3.19 3.19 0 0 1-1.65 3.48l-.04-.02Z" fill="#202E55" fill-rule="nonzero"/></svg>';
+oxfApp.icons.eye = '<svg width="77" height="49" viewBox="0 0 77 49" xmlns="http://www.w3.org/2000/svg"><path d="M38.58 9.46A14.94 14.94 0 1 0 53.52 24.4c-.033-8.237-6.703-14.907-14.94-14.94Zm0-9.13c20.54 0 36.62 21.68 37.29 22.6a2.49 2.49 0 0 1 0 2.94c-.67.92-16.75 22.6-37.29 22.6S1.96 26.79 1.29 25.87a2.49 2.49 0 0 1 0-2.94C2 22 18.04.33 38.58.33Zm0 4.98c-15.11 0-28.24 14.38-32.11 19.09 3.88 4.7 16.98 19.09 32.11 19.09 15.16 0 28.23-14.38 32.11-19.09-3.88-4.71-17-19.09-32.11-19.09Zm0 9.05c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10Z" fill="#323232" fill-rule="nonzero"/></svg>';
+
 oxfApp.text.oxford_geniox_pageperunit = "Páginas por unidad";
 oxfApp.text.oxford_geniox_resourcesperunit = "Recursos por unidad";
 oxfApp.text.oxford_geniox_showpins = "Mostrar pines";
@@ -28,6 +32,10 @@ oxfApp.text.oxford_geniox_toggleVisibility = "Bloquear/Desbloquear examen";
 oxfApp.text.oxford_geniox_exam_name = "Nombre";
 oxfApp.text.oxford_geniox_exam_grade = "Nota";
 oxfApp.text.oxford_geniox_exam_status = "Estado";
+oxfApp.text.oxford_geniox_exam_evau_locked_1 = "No tienes acceso a esta prueba.";
+oxfApp.text.oxford_geniox_exam_evau_locked_2 = "Este contenido todavía no ha sido desbloqueado por el profesor.";
+oxfApp.text.oxford_geniox_accept = "Aceptar";
+
 
 oxfApp.allExams = [];
 oxfApp.newExams = [];
@@ -247,7 +255,7 @@ oxfApp.initBookUnitsSidebar = function() {
             var page = (page === null || page === "null") ? "0" : page;
             var pageNext = (pags[pageIndex]) ?  pags[pageIndex].label : '';
             var otherBook = (window.idclase !== Number(subunitId)) ? 'data-onclick="' + subunit.onclickTitle + '"': '';
-            var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+'-'+pageNext+'</div></a></article>';
+            var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner ox-js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+'-'+pageNext+'</div></a></article>';
             subunitThumb += thumbWithPage;
           });
 
@@ -285,8 +293,8 @@ oxfApp.initBookUnitsSidebar = function() {
     buttonAddRecources = '<a href="javascript:void();" class="ox-button ox-button--addresource">'+oxfApp.text.oxford_geniox_addresource+'</a>';
   }
 
-  var bookUnitsSidebarUnits = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--goToUnitList">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden" id="ox-BookThumbs">'+bookThumbs+'<button class="ox-button ox-button--icon ox-button--icon--close-2 js--closeThumbs"><span>'+oxfApp.text.oxford_geniox_close+'</span></button></div></div>';
-  var bookUnitsSidebarResources = '<div class="ox-sidebar --hidden" id="ox-BookResources"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_resourcesperunit+'</h2><button class="ox-link js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list js--openResourcesList">'+bookUnits+'</ol></div><div class="ox-sidebar__footer">'+buttonAddRecources+'</div><div class="ox-sidebar__resources__wrapper --hidden" id="ox-BookResourcesList">'+bookResources+'</div></div>';
+  var bookUnitsSidebarUnits = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link ox-js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list ox-js--goToUnitList">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden" id="ox-BookThumbs">'+bookThumbs+'<button class="ox-button ox-button--icon ox-button--icon--close-2 ox-js--closeThumbs"><span>'+oxfApp.text.oxford_geniox_close+'</span></button></div></div>';
+  var bookUnitsSidebarResources = '<div class="ox-sidebar --hidden" id="ox-BookResources"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_resourcesperunit+'</h2><button class="ox-link ox-js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list ox-js--openResourcesList">'+bookUnits+'</ol></div><div class="ox-sidebar__footer">'+buttonAddRecources+'</div><div class="ox-sidebar__resources__wrapper --hidden" id="ox-BookResourcesList">'+bookResources+'</div></div>';
 
   $bookwrapper.append(bookUnitsSidebarUnits).append(bookUnitsSidebarResources);
 
@@ -308,12 +316,12 @@ oxfApp.initBookHTML = function () {
   var barAbove = oxfApp.createBarAbove(data.title);
   
   var bookMenuIndex =
-    '<a href="javascript:void(0)" class="ox-link-icon js--toggleBookUnits">' +
+    '<a href="javascript:void(0)" class="ox-link-icon ox-js--toggleBookUnits">' +
     oxfApp.icons.units +
     oxfApp.text.oxford_geniox_pageperunit +
     "</a>";
   var bookMenuResources =
-    '<a href="javascript:void(0)" class="ox-link-icon js--toggleBookResources">' +
+    '<a href="javascript:void(0)" class="ox-link-icon ox-js--toggleBookResources">' +
     oxfApp.icons.resources +
     oxfApp.text.oxford_geniox_resourcesperunit +
     "</a>";
@@ -321,7 +329,7 @@ oxfApp.initBookHTML = function () {
     '<label class="ox-switch"><input type="checkbox" value="ox-show-pin"><span class="ox-switch__slider"></span><span class="ox-switch__label">' +
     oxfApp.text.oxford_geniox_showpins +
     "</span></label>";
-  var bookMenuToggle = '<button class="ox-button--toggleBookMenu js--toggleBookMenu" data-text-show="'+oxfApp.text.oxford_geniox_showbookmenu+'" data-text-hide="'+oxfApp.text.oxford_geniox_hidebookmenu+'">'+oxfApp.text.oxford_geniox_showbookmenu+'</button>';
+  var bookMenuToggle = '<button class="ox-button--toggleBookMenu ox-js--toggleBookMenu" data-text-show="'+oxfApp.text.oxford_geniox_showbookmenu+'" data-text-hide="'+oxfApp.text.oxford_geniox_hidebookmenu+'">'+oxfApp.text.oxford_geniox_showbookmenu+'</button>';
 
   var bookMenu =
     '<div class="ox-book-navigation --hidden"><div class="ox-book-navigation__section ox-book-navigation__section--first">' +
@@ -429,7 +437,7 @@ oxfApp.blockDropdown = function (block) {
 };
 
 oxfApp.blockExams = function() {
-  ///if (!oxfApp.config.isStudent) return;
+  if (!oxfApp.config.isStudent) return;
 
   var data = oxfApp.courseData;
 
@@ -743,7 +751,7 @@ oxfApp.secondLevelView = function () {
             if (subunit.level === "1") {
               currentUnitTitle = subunit.title;
 
-              subunitsItems += '<header class="ox-resource-header><h2 class="">'+currentUnitTitle+'</h2></header>';
+              subunitsItems += '<header class="ox-resource-header"><h2 class="ox-resource-header__title">'+currentUnitTitle+'</h2></header>';
 
             }
 
@@ -756,11 +764,20 @@ oxfApp.secondLevelView = function () {
                 onclickTitle = subunit.onclickTitle,
                 type = subunit.type,
                 onlyVisibleTeachers = subunit.onlyVisibleTeachers,
+                lockStatus = subunit.lock,
                 description = subunit.description;
-            
-                var lock = (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) ? 'unlocked' : 'locked';
-              
-                subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--2 --'+type+' --'+lock+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div></a></article>';
+
+                var visibilityByUser = (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent);
+                var lock = (lockStatus !== 8) ? 'unlocked' : 'locked';
+                var userType = (oxfApp.config.isStudent) ? 'student' : 'not-student';
+                var lockedButton = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--lock --'+lock+' ox-js--toggleLock" data-status="'+lock+'"><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>' : '<button class="ox-button ox-button--lock --'+lock+'" disabled><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>';
+                var viewButton = '<span class="ox-button ox-button--view"><span class="ox-button__icon --lock">'+oxfApp.icons.eye+'</span></span>';
+                var onClickbyLockStatus = (lock === 'unlocked') ? 'onclick="'+onclickTitle+'"' : 'onclick="oxfApp.modalEvauExamLocked()"';
+
+                var onClickbyUser = (!oxfApp.config.isStudent) ? 'onclick="'+onclickTitle+'"' : onClickbyLockStatus;
+                if (visibilityByUser) {
+                  subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--3 --'+userType+' --'+type+' --'+lock+'"><a href="javascript:void(0)" class="ox-resource__inner" '+onClickbyUser+'><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div>'+viewButton+'</a>'+lockedButton+'</article>';
+                }
                 
             }
       
@@ -936,6 +953,19 @@ oxfApp.showExamsNotifications = function() {
   
 } 
 
+
+oxfApp.modalEvauExamLocked = function() {
+  $('#ox-modal-evauexamlocked').remove();
+
+  var modal = '<div class="ox-modal in ox-modal--lockstatus" id="ox-modal-evauexamlocked"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_evau_locked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_evau_locked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.closeModalCustom(\'ox-modal-evauexamlocked\')">'+oxfApp.text.oxford_geniox_accept+'</button></div></div></div>';
+
+  $('body').append(modal);
+}
+
+oxfApp.closeModalCustom = function(id) {
+  $('#'+id).remove();
+}
+
 //----------------------------------//
 //                                  //
 //  Document Ready                  //
@@ -981,7 +1011,7 @@ $(document).ready(function () {
     $(this).text(text);
   });
 
-  $("body").on("click", ".js--toggleBookMenu", function(e) {
+  $("body").on("click", ".ox-js--toggleBookMenu", function(e) {
     e.preventDefault();
     var $nav = $(this).closest('.ox-book-navigation');
 
@@ -998,20 +1028,20 @@ $(document).ready(function () {
     }
   });
 
-  $("body").on("click", ".js--toggleBookUnits", function(e) {
+  $("body").on("click", ".ox-js--toggleBookUnits", function(e) {
     e.preventDefault();
     $('.ox-sidebar:not(#ox-BookUnits)').addClass('--hidden');
     $('#ox-BookUnits').toggleClass('--hidden');
 
     if (!$('#ox-BookUnits').hasClass('--hidden') && bpdf) {
-      $('.js--goToPageBook').parent().removeClass('current');
+      $('.ox-js--goToPageBook').parent().removeClass('current');
       var currentPage = bpdf.getVisiblePages()[1];
       $('[data-book-id="'+window.idclase+'"][data-page="'+currentPage+'"]').parent().addClass('current');
     }
 
   });
 
-  $("body").on("click", ".js--toggleBookResources", function(e) {
+  $("body").on("click", ".ox-js--toggleBookResources", function(e) {
     e.preventDefault();
     
     if (!$('#ox-BookResources').hasClass('--hidden')) {
@@ -1024,20 +1054,20 @@ $(document).ready(function () {
 
   });
 
-  $("body").on("click", ".js--closeSidebar", function(e) {
+  $("body").on("click", ".ox-js--closeSidebar", function(e) {
     e.preventDefault();
     $('.ox-sidebar').addClass('--hidden');
     $('#ox-BookResourcesList').addClass('--hidden');
     $('#ox-BookThumbs').addClass('--hidden');
   });
 
-  $("body").on("click", ".js--closeThumbs", function(e) {
+  $("body").on("click", ".ox-js--closeThumbs", function(e) {
     e.preventDefault();
     $('#ox-BookThumbs').addClass('--hidden');
   });
 
 
-  $("body").on("click", ".js--openResourcesList a", function(e) {
+  $("body").on("click", ".ox-js--openResourcesList a", function(e) {
     e.preventDefault();
     var target = $(this).attr('data-target');
     if ($('[data-parent="'+target+'"]').hasClass('--hidden')) {
@@ -1053,7 +1083,7 @@ $(document).ready(function () {
 
   });
 
-  $("body").on("click", ".js--goToUnitList a", function(e) {
+  $("body").on("click", ".ox-js--goToUnitList a", function(e) {
     e.preventDefault();
     var target = $(this).attr('data-target');
     if ($('#ox-BookThumbs').hasClass('--hidden')) {
@@ -1067,7 +1097,7 @@ $(document).ready(function () {
   });
 
 
-  $("body").on("click", ".js--goToPageBook", function(e) {
+  $("body").on("click", ".ox-js--goToPageBook", function(e) {
     e.preventDefault();
 
     var hasOnclick = $(this).attr('data-onclick');
@@ -1081,7 +1111,7 @@ $(document).ready(function () {
     } else {
       bpdf.changePageDesktop.set(page);
 
-      $('.js--goToPageBook').removeClass('current');
+      $('.ox-js--goToPageBook').removeClass('current');
       $(this).addClass('current');
 
       $('.ox-sidebar').addClass('--hidden');

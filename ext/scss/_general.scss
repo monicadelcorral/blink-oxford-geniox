@@ -1,3 +1,53 @@
+.ox-button--2 {
+    background-color: $color_b_3;
+    color: $color_white;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.35;
+    padding: 11px 18px;
+}
+
+.ox-button--lock {
+    &.disabled,
+    &:disabled {
+        opacity: 1;
+    }
+
+    &.--locked {
+        color: $color_b_3;
+        .ox-button__icon {
+            &.--locked {
+                display: block;
+            }
+            &.--unlocked {
+                display: none;
+            }
+        }
+    }
+
+    &.--unlocked {
+        color: $color_b_13;
+
+        .ox-button__icon {
+            &.--unlocked {
+                display: block;
+            }
+            &.--locked {
+                display: none;
+            }
+        }
+    }
+}
+
+.ox-button--view {
+    color: $color_b_15;
+
+    svg {
+        width: 24px;
+        height: auto;
+    }
+}
+
 
 .ox-badge {
     display: inline-block;
@@ -30,5 +80,32 @@
 
     &.--locked {
         color: $color_b_3;
+    }
+}
+
+.ox-modal {
+
+    &__inner {
+        box-shadow: 0 4px 20px 0 #0003;
+        border-radius: 25px;
+    }
+    
+    &__message {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.33;
+        text-align: center;
+        color: $color_b_16;
+    }
+
+    &--lockstatus {
+        .ox-modal__message {
+            background-image: url(images/locked.svg);
+            background-size: 35px 50px;
+        }
+
+        .ox-modal__footer {
+            justify-content: center;
+        }
     }
 }

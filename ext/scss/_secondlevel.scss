@@ -65,7 +65,8 @@
 
 }
 
-.ox-resourceslist--cards {
+.ox-resourceslist--cards,
+.ox-resourceslist--cards--2 {
     .ox-resourceslist__inner {
         display: flex;
         flex-wrap: wrap;
@@ -157,18 +158,74 @@
             height: 97px;
         }
     }
+
+    &--3 {
+        position: relative;
+        min-height: 134px;
+        padding-bottom: 20px;
+
+        &.--student.--locked {
+            opacity: .7;
+        }
+
+        .ox-resource__title {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.33;
+            color: $color_b_3;
+            padding-right: 30px;
+        }
+
+        .ox-resource__description {
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1.42;
+            color: $color_b_3;
+        }
+
+        .ox-button--lock {
+            position: absolute;
+            z-index: 10;
+            right: 18px;
+            top: 10px;
+        }
+
+        .ox-button--view {
+            position: absolute;
+            z-index: 10;
+            right: 18px;
+            bottom: 10px;
+        }
+    }
 }
 
 .ox-resource--exam {
     padding-right: 0;
 
     .ox-resource__title {
-
-        font-size: 15px;
-        font-weight: 600;
-        line-height: 1.07;
-        color: $color_b_3;
-    
+        @include text--title-2;
     }
 } 
+
+
+.ox-resource-header__title {
+    @include text--title-2;
+}
+
+
+
+.ox-resourceslist--cards--2 {
+    .ox-resource-header {
+        min-width: 100%;
+        margin: 0 0 10px 0;
+        margin: 0 8px 16px;
+    }
+
+    .ox-resourceslist__inner {
+        .ox-resource--card {
+            width: 174px;
+        }
+    }
+}
+
 
