@@ -13,8 +13,8 @@ oxfApp.config.evauExams = "evau_exams";
 oxfApp.config.examsOnline = "exams_online";
 
 
-oxfApp.icons.units = '<svg xmlns="http://www.w3.org/2000/svg" width="72.607" height="55.322"><path data-name="Libro tab bar" d="M68.122 48.414h-.672v-2a3.778 3.778 0 0 0-3.942-3.579H55.38a2.042 2.042 0 0 0-2.085-1.684H46.65a2.042 2.042 0 0 0-2.085 1.684h-.656a8.82 8.82 0 0 0-7.583 4.081 8.82 8.82 0 0 0-7.583-4.081H9.1a3.778 3.778 0 0 0-3.942 3.579v2h-.673A4.3 4.3 0 0 0 0 52.486V92.4a4.3 4.3 0 0 0 4.485 4.07h63.637a4.3 4.3 0 0 0 4.485-4.07V52.486a4.3 4.3 0 0 0-4.485-4.072zm-24.213-3.651h.641v12.69a1.847 1.847 0 0 0 3.092 1.178l2.332-2.077 2.326 2.077a1.847 1.847 0 0 0 3.1-1.178v-5.817a1.069 1.069 0 0 0-2.127 0v5.148l-2.023-1.8a1.963 1.963 0 0 0-2.547 0l-2.023 1.8V43.079h6.592v13.159c0 .533.476-4.6 1.063-4.6s1.064.533 1.064 0v-6.875h8.112a1.739 1.739 0 0 1 1.815 1.647v41.823a1.739 1.739 0 0 1-1.815 1.647H37.39V50.635c.026-3.24 2.94-5.872 6.519-5.872zM70.479 92.4a2.26 2.26 0 0 1-2.358 2.141H4.485A2.26 2.26 0 0 1 2.127 92.4V52.486a2.26 2.26 0 0 1 2.358-2.141h.672V79.7a1.018 1.018 0 0 0 1.064.966 1.018 1.018 0 0 0 1.063-.966V46.411A1.739 1.739 0 0 1 9.1 44.763h19.642c3.579 0 6.493 2.632 6.52 5.876V89.88H9.1a1.739 1.739 0 0 1-1.814-1.647V79.7a.751.751 0 0 0-.83-.862c-.588 0-1.3.329-1.3.862v8.535A3.778 3.778 0 0 0 9.1 91.811h54.41a3.778 3.778 0 0 0 3.942-3.579V50.345h.672a2.26 2.26 0 0 1 2.358 2.141z" transform="translate(0 -41.148)" style="fill:#02285c"/></svg>';
-oxfApp.icons.resources = '<svg xmlns="http://www.w3.org/2000/svg" width="59.346" height="52.834"><defs><style>.cls-1{fill:#02285c}</style></defs><g id="ICON_contenidos_por_unidades" data-name="ICON contenidos por unidades" transform="translate(-5292.648 -791.102)"><g id="folder" transform="translate(5292.648 791.102)"><g id="Grupo_1216" data-name="Grupo 1216"><path id="Trazado_894" data-name="Trazado 894" class="cls-1" d="M55.39 178.69H3.956A4.1 4.1 0 0 1 0 174.475v-23.186c0-.582.442-.243.989-.243s.989-.338.989.243v23.186a2.048 2.048 0 0 0 1.978 2.108H55.39a2.048 2.048 0 0 0 1.978-2.108V140.75a2.048 2.048 0 0 0-1.978-2.108H3.956a2.048 2.048 0 0 0-1.978 2.108v10.539a1.023 1.023 0 0 1-.989 1.054A1.023 1.023 0 0 1 0 151.289V140.75a4.1 4.1 0 0 1 3.956-4.216H55.39a4.1 4.1 0 0 1 3.956 4.216v33.725a4.1 4.1 0 0 1-3.956 4.216" transform="translate(0 -125.856)"/><path id="Trazado_896" data-name="Trazado 896" class="cls-1" d="M36.264 44.725h51.117V42.96a1.975 1.975 0 0 0-2.13-1.765H55.988a2.4 2.4 0 0 1-1.733-.69l-4.128-4.276a1.149 1.149 0 0 0-.827-.329H38.394a1.975 1.975 0 0 0-2.13 1.765zm52.182 1.765H35.2c-.589 0-1.065 2.507-1.065 2.02V37.664c0-1.947 1.911-3.53 4.26-3.53H49.3a3.456 3.456 0 0 1 2.49.992l4.127 4.274 29.334.028c2.349 0 4.26 1.583 4.26 3.53v2.648a.986.986 0 0 1-1.065.883z" transform="translate(-34.134 -34.134)"/></g></g><path id="Trazado_897" data-name="Trazado 897" d="m221.4 144.324-12.926-8.079a1.616 1.616 0 0 0-2.472 1.37v16.158a1.615 1.615 0 0 0 2.472 1.37l12.926-8.079a1.616 1.616 0 0 0 0-2.74z" transform="translate(5110.242 677.102)" style="fill:none;stroke:#02285c;stroke-width:2px"/></g></svg>';
+oxfApp.icons.units = '<svg width="73" height="56" viewBox="0 0 73 56" xmlns="http://www.w3.org/2000/svg"><path d="M68.48 7.78h-.67v-2a3.78 3.78 0 0 0-3.94-3.58h-8.13A2.06 2.06 0 0 0 53.66.51H47a2 2 0 0 0-2.08 1.69h-.66a8.79 8.79 0 0 0-7.58 4.08A8.82 8.82 0 0 0 29.1 2.2H9.46a3.78 3.78 0 0 0-3.94 3.58v2h-.67a4.3 4.3 0 0 0-4.49 4.07v39.91a4.3 4.3 0 0 0 4.49 4.07h63.63A4.3 4.3 0 0 0 73 51.76V11.85a4.3 4.3 0 0 0-4.52-4.07ZM44.27 4.13h.64v12.69A1.85 1.85 0 0 0 48 18l2.33-2.07L52.66 18a1.85 1.85 0 0 0 2.61-.08c.278-.3.45-.683.49-1.09V11a1.07 1.07 0 0 0-1.17-1 1.09 1.09 0 0 0-1 1v5.15l-2-1.8a2 2 0 0 0-2.55 0l-2 1.8V2.44h6.59V15.6c0 .53.48-4.6 1.07-4.6.59 0 1.06.53 1.06 0V4.13h8.11a1.73 1.73 0 0 1 1.82 1.64V47.6a1.73 1.73 0 0 1-1.82 1.64H37.75V10c.03-3.24 2.94-5.87 6.52-5.87Zm26.57 47.63a2.26 2.26 0 0 1-2.36 2.14H4.85a2.26 2.26 0 0 1-2.36-2.14V11.85a2.26 2.26 0 0 1 2.36-2.14h.67v29.35a1.06 1.06 0 0 0 2.12 0V5.77a1.74 1.74 0 0 1 1.82-1.64H29.1c3.58 0 6.5 2.63 6.52 5.87v39.24H9.46a1.73 1.73 0 0 1-1.81-1.64v-8.54a.75.75 0 0 0-.63-.85.69.69 0 0 0-.2 0c-.59 0-1.3.33-1.3.86v8.53a3.77 3.77 0 0 0 3.94 3.57h54.41a3.76 3.76 0 0 0 3.94-3.57V9.71h.67a2.25 2.25 0 0 1 2.36 2.14v39.91Z" fill="#202E55" fill-rule="nonzero"/></svg>';
+oxfApp.icons.resources = '<svg width="60" height="54" viewBox="0 0 60 54" xmlns="http://www.w3.org/2000/svg"><path d="M2.12 11.35h51.12V9.58a2 2 0 0 0-2.13-1.76H21.85a2.42 2.42 0 0 1-1.73-.69L16 2.85a1.21 1.21 0 0 0-.83-.33H4.25a2 2 0 0 0-2.13 1.77v7.06ZM15.16.76a3.45 3.45 0 0 1 2.49 1L21.78 6h29.33c2.35 0 4.26 1.59 4.26 3.53v1.91h.02a4.09 4.09 0 0 1 4 4.21v33.73a4.09 4.09 0 0 1-4 4.21H4a4.09 4.09 0 0 1-4-3.977V15.65c-.005-.16 0-.318.014-.475C.004 15.18 0 15.16 0 15.11V4.29C0 2.34 1.91.76 4.26.76h10.9Zm40.23 12.78H4a2.06 2.06 0 0 0-2 2.11v33.73a2.05 2.05 0 0 0 2 2.11h51.39a2 2 0 0 0 2-2.11V15.65a2 2 0 0 0-2-2.11Zm-30.573 8.246a2.611 2.611 0 0 1 1.773.366l12.952 8.088a2.63 2.63 0 0 1-.012 4.428l-12.932 8.075a2.593 2.593 0 0 1-1.388.407 2.62 2.62 0 0 1-2.62-2.62V24.366c.002-.49.143-.97.4-1.372a2.61 2.61 0 0 1 1.624-1.168Zm.349 1.972-.096.015a.62.62 0 0 0-.387.285.587.587 0 0 0-.093.312v16.16c0 .342.278.62.616.62a.6.6 0 0 0 .324-.098l12.928-8.072a.63.63 0 0 0 .012-1.052L25.532 23.85a.61.61 0 0 0-.462-.076ZM2 26.19c0-.58-.44-.24-1-.24s-1-.34-1 .24a1 1 0 0 0 2 0Z" fill="#202E55" fill-rule="nonzero"/></svg>';
 oxfApp.icons.lockUnlock = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M21.53 13.8H6.73V9a5.15 5.15 0 0 1 4-5.1A5 5 0 0 1 16.52 8c.051.28.078.565.08.85a1.65 1.65 0 1 0 3.29 0A8.25 8.25 0 0 0 11.63.6h-.78a8.53 8.53 0 0 0-7.4 8.55v4.6H1.8A1.65 1.65 0 0 0 .16 15.4v16.49a1.76 1.76 0 0 0 1.64 1.64h19.73a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64h-.19Zm-8.22 11V27A1.655 1.655 0 1 1 10 27v-2.18A3.4 3.4 0 0 1 8.38 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11A3.72 3.72 0 0 1 15 21.36a3.21 3.21 0 0 1-1.69 3.46v-.02Z" fill="#8EC371" fill-rule="nonzero"/></svg>';
 oxfApp.icons.lockLocked = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M22 13.8H7.24V9a5.15 5.15 0 0 1 3.95-5.1A5 5 0 0 1 17 8c.051.28.078.565.08.85v6h2l1.3.53V8.87A8.26 8.26 0 0 0 12.12.61h-.78A8.54 8.54 0 0 0 4 9.19v4.6H2.31a1.65 1.65 0 0 0-1.64 1.65v16.45a1.76 1.76 0 0 0 1.64 1.64H22a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64H22Zm-8.22 11V27a1.65 1.65 0 1 1-3.29 0v-2.18A3.43 3.43 0 0 1 8.89 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11a3.72 3.72 0 0 1 2.47 2.47 3.19 3.19 0 0 1-1.65 3.48l-.04-.02Z" fill="#202E55" fill-rule="nonzero"/></svg>';
 oxfApp.icons.eye = '<svg width="77" height="49" viewBox="0 0 77 49" xmlns="http://www.w3.org/2000/svg"><path d="M38.58 9.46A14.94 14.94 0 1 0 53.52 24.4c-.033-8.237-6.703-14.907-14.94-14.94Zm0-9.13c20.54 0 36.62 21.68 37.29 22.6a2.49 2.49 0 0 1 0 2.94c-.67.92-16.75 22.6-37.29 22.6S1.96 26.79 1.29 25.87a2.49 2.49 0 0 1 0-2.94C2 22 18.04.33 38.58.33Zm0 4.98c-15.11 0-28.24 14.38-32.11 19.09 3.88 4.7 16.98 19.09 32.11 19.09 15.16 0 28.23-14.38 32.11-19.09-3.88-4.71-17-19.09-32.11-19.09Zm0 9.05c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10Z" fill="#323232" fill-rule="nonzero"/></svg>';
@@ -333,6 +333,7 @@ oxfApp.initBookUnitsSidebar = function() {
   $bookwrapper.append(bookUnitsSidebarUnits).append(bookUnitsSidebarResources);
 
   blink.events.on('digitalbook:viewerLoaded', (function() {
+    $('body').addClass('ox-book-loaded');
     if (oxfApp.storage.getItem('currentBookPage') !== null) {
       var page = oxfApp.storage.getItem('currentBookPage');
       bpdf.changePageDesktop.set(page);
@@ -352,27 +353,24 @@ oxfApp.initBookHTML = function () {
   var bookMenuIndex =
     '<a href="javascript:void(0)" class="ox-link-icon ox-js--toggleBookUnits">' +
     oxfApp.icons.units +
-    oxfApp.text.oxford_geniox_pageperunit +
+    '<span>'+oxfApp.text.oxford_geniox_pageperunit + '</span>' +
     "</a>";
   var bookMenuResources =
     '<a href="javascript:void(0)" class="ox-link-icon ox-js--toggleBookResources">' +
     oxfApp.icons.resources +
-    oxfApp.text.oxford_geniox_resourcesperunit +
+    '<span>'+oxfApp.text.oxford_geniox_resourcesperunit + '</span>' +
     "</a>";
   var bookMenuPin =
     '<label class="ox-switch"><input type="checkbox" value="ox-show-pin"><span class="ox-switch__slider"></span><span class="ox-switch__label">' +
     oxfApp.text.oxford_geniox_showpins +
     "</span></label>";
-  var bookMenuToggle = '<button class="ox-button--toggleBookMenu ox-js--toggleBookMenu" data-text-show="'+oxfApp.text.oxford_geniox_showbookmenu+'" data-text-hide="'+oxfApp.text.oxford_geniox_hidebookmenu+'">'+oxfApp.text.oxford_geniox_showbookmenu+'</button>';
+
+  var closeButton = '<a href="javascript:void(0)" class="ox-link ox-link--goback ox--js-closeActivity">'+oxfApp.icons.goback+oxfApp.text.oxford_zona_recursos_2020_exit+'</a>';
 
   var bookMenu =
-    '<div class="ox-book-navigation --hidden"><div class="ox-book-navigation__section ox-book-navigation__section--first">' +
+    '<div class="ox-book-navigation"><div class="ox-book-navigation__section">' +
     bookMenuIndex +
-    '</div><div class="ox-book-navigation__section ox-book-navigation__section--middle">' +
-    bookMenuResources + bookMenuPin +    
-    '</div><div class="ox-book-navigation__section ox-book-navigation__section--last">' +
-    bookMenuToggle +
-    '</div></div>';
+    bookMenuResources + bookMenuPin + '</div></div>';
 
 
   var $arrows = $(".slider-control"),
@@ -384,6 +382,7 @@ oxfApp.initBookHTML = function () {
 
   var barNavigation =
     '<div class="ox-navigation-wrapper">' +
+    closeButton+
     bookMenu +
     "</div>";
 

@@ -1,35 +1,53 @@
 .ox-body-book #viewer {
     padding-top: 0;
+    padding-bottom: 45px;
 }
 
 .ox-body-book .slider-control, 
 .ox-body-book .slider-control:focus {
-    background: none;
-    width: 52px;
-    height: 75px;
-    top: 50%;
-    margin-top: -32px;
+
+    width: 25px;
+    height: 22px;
+    top: auto;
+    bottom: 10px;
+    margin-top: 0;
+    background-color: #9da09e;
+    z-index: 2000;
+    margin-left: -25px;
 
     .ox-slider-control-text {
         display: none!important;
     }
 
+    .fa {
+        position: absolute!important;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        right: auto;
+        margin: 0!important;
+    }
+
     .fa::before {
-        width: 52px;
-        height: 75px;
+        width: 20px;
+        height: 10px;
         background-repeat: no-repeat;
+        filter: brightness(10);
     }
 
     &.left {
         right: auto;
-        left: 80px;
+        left: 50%;
         transform: none;
+        border-radius: 20px 0 0 20px!important;
     }
 
     &.right {
-        left: auto;
-        right: 80px;
+        left: 50%;
+        right: auto;
         transform: none;
+        border-radius: 0 20px 20px 0!important;
+        margin-left: 0;
     }
 }
 
@@ -102,12 +120,10 @@
 
 .ox-switch {
     position: relative;
-    width: 140px;
-    height: 82px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    padding-left: 42px;
 
     input { 
         opacity: 0;
@@ -117,20 +133,19 @@
 
     &__label {
         color: $color_b_3;
-        @include font-size(1.6);
+        @include font-size(1.2);
         font-weight: 600;
-        line-height: 1.35;
+        line-height: 1.42;
         white-space: nowrap;
     }
 
     &__slider {
         position: absolute;
         cursor: pointer;
-        top: 20px;
-        left: 50%;
+        top: 16px;
+        left: 0;
         height: 10px;
-        width: 54px;
-        margin-left: -30px;
+        width: 32px;
         background-color: #999;
         transition: .4s;
         border-radius: 34px;
@@ -138,10 +153,10 @@
         &:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
-            left: -2px;
-            top: -7px;
+            height: 18px;
+            width: 18px;
+            left: -7px;
+            top: -4px;
             background-color: $color_b_3;
             transition: .4s;
             border-radius: 50%;
@@ -157,45 +172,57 @@
     }
 
     input:checked + &__slider:before {
-        transform: translateX(32px);
+        transform: translateX(28px);
     }
 
 }
 
 .ox-body-book .ox-navigation-wrapper {
-    padding: 0;
+    padding: 0 20px;
     height: auto;
     box-shadow: 0 0 15px 0 #02285c29;
     z-index: 550;
-    
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+}
+.ox-body-book.ox-book-loaded .ox-navigation-wrapper {
+    display: flex;
 }
 
 .ox-book-navigation {
+    flex-grow: 2;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: stretch;
     transition: height .3s ease-in;
     overflow: hidden;
-    height: 110px;
-
-    .ox-loading & {
-        display: none;
-    }
+    height: 45px;
 
     .ox-switch,
     .ox-link-icon {
-        margin: 0 65px;
+        margin: 0 10px;
+    }
+
+    .ox-switch {
+        margin-left: 18px;
+    }
+
+    .ox-link-icon {
+
+        svg {
+            width: 31px;
+            height: auto;
+        }
+        span {
+            @include screen-reader-text;
+        }
     }
 
     &__section {
-        min-width: 220px;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 1;
-        transition: opacity .3s ease-out;
-
-        &--middle {flex-grow: 2;}
+        justify-content: flex-end;
+        align-items: stretch;
     }
 
     &.--hidden {
@@ -215,18 +242,18 @@
     position: fixed;
     left: 0;
     top: 44px;
-    bottom: 54px;
+    bottom: 45px;
     z-index: 500;
     background: $color_white;
     width: 340px;
-    display: flex;
+    display: none;
     flex-direction: column;
     transition: bottom .3s ease-in, transform .3s ease-in-out;
     transform: translate(0, 0);
     box-shadow: 0 3px 15px 0 #00000029;
     
-    .ox-loading & {
-        display: none;
+    .ox-book-loaded & {
+        display: flex;
     }
 
     &.--hidden {

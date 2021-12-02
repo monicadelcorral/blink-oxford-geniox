@@ -647,37 +647,54 @@
 
 .ox-body-book #viewer {
   padding-top: 0;
+  padding-bottom: 45px;
 }
 
 .ox-body-book .slider-control,
 .ox-body-book .slider-control:focus {
-  background: none;
-  width: 52px;
-  height: 75px;
-  top: 50%;
-  margin-top: -32px;
+  width: 25px;
+  height: 22px;
+  top: auto;
+  bottom: 10px;
+  margin-top: 0;
+  background-color: #9da09e;
+  z-index: 2000;
+  margin-left: -25px;
 }
 .ox-body-book .slider-control .ox-slider-control-text,
 .ox-body-book .slider-control:focus .ox-slider-control-text {
   display: none !important;
 }
+.ox-body-book .slider-control .fa,
+.ox-body-book .slider-control:focus .fa {
+  position: absolute !important;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  right: auto;
+  margin: 0 !important;
+}
 .ox-body-book .slider-control .fa::before,
 .ox-body-book .slider-control:focus .fa::before {
-  width: 52px;
-  height: 75px;
+  width: 20px;
+  height: 10px;
   background-repeat: no-repeat;
+  filter: brightness(10);
 }
 .ox-body-book .slider-control.left,
 .ox-body-book .slider-control:focus.left {
   right: auto;
-  left: 80px;
+  left: 50%;
   transform: none;
+  border-radius: 20px 0 0 20px !important;
 }
 .ox-body-book .slider-control.right,
 .ox-body-book .slider-control:focus.right {
-  left: auto;
-  right: 80px;
+  left: 50%;
+  right: auto;
   transform: none;
+  border-radius: 0 20px 20px 0 !important;
+  margin-left: 0;
 }
 
 .ox-link-icon {
@@ -740,12 +757,10 @@
 
 .ox-switch {
   position: relative;
-  width: 140px;
-  height: 82px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  padding-left: 42px;
 }
 .ox-switch input {
   opacity: 0;
@@ -754,19 +769,18 @@
 }
 .ox-switch__label {
   color: #02285c;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.42;
   white-space: nowrap;
 }
 .ox-switch__slider {
   position: absolute;
   cursor: pointer;
-  top: 20px;
-  left: 50%;
+  top: 16px;
+  left: 0;
   height: 10px;
-  width: 54px;
-  margin-left: -30px;
+  width: 32px;
   background-color: #999;
   transition: 0.4s;
   border-radius: 34px;
@@ -774,10 +788,10 @@
 .ox-switch__slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: -2px;
-  top: -7px;
+  height: 18px;
+  width: 18px;
+  left: -7px;
+  top: -4px;
   background-color: #02285c;
   transition: 0.4s;
   border-radius: 50%;
@@ -789,41 +803,59 @@ input:focus + .ox-switch__slider {
   box-shadow: 0 0 1px #8bcb71;
 }
 input:checked + .ox-switch__slider:before {
-  transform: translateX(32px);
+  transform: translateX(28px);
 }
 
 .ox-body-book .ox-navigation-wrapper {
-  padding: 0;
+  padding: 0 20px;
   height: auto;
   box-shadow: 0 0 15px 0 #02285c29;
   z-index: 550;
+  justify-content: space-between;
+  align-items: center;
+  display: none;
+}
+
+.ox-body-book.ox-book-loaded .ox-navigation-wrapper {
+  display: flex;
 }
 
 .ox-book-navigation {
+  flex-grow: 2;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: stretch;
   transition: height 0.3s ease-in;
   overflow: hidden;
-  height: 110px;
-}
-.ox-loading .ox-book-navigation {
-  display: none;
+  height: 45px;
 }
 .ox-book-navigation .ox-switch,
 .ox-book-navigation .ox-link-icon {
-  margin: 0 65px;
+  margin: 0 10px;
+}
+.ox-book-navigation .ox-switch {
+  margin-left: 18px;
+}
+.ox-book-navigation .ox-link-icon svg {
+  width: 31px;
+  height: auto;
+}
+.ox-book-navigation .ox-link-icon span {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
 }
 .ox-book-navigation__section {
-  min-width: 220px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 1;
-  transition: opacity 0.3s ease-out;
-}
-.ox-book-navigation__section--middle {
-  flex-grow: 2;
+  justify-content: flex-end;
+  align-items: stretch;
 }
 .ox-book-navigation.--hidden {
   height: 54px;
@@ -837,18 +869,18 @@ input:checked + .ox-switch__slider:before {
   position: fixed;
   left: 0;
   top: 44px;
-  bottom: 54px;
+  bottom: 45px;
   z-index: 500;
   background: #fff;
   width: 340px;
-  display: flex;
+  display: none;
   flex-direction: column;
   transition: bottom 0.3s ease-in, transform 0.3s ease-in-out;
   transform: translate(0, 0);
   box-shadow: 0 3px 15px 0 #00000029;
 }
-.ox-loading .ox-sidebar {
-  display: none;
+.ox-book-loaded .ox-sidebar {
+  display: flex;
 }
 .ox-sidebar.--hidden {
   transform: translate(-340px, 0);
