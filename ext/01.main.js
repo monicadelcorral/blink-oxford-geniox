@@ -943,9 +943,6 @@ oxfApp.loadHomeGeniox = function () {
   // Remove Ebook content and prepare eBook link
   oxfApp.prepareToEbooks();
 
-  // Add notifications
-  oxfApp.showExamsNotifications();
-
   // Add Exam block
   oxfApp.blockExams();
 
@@ -978,6 +975,8 @@ oxfApp.getExamsNotifications = function() {
       })
     }
   });
+
+  oxfApp.showExamsNotifications();
 } 
 
 oxfApp.showExamsNotifications = function() {
