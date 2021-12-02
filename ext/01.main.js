@@ -18,6 +18,7 @@ oxfApp.icons.resources = '<svg xmlns="http://www.w3.org/2000/svg" width="59.346"
 oxfApp.icons.lockUnlock = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M21.53 13.8H6.73V9a5.15 5.15 0 0 1 4-5.1A5 5 0 0 1 16.52 8c.051.28.078.565.08.85a1.65 1.65 0 1 0 3.29 0A8.25 8.25 0 0 0 11.63.6h-.78a8.53 8.53 0 0 0-7.4 8.55v4.6H1.8A1.65 1.65 0 0 0 .16 15.4v16.49a1.76 1.76 0 0 0 1.64 1.64h19.73a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64h-.19Zm-8.22 11V27A1.655 1.655 0 1 1 10 27v-2.18A3.4 3.4 0 0 1 8.38 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11A3.72 3.72 0 0 1 15 21.36a3.21 3.21 0 0 1-1.69 3.46v-.02Z" fill="#8EC371" fill-rule="nonzero"/></svg>';
 oxfApp.icons.lockLocked = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M22 13.8H7.24V9a5.15 5.15 0 0 1 3.95-5.1A5 5 0 0 1 17 8c.051.28.078.565.08.85v6h2l1.3.53V8.87A8.26 8.26 0 0 0 12.12.61h-.78A8.54 8.54 0 0 0 4 9.19v4.6H2.31a1.65 1.65 0 0 0-1.64 1.65v16.45a1.76 1.76 0 0 0 1.64 1.64H22a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64H22Zm-8.22 11V27a1.65 1.65 0 1 1-3.29 0v-2.18A3.43 3.43 0 0 1 8.89 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11a3.72 3.72 0 0 1 2.47 2.47 3.19 3.19 0 0 1-1.65 3.48l-.04-.02Z" fill="#202E55" fill-rule="nonzero"/></svg>';
 oxfApp.icons.eye = '<svg width="77" height="49" viewBox="0 0 77 49" xmlns="http://www.w3.org/2000/svg"><path d="M38.58 9.46A14.94 14.94 0 1 0 53.52 24.4c-.033-8.237-6.703-14.907-14.94-14.94Zm0-9.13c20.54 0 36.62 21.68 37.29 22.6a2.49 2.49 0 0 1 0 2.94c-.67.92-16.75 22.6-37.29 22.6S1.96 26.79 1.29 25.87a2.49 2.49 0 0 1 0-2.94C2 22 18.04.33 38.58.33Zm0 4.98c-15.11 0-28.24 14.38-32.11 19.09 3.88 4.7 16.98 19.09 32.11 19.09 15.16 0 28.23-14.38 32.11-19.09-3.88-4.71-17-19.09-32.11-19.09Zm0 9.05c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10Z" fill="#323232" fill-rule="nonzero"/></svg>';
+oxfApp.icons.download = '<svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><path d="M32.07 20.64a1.5 1.5 0 0 1 1.493 1.356l.007.144v6.77a4.88 4.88 0 0 1-4.663 4.875l-.217.005H5a4.88 4.88 0 0 1-4.875-4.663L.12 28.91v-6.77a1.5 1.5 0 0 1 2.993-.144l.007.144v6.77c0 .989.763 1.8 1.733 1.874L5 30.79h23.69c.989 0 1.8-.763 1.874-1.733l.006-.147v-6.77a1.5 1.5 0 0 1 1.5-1.5ZM16.85.35a1.5 1.5 0 0 1 1.493 1.356l.007.144-.001 16.67 5.901-5.891a1.5 1.5 0 0 1 2.223 2.008l-.103.114-8.376 8.37a1.497 1.497 0 0 1-2.288 0L7.33 14.75a1.5 1.5 0 0 1 2.006-2.225l.114.103 5.899 5.891.001-16.67a1.5 1.5 0 0 1 1.5-1.5Z" fill="#202E55" fill-rule="nonzero"/></svg>';
 
 oxfApp.text.oxford_geniox_pageperunit = "Páginas por unidad";
 oxfApp.text.oxford_geniox_resourcesperunit = "Recursos por unidad";
@@ -35,6 +36,10 @@ oxfApp.text.oxford_geniox_exam_status = "Estado";
 oxfApp.text.oxford_geniox_exam_evau_locked_1 = "No tienes acceso a esta prueba.";
 oxfApp.text.oxford_geniox_exam_evau_locked_2 = "Este contenido todavía no ha sido desbloqueado por el profesor.";
 oxfApp.text.oxford_geniox_accept = "Aceptar";
+oxfApp.text.oxford_geniox_resource_text_general = "Abrir recurso";
+oxfApp.text.oxford_geniox_resource_text_activity = "Ver actividad";
+oxfApp.text.oxford_geniox_resource_text_document = "Ver documento";
+oxfApp.text.oxford_geniox_resource_text_video = "Ver vídeo";
 
 
 oxfApp.allExams = [];
@@ -116,6 +121,35 @@ oxfApp.getTemplate = function (templateName) {
         oxfApp.config.templateDefault,
         oxfApp.config.templateDefaultTotal,
       ];
+  }
+};
+// Get text for downloadble file
+
+oxfApp.getTextbyFileType = function (type) {
+  switch (type) {
+    case "actividad":
+      return oxfApp.text.oxford_geniox_resource_text_activity;
+      break;
+    case "video":
+      return oxfApp.text.oxford_geniox_resource_text_video;
+      break;
+    case "archivo":
+      return oxfApp.text.oxford_geniox_resource_text_document;
+      break;
+    case "archivo-pdf":
+      return oxfApp.text.oxford_geniox_resource_text_document;
+      break;
+    case "archivo-word":
+      return oxfApp.text.oxford_geniox_resource_text_document;
+      break;
+    case "archivo-ppt":
+      return oxfApp.text.oxford_geniox_resource_text_document;
+      break;
+    case "archivo-zip":
+      return oxfApp.text.oxford_geniox_resource_text_general;
+      break;
+    default:
+      return oxfApp.text.oxford_geniox_resource_text_general;
   }
 };
 
@@ -233,7 +267,7 @@ oxfApp.initBookUnitsSidebar = function() {
         var unitTitle = unit.title,
         onlyVisibleTeachers = unit.onlyVisibleTeachers;
         
-        if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+        if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
           var unitItem = '<li><a href="javascript:void(0)" title="'+unitTitle+'" data-target="'+unitID+'">'+unitTitle+'</a></li>';
           bookUnits += unitItem;
 
@@ -681,9 +715,10 @@ oxfApp.secondLevelView = function () {
               var fileurl = subunit.fileurl,
                   type = oxfApp.getFileType(fileurl);
             }
-      
-            if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
-              subunitsItems += '<article class="ox-resource ox-resource--card --'+type+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__image" style="background-color: '+backgroundColorImage+'; background-image: url('+image+'); "></div><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div></a></article>';
+             var linktext = oxfApp.getTextbyFileType(type);
+            
+            if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
+              subunitsItems += '<article class="ox-resource ox-resource--card --'+type+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__image" style="background-color: '+backgroundColorImage+'; background-image: url('+image+'); "></div><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div><div class="ox-resource__textlink">'+linktext+'</div></a></article>';
             }
       
           });
@@ -692,7 +727,9 @@ oxfApp.secondLevelView = function () {
       
         }
 
-      } else if (hasAbstractView) {
+      } 
+      
+      if (hasAbstractView) {
 
          if (parentTags != null && parentTags.length) {
           $.each(parentTags, function(index, value) {
@@ -704,7 +741,6 @@ oxfApp.secondLevelView = function () {
         }
 
         if (subunits.length) {
-
           var currentUnitTitle = null;
           var currentUnitImage = null;
 
@@ -730,20 +766,22 @@ oxfApp.secondLevelView = function () {
       
                 var downloadableSubunit = subunits[i + 2];
                 var isDownloadable = (downloadableSubunit) ? downloadableSubunit.type === 'archivo' : false;
-                var downloadable = (isDownloadable) ? '<a class="ox-resource__download" href="'+nextSubunit.fileurl+'" download>'+oxfApp.text.oxford_geniox_downloadFile+'</a>' : '';
+                var downloadable = (isDownloadable) ? '<a class="ox-resource__download" href="'+nextSubunit.fileurl+'" download>'+oxfApp.text.oxford_geniox_downloadFile+'<span>'+oxfApp.icons.download+'</span></a>' : '';
       
                 var badge = '<span class="ox-badge">'+currentUnitTitle+'</span>';
-
-                if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+                if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
                   subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--2 --'+type+'"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><div class="ox-resource__image" style="background-color: '+backgroundColorImage+'; background-image: url('+image+'); ">'+badge+'</div><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div></a>'+downloadable+'</article>';
                 }
             }
       
           });
-  
+
+          subunitsItemsSkeleton = (subunitsItems !== '') ? '<section class="ox-resourceslist ox-resourceslist--cards--2"><div class="ox-container"><div class="ox-resourceslist__inner">'+subunitsItems+'</div></div></section>' : '';  
         }
 
-      } else if (hasEvauExamView) {
+      } 
+      
+      if (hasEvauExamView) {
         if (subunits.length) {
           var currentUnitTitle = null;
 
@@ -767,7 +805,7 @@ oxfApp.secondLevelView = function () {
                 lockStatus = subunit.lock,
                 description = subunit.description;
 
-                var visibilityByUser = (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent);
+                var visibilityByUser = (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent));
                 var lock = (lockStatus !== 8) ? 'unlocked' : 'locked';
                 var userType = (oxfApp.config.isStudent) ? 'student' : 'not-student';
                 var lockedButton = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--lock --'+lock+' ox-js--toggleLock" data-status="'+lock+'"><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>' : '<button class="ox-button ox-button--lock --'+lock+'" disabled><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>';
@@ -783,10 +821,12 @@ oxfApp.secondLevelView = function () {
       
           });
       
-          subunitsItemsSkeleton = (subunitsItems !== '') ? '<section class="ox-resourceslist ox-resourceslist--cards--2"><div class="ox-container"><div class="ox-resourceslist__inner">'+subunitsItems+'</div></div></section>' : '';
+          subunitsItemsSkeleton = (subunitsItems !== '') ? '<section class="ox-resourceslist ox-resourceslist--cards--3"><div class="ox-container"><div class="ox-resourceslist__inner">'+subunitsItems+'</div></div></section>' : '';
         }
 
-      } else if (hasExamOnlineView) {
+      } 
+      
+      if (hasExamOnlineView) {
         if (subunits.length) {
         
           $.each(subunits, function(i, subunit) {
@@ -804,7 +844,7 @@ oxfApp.secondLevelView = function () {
             var classLocked = (isLocked) ? '--locked' : '--unlocked';
             var actionsTeachers = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--toggleVisibility '+classLocked+'" data-id="'+id+'"><span>'+oxfApp.text.oxford_geniox_toggleVisibility+'</span></button>' : '';
             
-            if (!onlyVisibleTeachers || onlyVisibleTeachers && !oxfApp.config.isStudent) {
+            if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
               subunitsItems += '<article class="ox-resource ox-resource--exam"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><span class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3></span></a>'+gradeBadgeWrapper+actionsTeachers+'</article>';
             }
         
@@ -923,11 +963,11 @@ oxfApp.getExamsNotifications = function() {
 
   $.each(units, function(i, unit) {
     var isExams = unit.isExams;
-    
     if (isExams) {
       var subunits = unit.subunits;
       $.each(subunits, function(i, subunit) {
-      var isVisible = subunit.lock !== 8;
+      var onlyVisibleTeachers = unit.onlyVisibleTeachers
+      var isVisible = subunit.lock !== 8 && !onlyVisibleTeachers;
         if (isVisible) {
           var id = subunit.id;
           oxfApp.allExams.push(id);
