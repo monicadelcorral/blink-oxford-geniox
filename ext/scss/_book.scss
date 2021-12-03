@@ -348,10 +348,11 @@
                 z-index: 10;
             }
         }
-
+        li:hover,
         li.--current {
             a {
-                background-color: fade-out($color_b_3, .9);
+                background-color: $color_b_9;
+                color: $color_b_3;
                 &::before {
                     border-top-color: $color_b_3;
                 }
@@ -526,7 +527,7 @@
         margin-top: 5px;
     }
 
-    &.current {
+    &.--current {
         box-shadow: 0 0 0 4px $color-white;
     }
 }

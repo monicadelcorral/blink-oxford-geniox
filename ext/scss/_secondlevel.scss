@@ -143,6 +143,8 @@
         line-height: 1.42;
         text-align: left;
         color: $color_darkgray;
+        height: 68px;
+        @include scrollable();
     }
 
     .ox-resource__textlink {

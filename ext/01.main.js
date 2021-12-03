@@ -287,9 +287,10 @@ oxfApp.initBookUnitsSidebar = function() {
             var thumbNext = (pags[pageIndex]) ? pags[pageIndex].thumb : '';
             var page = pag.label;
             var page = (page === null || page === "null") ? "0" : page;
-            var pageNext = (pags[pageIndex]) ?  pags[pageIndex].label : '';
+            var pageNext = (pags[pageIndex]) ?  '-'+pags[pageIndex].label : '';
             var otherBook = (window.idclase !== Number(subunitId)) ? 'data-onclick="' + subunit.onclickTitle + '"': '';
-            var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner ox-js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+'-'+pageNext+'</div></a></article>';
+            
+            var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner ox-js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+pageNext+'</div></a></article>';
             subunitThumb += thumbWithPage;
           });
 
@@ -337,8 +338,11 @@ oxfApp.initBookUnitsSidebar = function() {
     if (oxfApp.storage.getItem('currentBookPage') !== null) {
       var page = oxfApp.storage.getItem('currentBookPage');
       bpdf.changePageDesktop.set(page);
-      $('[data-page]').parent().removeClass('current');
-      $('[data-book-id="'+window.idclase+'"][data-page="'+oxfApp.storage.getItem('currentBookPage')+'"]').parent().addClass('current');
+      $('[data-page]').parent().removeClass('--current');
+      $('[data-book-id="'+window.idclase+'"][data-page="'+oxfApp.storage.getItem('currentBookPage')+'"]').parent().addClass('--current');
+
+      $('.ox-sidebar__list a[data-target]').parent().removeClass('--current');
+      $('.ox-sidebar__list [data-target="'+window.idclase+'"]').parent().addClass('--current');
     }
   }));
 }
@@ -687,6 +691,16 @@ oxfApp.secondLevelView = function () {
       var hasAbstractView = parentTags.indexOf(oxfApp.config.evauAbstracts) > -1;
       var hasEvauExamView = parentTags.indexOf(oxfApp.config.evauExams) > -1;
       var hasExamOnlineView = parentTags.indexOf(oxfApp.config.examsOnline) > -1;
+      var isEbookCover = parentTags.indexOf(oxfApp.config.tagBlockEbook ) > -1;
+
+      if (isEbookCover) {
+        $('.ox-page--resourcessection .ox-resourceslist').remove();
+        var action = subunits[0].onclickTitle;
+        var onclickfunction = eval(action)
+        if (typeof onclickfunction == 'function') {
+          onclickfunction()
+        }
+      }
 
       if (hasCardsView) {
 
@@ -1072,9 +1086,13 @@ $(document).ready(function () {
     $('#ox-BookUnits').toggleClass('--hidden');
 
     if (!$('#ox-BookUnits').hasClass('--hidden') && bpdf) {
-      $('.ox-js--goToPageBook').parent().removeClass('current');
+      $('.ox-js--goToPageBook').parent().removeClass('--current');
       var currentPage = bpdf.getVisiblePages()[1];
-      $('[data-book-id="'+window.idclase+'"][data-page="'+currentPage+'"]').parent().addClass('current');
+      $('[data-book-id="'+window.idclase+'"][data-page="'+currentPage+'"]').parent().addClass('--current');
+
+      $('.ox-sidebar__list a[data-target]').parent().removeClass('--current');
+      $('.ox-sidebar__list [data-target="'+window.idclase+'"]').parent().addClass('--current');
+
     }
 
   });
@@ -1084,6 +1102,7 @@ $(document).ready(function () {
     
     if (!$('#ox-BookResources').hasClass('--hidden')) {
       $('#ox-BookResourcesList').addClass('--hidden');
+      $('#ox-BookThumbs').addClass('--hidden');
     }
 
     $('.ox-sidebar:not(#ox-BookResources)').addClass('--hidden');
@@ -1128,9 +1147,13 @@ $(document).ready(function () {
       $('#ox-BookThumbs').removeClass('--hidden');
     }
 
-    var offset = ($('[data-thumbs="'+target+'"').length) ? $('[data-thumbs="'+target+'"').offset().top : 0;
+    var innerScroll = $('#ox-BookThumbs').scrollTop();
+    var offset = ($('[data-thumbs="'+target+'"').length) ? $('[data-thumbs="'+target+'"').offset().top + innerScroll - 100 : false;
 
-    $('#ox-BookThumbs').scrollTop(offset);
+    if (!offset) return;
+
+    $('#ox-BookThumbs').stop().animate({scrollTop: offset}, 600);
+
 
   });
 
@@ -1149,8 +1172,8 @@ $(document).ready(function () {
     } else {
       bpdf.changePageDesktop.set(page);
 
-      $('.ox-js--goToPageBook').removeClass('current');
-      $(this).addClass('current');
+      $('.ox-js--goToPageBook').removeClass('--current');
+      $(this).addClass('--current');
 
       $('.ox-sidebar').addClass('--hidden');
       $('#ox-BookThumbs').addClass('--hidden');

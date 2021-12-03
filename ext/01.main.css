@@ -978,9 +978,12 @@ input:checked + .ox-switch__slider:before {
   transform: translate(-50%, -50%) rotate(-90deg);
   z-index: 10;
 }
+.ox-sidebar__list li:hover a,
 .ox-sidebar__list li.--current a {
-  background-color: rgba(2, 40, 92, 0.1);
+  background-color: #d1d8e1;
+  color: #02285c;
 }
+.ox-sidebar__list li:hover a::before,
 .ox-sidebar__list li.--current a::before {
   border-top-color: #02285c;
 }
@@ -1148,7 +1151,7 @@ input:checked + .ox-switch__slider:before {
 .ox-thumb__pages {
   margin-top: 5px;
 }
-.ox-thumb.current {
+.ox-thumb.--current {
   box-shadow: 0 0 0 4px #fff;
 }
 
@@ -1284,6 +1287,23 @@ input:checked + .ox-switch__slider:before {
   line-height: 1.42;
   text-align: left;
   color: #4D4D4D;
+  height: 68px;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: #777777 #fff;
+  scrollbar-width: thin;
+}
+.ox-resource--card .ox-resource__description::-webkit-scrollbar {
+  width: 6px;
+}
+.ox-resource--card .ox-resource__description::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ox-resource--card .ox-resource__description::-webkit-scrollbar-thumb {
+  background-color: #777777;
+  border-radius: 20px;
 }
 .ox-resource--card .ox-resource__textlink {
   font-size: 15px;
