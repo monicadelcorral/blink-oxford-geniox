@@ -40,7 +40,7 @@ oxfApp.text.oxford_geniox_resource_text_general = "Abrir recurso";
 oxfApp.text.oxford_geniox_resource_text_activity = "Ver actividad";
 oxfApp.text.oxford_geniox_resource_text_document = "Ver documento";
 oxfApp.text.oxford_geniox_resource_text_video = "Ver vídeo";
-
+oxfApp.text.geniox_new = "¡Nuevo!"
 
 oxfApp.allExams = [];
 oxfApp.newExams = [];
@@ -174,6 +174,7 @@ oxfApp.closeActivity = function() {
     }
   }
 }
+
 
 // Go to home
 oxfApp.goHome = function() {
@@ -850,9 +851,12 @@ oxfApp.secondLevelView = function () {
                 onclickTitle = subunit.onclickTitle,
                 onlyVisibleTeachers = subunit.onlyVisibleTeachers;      
 
-            var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
-                gradeBadgeWrapper = (gradeBadge) ? '<span class="ox-resource__grade">'+gradeBadge+'</span>' : '';
-
+            
+             var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
+                isNew = !gradeBadge && oxfApp.config.isStudent,
+                badge = (isNew) ? '<span class="ox-resource__tag">'+oxfApp.text.geniox_new+'</span><div class="ox-gradebadge ox-activity-new"><span class="ox-gradebadge__inner"></span></div>' : gradeBadge,                
+                gradeBadgeWrapper = (badge) ? '<span class="ox-resource__grade">'+badge+'</span>' : '';
+            
             var isLocked = subunit.lock === 8;
             var classLocked = (isLocked) ? '--locked' : '--unlocked';
             var actionsTeachers = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--toggleVisibility '+classLocked+'" data-id="'+id+'"><span>'+oxfApp.text.oxford_geniox_toggleVisibility+'</span></button>' : '';

@@ -279,3 +279,34 @@
         }
     }
 }
+
+
+// Grade Badge
+.ox-resource--exam {
+    .ox-gradebadge span {
+        position: relative;
+    }
+    
+    .ox-gradebadge {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+
+    .ox-resource__grade {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .ox-resource__tag {
+        display: inline-block;
+        padding: 0 22px;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 0.93;
+        text-align: center;
+        color: $color_b_13;
+        text-transform: uppercase;
+    }
+}

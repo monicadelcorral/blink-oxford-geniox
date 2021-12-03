@@ -1418,4 +1418,27 @@ input:checked + .ox-switch__slider:before {
   width: 174px;
 }
 
+.ox-resource--exam .ox-gradebadge span {
+  position: relative;
+}
+.ox-resource--exam .ox-gradebadge {
+  margin-left: 0;
+  margin-right: 0;
+}
+.ox-resource--exam .ox-resource__grade {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.ox-resource--exam .ox-resource__tag {
+  display: inline-block;
+  padding: 0 22px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 0.93;
+  text-align: center;
+  color: #8bcb71;
+  text-transform: uppercase;
+}
+
 /*# sourceMappingURL=01.main.css.map */
