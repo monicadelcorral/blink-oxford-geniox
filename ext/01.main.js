@@ -874,18 +874,20 @@ oxfApp.secondLevelView = function () {
           subunitsItemsSkeleton = (subunitsItems !== '') ? '<section class="ox-resourceslist ox-resourceslist--exams"><div class="ox-container">'+resourcesHeader+'<div class="ox-resourceslist__inner">'+subunitsItems+'</div></div></section>' : '<section class="ox-resourceslist ox-resourceslist--exams"><div class="ox-container">'+resourcesHeader+'<div class="ox-resourceslist__inner"></div></div></section>';
       }
 
-      var intervalLoaResources = setInterval(function() {
-        if ($('.ox-page--resourcessection .ox-resourceslist').length) {
-          $('.ox-page--resourcessection .ox-resourceslist').remove();
-          $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
-          $('.ox-page--resourcessection').removeClass('loading');
-          clearInterval(intervalLoaResources);
-        }
-       
-      }, 250);
+
       
       if (!hasCardsView && !hasAbstractView && !hasEvauExamView && !hasExamOnlineView) {
           $('.ox-page--resourcessection').removeClass('loading');
+      } else {
+        var intervalLoaResources = setInterval(function() {
+          if ($('.ox-page--resourcessection .ox-resourceslist').length) {
+            $('.ox-page--resourcessection .ox-resourceslist').remove();
+            $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
+            $('.ox-page--resourcessection').removeClass('loading');
+            clearInterval(intervalLoaResources);
+          }
+         
+        }, 250);
       }
 
     }
