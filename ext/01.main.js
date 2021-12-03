@@ -765,7 +765,7 @@ oxfApp.secondLevelView = function () {
       
                 var downloadableSubunit = subunits[i + 2];
                 var isDownloadable = (downloadableSubunit) ? downloadableSubunit.type === 'archivo' : false;
-                var downloadable = (isDownloadable) ? '<a class="ox-resource__download" href="'+nextSubunit.fileurl+'" download>'+oxfApp.text.oxford_geniox_downloadFile+'<span>'+oxfApp.icons.download+'</span></a>' : '';
+                var downloadable = (isDownloadable) ? '<a class="ox-resource__download" href="'+downloadableSubunit.fileurl+'" download>'+oxfApp.text.oxford_geniox_downloadFile+'<span>'+oxfApp.icons.download+'</span></a>' : '';
       
                 var badge = '<span class="ox-badge">'+currentUnitTitle+'</span>';
                 if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
