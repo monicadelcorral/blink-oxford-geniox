@@ -619,11 +619,35 @@
   font-size: 12px;
   font-weight: bold;
 }
+.ox-button--toggleVisibility .ox-button__text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+}
 .ox-button--toggleVisibility.--unlocked {
   color: #8bcb71;
 }
+.ox-button--toggleVisibility.--unlocked .--icon-locked {
+  display: none;
+}
+.ox-button--toggleVisibility.--unlocked .--icon-unlocked {
+  display: block;
+}
 .ox-button--toggleVisibility.--locked {
   color: #02285c;
+}
+.ox-button--toggleVisibility.--locked .--icon-locked {
+  display: block;
+}
+.ox-button--toggleVisibility.--locked .--icon-unlocked {
+  display: none;
 }
 
 .ox-modal__inner {

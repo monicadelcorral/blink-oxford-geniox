@@ -74,12 +74,31 @@
     font-size: 12px;
     font-weight: bold;
 
+    .ox-button__text {
+        @include screen-reader-text;
+    }
+
     &.--unlocked {
         color: $color_b_13;
+
+        .--icon-locked {
+            display: none;
+        }
+        .--icon-unlocked {
+            display: block;
+        }
     } 
 
     &.--locked {
         color: $color_b_3;
+
+        .--icon-locked {
+            display: block;
+        }
+
+        .--icon-unlocked {
+            display: none;
+        }
     }
 }
 
