@@ -444,3 +444,12 @@
     height: 20px;
 }
 
+.ox-body-slide #actividad {
+    padding-bottom: 0;
+}
+
+
+.ox-body-slide .slider-control, 
+.ox-body-slide .slider-control:focus {
+    margin-top: -40px;
+}

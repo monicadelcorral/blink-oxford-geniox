@@ -183,6 +183,36 @@ oxfApp.closeActivity = function() {
   }
 }
 
+//Overwrite MInHeight
+
+oxfApp.minHeightSlides = function() {
+
+  var $minHeight = $('#actividad .item-container');
+  var $minHeightTarget = $('#actividad .item-container, #actividad .class_slide');
+  var $heightCanvas = $('#activity-canvas');
+
+  var belowBarHeight = 0; // Former 24
+
+  if ($minHeight.length) {
+
+    var offsetTop = $minHeight.offset().top,
+        minHeight = oxfApp.windowHeight - offsetTop - belowBarHeight;
+
+    $minHeightTarget.css('min-height', minHeight);
+    $heightCanvas.css('height', minHeight - 4);
+  }
+
+  var $minHeightContent = $('#actividad .content');
+
+  if ($minHeightContent.length) {
+
+    var offsetTopContent = $minHeightContent.offset().top,
+        minHeightContent = oxfApp.windowHeight - offsetTopContent - belowBarHeight;
+    $minHeightContent.css('height', minHeightContent);
+  }
+
+}
+
 
 // Go to home
 oxfApp.goHome = function() {
@@ -429,6 +459,13 @@ oxfApp.initBookHTML = function () {
 
   oxfApp.initBookUnitsSidebar();
 };
+
+oxfApp.initSlideGeniox = function() {
+  $('.ox-topbar--2').remove();
+
+  oxfApp.minHeightSlides();
+}
+
 
 oxfApp.blockDropdown = function (block) {
   var data = oxfApp.courseData;
@@ -1070,12 +1107,15 @@ $(document).ready(function () {
 
     if (coverID && oxfApp.courseData !== "") {      
       var isBookCover = idclase.toString() === coverID;
+      var ishtmlBook = $('body').hasClass('body_htmlBook');
 
       if (isBookCover) {
         oxfApp.config.canLockActivities = !oxfApp.config.isStudent;
         oxfApp.loadHomeGeniox();
         oxfApp.secondLevelView();
         oxfApp.getExamsNotifications();
+      } else if (!ishtmlBook) {
+        oxfApp.initSlideGeniox();
       }
  
       clearInterval(intervalLoadHome);
