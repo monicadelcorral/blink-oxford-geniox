@@ -349,7 +349,8 @@
             }
         }
         li:hover,
-        li.--current {
+        li.--current,
+        li.--active {
             a {
                 background-color: $color_b_9;
                 color: $color_b_3;
@@ -498,6 +499,10 @@
     margin-bottom: 16px;
     padding: 8px;
     width: 128px;
+
+    &__page {
+        margin-top: 4px;
+    }
 
     &__inner {
         color: $color-white;

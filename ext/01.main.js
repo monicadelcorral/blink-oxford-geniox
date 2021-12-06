@@ -25,8 +25,6 @@ oxfApp.icons.download = '<svg width="34" height="34" viewBox="0 0 34 34" xmlns="
 oxfApp.text.oxford_geniox_pageperunit = "Páginas por unidad";
 oxfApp.text.oxford_geniox_resourcesperunit = "Recursos por unidad";
 oxfApp.text.oxford_geniox_showpins = "Mostrar pines";
-oxfApp.text.oxford_geniox_showbookmenu = "Mostrar menú";
-oxfApp.text.oxford_geniox_hidebookmenu = "Ocultar menú";
 oxfApp.text.oxford_geniox_close = "Cerrar";
 oxfApp.text.oxford_geniox_addresource = "Añade tu recurso";
 oxfApp.text.oxford_geniox_pags = "Pág.";
@@ -351,9 +349,11 @@ oxfApp.initBookUnitsSidebar = function() {
       bpdf.changePageDesktop.set(page);
       $('[data-page]').parent().removeClass('--current');
       $('[data-book-id="'+window.idclase+'"][data-page="'+oxfApp.storage.getItem('currentBookPage')+'"]').parent().addClass('--current');
+      
+      var target = $('[data-book-id="'+window.idclase+'"][data-page="'+oxfApp.storage.getItem('currentBookPage')+'"]').closest('[data-thumbs]').attr('data-thumbs');
 
       $('.ox-sidebar__list a[data-target]').parent().removeClass('--current');
-      $('.ox-sidebar__list [data-target="'+window.idclase+'"]').parent().addClass('--current');
+      $('.ox-sidebar__list [data-target="'+target+'"]').parent().addClass('--current');
     }
   }));
 }
@@ -1124,13 +1124,19 @@ $(document).ready(function () {
     $('.ox-sidebar:not(#ox-BookUnits)').addClass('--hidden');
     $('#ox-BookUnits').toggleClass('--hidden');
 
+    if ($('#ox-BookUnits').hasClass('--hidden')) {
+      $('#ox-BookThumbs').addClass('--hidden');
+    }
+
     if (!$('#ox-BookUnits').hasClass('--hidden') && bpdf) {
       $('.ox-js--goToPageBook').parent().removeClass('--current');
       var currentPage = bpdf.getVisiblePages()[1];
       $('[data-book-id="'+window.idclase+'"][data-page="'+currentPage+'"]').parent().addClass('--current');
+      
+      var target = $('[data-book-id="'+window.idclase+'"][data-page="'+currentPage+'"]').closest('[data-thumbs]').attr('data-thumbs');
 
       $('.ox-sidebar__list a[data-target]').parent().removeClass('--current');
-      $('.ox-sidebar__list [data-target="'+window.idclase+'"]').parent().addClass('--current');
+      $('.ox-sidebar__list [data-target="'+target+'"]').parent().addClass('--current');
 
     }
 
@@ -1193,6 +1199,8 @@ $(document).ready(function () {
 
     $('#ox-BookThumbs').stop().animate({scrollTop: offset}, 600);
 
+    $(this).parent().siblings().removeClass('--active');
+    $(this).parent().addClass('--active');
 
   });
 

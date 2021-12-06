@@ -1020,12 +1020,14 @@ input:checked + .ox-switch__slider:before {
   z-index: 10;
 }
 .ox-sidebar__list li:hover a,
-.ox-sidebar__list li.--current a {
+.ox-sidebar__list li.--current a,
+.ox-sidebar__list li.--active a {
   background-color: #d1d8e1;
   color: #02285c;
 }
 .ox-sidebar__list li:hover a::before,
-.ox-sidebar__list li.--current a::before {
+.ox-sidebar__list li.--current a::before,
+.ox-sidebar__list li.--active a::before {
   border-top-color: #02285c;
 }
 
@@ -1168,6 +1170,9 @@ input:checked + .ox-switch__slider:before {
   margin-bottom: 16px;
   padding: 8px;
   width: 128px;
+}
+.ox-thumb__page {
+  margin-top: 4px;
 }
 .ox-thumb__inner {
   color: #fff;
