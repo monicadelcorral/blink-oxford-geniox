@@ -5,6 +5,13 @@
     font-weight: bold;
     line-height: 1.35;
     padding: 11px 18px;
+    border: 2px solid $color_b_3;
+}
+
+.ox-button--secondary {
+    background-color: $color_white;
+    color: $color_b_3;
+    border: 2px solid $color_b_3;
 }
 
 .ox-button--lock {
@@ -107,6 +114,7 @@
     &__inner {
         box-shadow: 0 4px 20px 0 #0003;
         border-radius: 25px;
+        max-width: 490px;
     }
     
     &__message {
@@ -123,8 +131,20 @@
             background-size: 35px 50px;
         }
 
+        &.--unlocked {
+            .ox-modal__message {
+                background-image: url(images/unlocked.svg);
+                background-size: 35px 50px;
+            }
+        }
+
         .ox-modal__footer {
             justify-content: center;
+            margin: 0 -20px;
+            .ox-button {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
         }
     }
 }

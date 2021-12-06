@@ -563,6 +563,13 @@
   font-weight: bold;
   line-height: 1.35;
   padding: 11px 18px;
+  border: 2px solid #02285c;
+}
+
+.ox-button--secondary {
+  background-color: #fff;
+  color: #02285c;
+  border: 2px solid #02285c;
 }
 
 .ox-button--lock.disabled, .ox-button--lock:disabled {
@@ -653,6 +660,7 @@
 .ox-modal__inner {
   box-shadow: 0 4px 20px 0 #0003;
   border-radius: 25px;
+  max-width: 490px;
 }
 .ox-modal__message {
   font-size: 18px;
@@ -665,8 +673,17 @@
   background-image: url(images/locked.svg);
   background-size: 35px 50px;
 }
+.ox-modal--lockstatus.--unlocked .ox-modal__message {
+  background-image: url(images/unlocked.svg);
+  background-size: 35px 50px;
+}
 .ox-modal--lockstatus .ox-modal__footer {
   justify-content: center;
+  margin: 0 -20px;
+}
+.ox-modal--lockstatus .ox-modal__footer .ox-button {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .ox-body-book #viewer {
