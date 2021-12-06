@@ -421,17 +421,21 @@
                     right: 2px;
                     transform: translate(-50%, -50%);
                     z-index: 10;
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 20px;
+                    width: 24px;
+                    height: 24px;
                     background-color: transparent;
+                    background-size: 24px auto;
+                    background-position: center center;
+                    background-repeat: no-repeat;
                 }
             }
 
 
             &.--actividad {
                 a {
-                    &::after {background-color: blue}
+                    &::after {
+                        background-image: url(images/resource-activity.svg);
+                    }
                 }
             }
 
@@ -446,7 +450,17 @@
 
             &.--archivo {
                 a {
-                    &::after {background-color: green}
+                    &::after {
+                        background-image: url(images/resource-view.svg);
+                    }
+                }
+            }
+
+            &.--video {
+                a {
+                    &::after {
+                        background-image: url(images/resource-video.svg);
+                    }
                 }
             }
 

@@ -1128,13 +1128,15 @@ input:checked + .ox-switch__slider:before {
   right: 2px;
   transform: translate(-50%, -50%);
   z-index: 10;
-  width: 10px;
-  height: 10px;
-  border-radius: 20px;
+  width: 24px;
+  height: 24px;
   background-color: transparent;
+  background-size: 24px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--actividad a::after {
-  background-color: blue;
+  background-image: url(images/resource-activity.svg);
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--level-1 {
   background-color: #e6f5f5;
@@ -1144,7 +1146,10 @@ input:checked + .ox-switch__slider:before {
   content: none;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--archivo a::after {
-  background-color: green;
+  background-image: url(images/resource-view.svg);
+}
+.ox-sidebar__resources__wrapper .ox-sidebar__list li.--video a::after {
+  background-image: url(images/resource-video.svg);
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list.--hidden {
   display: none;
