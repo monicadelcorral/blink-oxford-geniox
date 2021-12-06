@@ -565,6 +565,11 @@
   margin-top: -40px;
 }
 
+.ox-resourcessection-header {
+  background-color: #2ba2b7;
+  color: #fff;
+}
+
 .ox-button--2 {
   background-color: #02285c;
   color: #fff;

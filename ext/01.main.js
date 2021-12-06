@@ -1,3 +1,8 @@
+oxfApp.config.headerBackground = '#2BA2B7';
+oxfApp.config.headerBackgroundTag = 'header_color_code_';
+oxfApp.config.breadcrumbColor = '#FFFFFF';
+oxfApp.config.breadcrumbColorTag = 'breadcrumb_color_code_';
+
 oxfApp.config.tagDropdown = "block_dropdown";
 oxfApp.config.tagTextCenter = "block_text_center";
 oxfApp.config.tagTextUpCenter = "block_text_up_center";
@@ -210,6 +215,81 @@ oxfApp.minHeightSlides = function() {
         minHeightContent = oxfApp.windowHeight - offsetTopContent - belowBarHeight;
     $minHeightContent.css('height', minHeightContent);
   }
+
+}
+
+// Header colors
+
+oxfApp.headerColorsGeniox = function(unitID) {
+
+  var bgcolor = oxfApp.config.headerBackground;
+  var color = oxfApp.config.breadcrumbColor;
+
+  var unitIDExists = (oxfApp.config.unitsNblockIDs.indexOf(unitID) >= 0);
+
+  if (unitID && unitIDExists) {
+
+    var resourceInfo = oxfApp.getResourcesInfo(unitID);
+    var parentTags = resourceInfo[1].data.tags;
+    var parentTags = (typeof parentTags !== 'undefined') ? parentTags.split(" ") : [];
+
+    var hasCustomColors = false;
+    if (parentTags != null && parentTags.length) {
+      $.each(parentTags, function(index, value) {
+        value = value.toLowerCase();
+
+        if (oxfApp.startsWith(value, oxfApp.config.resourceHeaderBackgroundTag)) {
+          bgcolor = value.replace(oxfApp.config.resourceHeaderBackgroundTag, '#');
+          hasCustomColors = true;
+        }
+        if (oxfApp.startsWith(value, oxfApp.config.breadcrumbColorTag)) {
+          color = value.replace(oxfApp.config.breadcrumbColorTag, '#');
+          hasCustomColors = true;
+        }
+      });
+    } 
+    if (!hasCustomColors) {
+      var generalCourseTags = oxfApp.courseData.courseTags;
+
+      if (generalCourseTags != null && generalCourseTags.length) {
+        $.each(generalCourseTags, function(index, value) {
+          value = value.toLowerCase();
+  
+          if (oxfApp.startsWith(value, oxfApp.config.headerBackgroundTag)) {
+            bgcolor = value.replace(oxfApp.config.headerBackgroundTag, '#');
+          }
+          if (oxfApp.startsWith(value, oxfApp.config.breadcrumbColorTag)) {
+            color = value.replace(oxfApp.config.breadcrumbColorTag, '#');
+          }
+        });
+      }
+    }
+
+    $('.ox-resourcessection-header').css({'background-color': bgcolor, 'color': color}).find('.ox-title').css('color', color);
+  
+  } else {
+    // Get generic colors
+    var generalCourseTags = oxfApp.courseData.courseTags;
+    if (generalCourseTags != null && generalCourseTags.length) {
+      $.each(generalCourseTags, function(index, value) {
+        value = value.toLowerCase();
+
+        if (oxfApp.startsWith(value, oxfApp.config.headerBackgroundTag)) {
+          bgcolor = value.replace(oxfApp.config.headerBackgroundTag, '#');
+          oxfApp.config.resourceHeaderBackground = bgcolor;
+        }
+        if (oxfApp.startsWith(value, oxfApp.config.breadcrumbColorTag)) {
+          color = value.replace(oxfApp.config.breadcrumbColorTag, '#');
+          oxfApp.config.breadcrumbColor = color;
+        }
+      });
+    }
+
+
+    $('.ox-module--header').css({'background-color': bgcolor, 'color': color});
+  
+  }
+  
 
 }
 
@@ -924,14 +1004,24 @@ oxfApp.secondLevelView = function () {
 
       
       if (!hasCardsView && !hasAbstractView && !hasEvauExamView && !hasExamOnlineView) {
-          $('.ox-page--resourcessection').removeClass('loading');
+          var intervalLoadResourcesNotCustom = setInterval(function() {
+            if ($('.ox-page--resourcessection .ox-resourcessection-header').length) {
+              $('.ox-page--resourcessection').removeClass('loading');
+              oxfApp.headerColorsGeniox(unitID);
+  
+              clearInterval(intervalLoadResourcesNotCustom);
+            }
+           
+          }, 250);
       } else {
-        var intervalLoaResources = setInterval(function() {
+        var intervalLoadResources = setInterval(function() {
           if ($('.ox-page--resourcessection .ox-resourceslist').length) {
             $('.ox-page--resourcessection .ox-resourceslist').remove();
             $('.ox-page--resourcessection').append(subunitsItemsSkeleton);
             $('.ox-page--resourcessection').removeClass('loading');
-            clearInterval(intervalLoaResources);
+            oxfApp.headerColorsGeniox(unitID);
+
+            clearInterval(intervalLoadResources);
           }
          
         }, 250);
@@ -1012,6 +1102,10 @@ oxfApp.loadHomeGeniox = function () {
 
   // Add Exam block
   oxfApp.blockExams();
+
+  //Custom header color
+
+  oxfApp.headerColorsGeniox();
 
 };
 
@@ -1114,6 +1208,7 @@ $(document).ready(function () {
         oxfApp.loadHomeGeniox();
         oxfApp.secondLevelView();
         oxfApp.getExamsNotifications();
+
       } else if (!ishtmlBook) {
         oxfApp.initSlideGeniox();
       }
