@@ -296,7 +296,13 @@
 
         .ox-button--addresource {
             width: 100%;
-
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            &:hover, &:active, &:focus {
+                color: $color_white;
+                background-color: $color_b_2;
+            }
         }
     }
 
@@ -321,6 +327,7 @@
         position: relative;
         z-index: 150;
         background: $color-white;
+        box-shadow: 0 3px 15px 0 #00000029;
     }
 
     &__list {

@@ -26,7 +26,7 @@ oxfApp.icons.lockUnlock = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns
 oxfApp.icons.lockLocked = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M22 13.8H7.24V9a5.15 5.15 0 0 1 3.95-5.1A5 5 0 0 1 17 8c.051.28.078.565.08.85v6h2l1.3.53V8.87A8.26 8.26 0 0 0 12.12.61h-.78A8.54 8.54 0 0 0 4 9.19v4.6H2.31a1.65 1.65 0 0 0-1.64 1.65v16.45a1.76 1.76 0 0 0 1.64 1.64H22a1.66 1.66 0 0 0 1.65-1.64V15.44a1.56 1.56 0 0 0-1.46-1.64H22Zm-8.22 11V27a1.65 1.65 0 1 1-3.29 0v-2.18A3.43 3.43 0 0 1 8.89 22a3.26 3.26 0 0 1 3.28-3.24c.28.001.56.038.83.11a3.72 3.72 0 0 1 2.47 2.47 3.19 3.19 0 0 1-1.65 3.48l-.04-.02Z" fill="#202E55" fill-rule="nonzero"/></svg>';
 oxfApp.icons.eye = '<svg width="77" height="49" viewBox="0 0 77 49" xmlns="http://www.w3.org/2000/svg"><path d="M38.58 9.46A14.94 14.94 0 1 0 53.52 24.4c-.033-8.237-6.703-14.907-14.94-14.94Zm0-9.13c20.54 0 36.62 21.68 37.29 22.6a2.49 2.49 0 0 1 0 2.94c-.67.92-16.75 22.6-37.29 22.6S1.96 26.79 1.29 25.87a2.49 2.49 0 0 1 0-2.94C2 22 18.04.33 38.58.33Zm0 4.98c-15.11 0-28.24 14.38-32.11 19.09 3.88 4.7 16.98 19.09 32.11 19.09 15.16 0 28.23-14.38 32.11-19.09-3.88-4.71-17-19.09-32.11-19.09Zm0 9.05c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10Z" fill="#323232" fill-rule="nonzero"/></svg>';
 oxfApp.icons.download = '<svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><path d="M32.07 20.64a1.5 1.5 0 0 1 1.493 1.356l.007.144v6.77a4.88 4.88 0 0 1-4.663 4.875l-.217.005H5a4.88 4.88 0 0 1-4.875-4.663L.12 28.91v-6.77a1.5 1.5 0 0 1 2.993-.144l.007.144v6.77c0 .989.763 1.8 1.733 1.874L5 30.79h23.69c.989 0 1.8-.763 1.874-1.733l.006-.147v-6.77a1.5 1.5 0 0 1 1.5-1.5ZM16.85.35a1.5 1.5 0 0 1 1.493 1.356l.007.144-.001 16.67 5.901-5.891a1.5 1.5 0 0 1 2.223 2.008l-.103.114-8.376 8.37a1.497 1.497 0 0 1-2.288 0L7.33 14.75a1.5 1.5 0 0 1 2.006-2.225l.114.103 5.899 5.891.001-16.67a1.5 1.5 0 0 1 1.5-1.5Z" fill="#202E55" fill-rule="nonzero"/></svg>';
-
+oxfApp.icons.addResource = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>';
 
 oxfApp.text.oxford_geniox_pageperunit = "Páginas por unidad";
 oxfApp.text.oxford_geniox_resourcesperunit = "Recursos por unidad";
@@ -445,7 +445,7 @@ oxfApp.initBookUnitsSidebar = function() {
 
   var buttonAddRecources = "";
   if (!oxfApp.config.isStudent) {
-    buttonAddRecources = '<a href="javascript:void();" class="ox-button ox-button--addresource">'+oxfApp.text.oxford_geniox_addresource+'</a>';
+    buttonAddRecources = '<a href="javascript:void();" class="ox-button ox-button--addresource">'+oxfApp.text.oxford_geniox_addresource+oxfApp.icons.addResource+'</a>';
   }
 
   var bookUnitsSidebarUnits = '<div class="ox-sidebar --hidden" id="ox-BookUnits"><div class="ox-sidebar__header"><h2 class="ox-sidebar__title">'+oxfApp.text.oxford_geniox_pageperunit+'</h2><button class="ox-link ox-js--closeSidebar">'+oxfApp.text.oxford_geniox_close+'</button></div><div class="ox-sidebar__body"><ol class="ox-sidebar__list ox-js--goToUnitList">'+bookUnits+'</ol></div><div class="ox-sidebar__thumbs__wrapper --hidden" id="ox-BookThumbs">'+bookThumbs+'<button class="ox-button ox-button--icon ox-button--icon--close-2 ox-js--closeThumbs"><span>'+oxfApp.text.oxford_geniox_close+'</span></button></div></div>';

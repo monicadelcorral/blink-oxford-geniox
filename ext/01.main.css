@@ -972,6 +972,13 @@ input:checked + .ox-switch__slider:before {
 }
 .ox-sidebar__footer .ox-button--addresource {
   width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ox-sidebar__footer .ox-button--addresource:hover, .ox-sidebar__footer .ox-button--addresource:active, .ox-sidebar__footer .ox-button--addresource:focus {
+  color: #fff;
+  background-color: #2ba2b7;
 }
 .ox-sidebar__title {
   font-size: 18px;
@@ -997,6 +1004,7 @@ input:checked + .ox-switch__slider:before {
   position: relative;
   z-index: 150;
   background: #fff;
+  box-shadow: 0 3px 15px 0 #00000029;
 }
 .ox-sidebar__body::-webkit-scrollbar {
   width: 6px;
