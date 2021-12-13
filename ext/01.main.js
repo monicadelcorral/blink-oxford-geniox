@@ -27,6 +27,7 @@ oxfApp.icons.lockLocked = '<svg width="24" height="34" viewBox="0 0 24 34" xmlns
 oxfApp.icons.eye = '<svg width="77" height="49" viewBox="0 0 77 49" xmlns="http://www.w3.org/2000/svg"><path d="M38.58 9.46A14.94 14.94 0 1 0 53.52 24.4c-.033-8.237-6.703-14.907-14.94-14.94Zm0-9.13c20.54 0 36.62 21.68 37.29 22.6a2.49 2.49 0 0 1 0 2.94c-.67.92-16.75 22.6-37.29 22.6S1.96 26.79 1.29 25.87a2.49 2.49 0 0 1 0-2.94C2 22 18.04.33 38.58.33Zm0 4.98c-15.11 0-28.24 14.38-32.11 19.09 3.88 4.7 16.98 19.09 32.11 19.09 15.16 0 28.23-14.38 32.11-19.09-3.88-4.71-17-19.09-32.11-19.09Zm0 9.05c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10Z" fill="#323232" fill-rule="nonzero"/></svg>';
 oxfApp.icons.download = '<svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><path d="M32.07 20.64a1.5 1.5 0 0 1 1.493 1.356l.007.144v6.77a4.88 4.88 0 0 1-4.663 4.875l-.217.005H5a4.88 4.88 0 0 1-4.875-4.663L.12 28.91v-6.77a1.5 1.5 0 0 1 2.993-.144l.007.144v6.77c0 .989.763 1.8 1.733 1.874L5 30.79h23.69c.989 0 1.8-.763 1.874-1.733l.006-.147v-6.77a1.5 1.5 0 0 1 1.5-1.5ZM16.85.35a1.5 1.5 0 0 1 1.493 1.356l.007.144-.001 16.67 5.901-5.891a1.5 1.5 0 0 1 2.223 2.008l-.103.114-8.376 8.37a1.497 1.497 0 0 1-2.288 0L7.33 14.75a1.5 1.5 0 0 1 2.006-2.225l.114.103 5.899 5.891.001-16.67a1.5 1.5 0 0 1 1.5-1.5Z" fill="#202E55" fill-rule="nonzero"/></svg>';
 
+
 oxfApp.text.oxford_geniox_pageperunit = "Páginas por unidad";
 oxfApp.text.oxford_geniox_resourcesperunit = "Recursos por unidad";
 oxfApp.text.oxford_geniox_showpins = "Mostrar pines";
@@ -539,12 +540,6 @@ oxfApp.initBookHTML = function () {
 
   oxfApp.initBookUnitsSidebar();
 };
-
-oxfApp.initSlideGeniox = function() {
-  $('.ox-topbar--2').remove();
-
-  oxfApp.minHeightSlides();
-}
 
 
 oxfApp.blockDropdown = function (block) {
@@ -1201,7 +1196,6 @@ $(document).ready(function () {
 
     if (coverID && oxfApp.courseData !== "") {      
       var isBookCover = idclase.toString() === coverID;
-      var ishtmlBook = $('body').hasClass('body_htmlBook');
 
       if (isBookCover) {
         oxfApp.config.canLockActivities = !oxfApp.config.isStudent;
@@ -1209,8 +1203,6 @@ $(document).ready(function () {
         oxfApp.secondLevelView();
         oxfApp.getExamsNotifications();
 
-      } else if (!ishtmlBook) {
-        oxfApp.initSlideGeniox();
       }
  
       clearInterval(intervalLoadHome);
@@ -1258,6 +1250,7 @@ $(document).ready(function () {
     e.preventDefault();
     $('.ox-sidebar:not(#ox-BookUnits)').addClass('--hidden');
     $('#ox-BookUnits').toggleClass('--hidden');
+    $(this).toggleClass('--active');
 
     if ($('#ox-BookUnits').hasClass('--hidden')) {
       $('#ox-BookThumbs').addClass('--hidden');
@@ -1280,6 +1273,8 @@ $(document).ready(function () {
   $("body").on("click", ".ox-js--toggleBookResources", function(e) {
     e.preventDefault();
     
+    $(this).toggleClass('--active');
+    
     if (!$('#ox-BookResources').hasClass('--hidden')) {
       $('#ox-BookResourcesList').addClass('--hidden');
       $('#ox-BookThumbs').addClass('--hidden');
@@ -1296,6 +1291,9 @@ $(document).ready(function () {
     $('.ox-sidebar').addClass('--hidden');
     $('#ox-BookResourcesList').addClass('--hidden');
     $('#ox-BookThumbs').addClass('--hidden');
+
+    $('.ox-js--toggleBookResources, .ox-js--toggleBookUnits').removeClass('--active');
+
   });
 
   $("body").on("click", ".ox-js--closeThumbs", function(e) {

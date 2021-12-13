@@ -770,6 +770,12 @@
   margin: 0 auto 5px;
   transform: scale(0.75);
 }
+.ox-link-icon.--active {
+  background: #2ba2b7;
+}
+.ox-link-icon.--active svg {
+  fill: #fff;
+}
 
 .ox-button--toggleBookMenu {
   position: relative;
@@ -1151,6 +1157,12 @@ input:checked + .ox-switch__slider:before {
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--video a::after {
   background-image: url(images/resource-video.svg);
 }
+.ox-sidebar__resources__wrapper .ox-sidebar__list li.--imagen a::after {
+  background-image: url(images/resource-image.svg);
+}
+.ox-sidebar__resources__wrapper .ox-sidebar__list li.--audio a::after {
+  background-image: url(images/resource-audio.svg);
+}
 .ox-sidebar__resources__wrapper .ox-sidebar__list.--hidden {
   display: none;
 }
@@ -1504,6 +1516,26 @@ input:checked + .ox-switch__slider:before {
   text-align: center;
   color: #8bcb71;
   text-transform: uppercase;
+}
+
+.ox-resource__icon--archivo + .ox-resource__body .ox-resource__title {
+  position: relative;
+  padding-right: 20px;
+}
+.ox-resource__icon--archivo + .ox-resource__body .ox-resource__title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  transform: translate(0, -50%);
+  z-index: 10;
+  width: 14px;
+  height: 14px;
+  background-color: transparent;
+  background-size: 14px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(images/download.svg);
 }
 
 /*# sourceMappingURL=01.main.css.map */

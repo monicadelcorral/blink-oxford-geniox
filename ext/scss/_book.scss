@@ -73,6 +73,14 @@
         margin: 0 auto 5px;
         transform: scale(.75);
     }
+
+    &.--active {
+        background: $color_b_2;
+
+        svg {
+            fill: $color_white;
+        }
+    }
 }
 
 .ox-button--toggleBookMenu {
@@ -460,6 +468,22 @@
                 a {
                     &::after {
                         background-image: url(images/resource-video.svg);
+                    }
+                }
+            }
+
+            &.--imagen {
+                a {
+                    &::after {
+                        background-image: url(images/resource-image.svg);
+                    }
+                }
+            }
+
+            &.--audio {
+                a {
+                    &::after {
+                        background-image: url(images/resource-audio.svg);
                     }
                 }
             }

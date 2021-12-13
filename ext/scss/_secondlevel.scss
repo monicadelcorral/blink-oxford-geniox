@@ -310,3 +310,32 @@
         text-transform: uppercase;
     }
 }
+
+
+
+//overwrite
+
+.ox-resource__icon--archivo {
+    & + .ox-resource__body {
+        .ox-resource__title {
+            position: relative;
+            padding-right: 20px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 2px;
+                transform: translate(0, -50%);
+                z-index: 10;
+                width: 14px;
+                height: 14px;
+                background-color: transparent;
+                background-size: 14px auto;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-image: url(images/download.svg);
+            }
+        }
+    }
+}
