@@ -1,7 +1,7 @@
 oxfApp.config.headerBackground = '#2BA2B7';
-oxfApp.config.headerBackgroundTag = 'header_color_code_';
+oxfApp.config.headerBackgroundTag = 'header_color_';
 oxfApp.config.breadcrumbColor = '#FFFFFF';
-oxfApp.config.breadcrumbColorTag = 'breadcrumb_color_code_';
+oxfApp.config.breadcrumbColorTag = 'breadcrumb_color_';
 
 oxfApp.config.tagDropdown = "block_dropdown";
 oxfApp.config.tagTextCenter = "block_text_center";
