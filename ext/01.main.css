@@ -1535,7 +1535,7 @@ input:checked + .ox-switch__slider:before {
 
 .ox-resource__icon--archivo + .ox-resource__body .ox-resource__title {
   position: relative;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 .ox-resource__icon--archivo + .ox-resource__body .ox-resource__title::after {
   content: "";
@@ -1544,10 +1544,10 @@ input:checked + .ox-switch__slider:before {
   right: 2px;
   transform: translate(0, -50%);
   z-index: 10;
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   background-color: transparent;
-  background-size: 14px auto;
+  background-size: 44px auto;
   background-position: center center;
   background-repeat: no-repeat;
   background-image: url(images/download.svg);
