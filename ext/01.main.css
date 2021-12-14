@@ -773,7 +773,7 @@
 .ox-link-icon.--active {
   background: #2ba2b7;
 }
-.ox-link-icon.--active svg {
+.ox-link-icon.--active svg path {
   fill: #fff;
 }
 
@@ -975,6 +975,9 @@ input:checked + .ox-switch__slider:before {
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
+}
+.ox-sidebar__footer .ox-button--addresource svg {
+  width: 24px;
 }
 .ox-sidebar__footer .ox-button--addresource:hover, .ox-sidebar__footer .ox-button--addresource:active, .ox-sidebar__footer .ox-button--addresource:focus {
   color: #fff;
@@ -1238,6 +1241,10 @@ input:checked + .ox-switch__slider:before {
 }
 .ox-thumb.--current {
   box-shadow: 0 0 0 4px #fff;
+}
+
+.body_htmlBook:not(.ox-book-loaded) #libro-digital iframe {
+  visibility: hidden !important;
 }
 
 .ox-page--resourcessection.loading {

@@ -78,7 +78,9 @@
         background: $color_b_2;
 
         svg {
-            fill: $color_white;
+            path {
+                fill: $color_white;
+            }
         }
     }
 }
@@ -299,6 +301,11 @@
             display: inline-flex;
             justify-content: space-between;
             align-items: center;
+
+            svg {
+                width: 24px;
+            }
+            
             &:hover, &:active, &:focus {
                 color: $color_white;
                 background-color: $color_b_2;
@@ -579,5 +586,12 @@
 
     &.--current {
         box-shadow: 0 0 0 4px $color-white;
+    }
+}
+
+
+.body_htmlBook:not(.ox-book-loaded) #libro-digital {
+    iframe {
+        visibility: hidden!important;
     }
 }

@@ -1250,7 +1250,7 @@ $(document).ready(function () {
     e.preventDefault();
     $('.ox-sidebar:not(#ox-BookUnits)').addClass('--hidden');
     $('#ox-BookUnits').toggleClass('--hidden');
-    $(this).toggleClass('--active');
+    $(this).toggleClass('--active').sibilings().removeClass('--active');
 
     if ($('#ox-BookUnits').hasClass('--hidden')) {
       $('#ox-BookThumbs').addClass('--hidden');
@@ -1273,7 +1273,7 @@ $(document).ready(function () {
   $("body").on("click", ".ox-js--toggleBookResources", function(e) {
     e.preventDefault();
     
-    $(this).toggleClass('--active');
+    $(this).toggleClass('--active').sibilings().removeClass('--active');
     
     if (!$('#ox-BookResources').hasClass('--hidden')) {
       $('#ox-BookResourcesList').addClass('--hidden');
