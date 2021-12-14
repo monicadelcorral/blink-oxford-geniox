@@ -305,7 +305,7 @@
             svg {
                 width: 24px;
             }
-            
+
             &:hover, &:active, &:focus {
                 color: $color_white;
                 background-color: $color_b_2;
@@ -486,7 +486,8 @@
                 }
             }
 
-            &.--imagen {
+            &.--imagen,
+            &.--img {
                 a {
                     &::after {
                         background-image: url(images/resource-image.svg);
@@ -494,7 +495,8 @@
                 }
             }
 
-            &.--audio {
+            &.--audio,
+            &.--musica {
                 a {
                     &::after {
                         background-image: url(images/resource-audio.svg);

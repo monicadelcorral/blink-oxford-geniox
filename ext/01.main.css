@@ -1168,10 +1168,10 @@ input:checked + .ox-switch__slider:before {
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--video a::after {
   background-image: url(images/resource-video.svg);
 }
-.ox-sidebar__resources__wrapper .ox-sidebar__list li.--imagen a::after {
+.ox-sidebar__resources__wrapper .ox-sidebar__list li.--imagen a::after, .ox-sidebar__resources__wrapper .ox-sidebar__list li.--img a::after {
   background-image: url(images/resource-image.svg);
 }
-.ox-sidebar__resources__wrapper .ox-sidebar__list li.--audio a::after {
+.ox-sidebar__resources__wrapper .ox-sidebar__list li.--audio a::after, .ox-sidebar__resources__wrapper .ox-sidebar__list li.--musica a::after {
   background-image: url(images/resource-audio.svg);
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list.--hidden {
