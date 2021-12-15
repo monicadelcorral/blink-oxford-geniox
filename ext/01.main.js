@@ -344,7 +344,7 @@ oxfApp.createSearchBar = function () {
   var barSearch =
     '<div class="ox-searchbar"><div class="ox-container"><div class="ox-searchbar__inner"><div class="ox-searchform"><label class="ox-searchform__field"><input type="text" class="ox-searchform__field__input ox--js-triggersearch" placeholder="' +
     oxfApp.text.oxford_zona_recursos_2020_searchPlaceHolder +
-    '"><span class="ox-searchform__field__button"></span></label><div class="ox-searchform__results"><div class="ox-searchform__results__inner ox--js-resultslist"></div></div></div></div></div></div>';
+    '" /><span class="ox-searchform__field__button"></span></label><div class="ox-searchform__results"><div class="ox-searchform__results__inner ox--js-resultslist"></div></div></div></div></div></div>';
 
   return barSearch;
 };
@@ -1460,6 +1460,17 @@ $(document).ready(function () {
   $("body").on("click", ".ox-js--startTest", function(e) {
     e.preventDefault();
     oxfApp.startTestFromAbstract();
+  });
+
+  $("body").on("keypress", ".ox--js-triggersearch", function(e) {
+    if (e.keyCode == 13) {
+      var $link = $('.ox--js-resultslist .ox-result:first-child a');
+      if ($link.length) {
+        $link.click();
+      }
+      e.preventDefault();
+      e.stopPropagation();
+    }
   });
 
 });
