@@ -1320,8 +1320,10 @@ $(document).ready(function () {
   $("body").on("click", ".ox-js--toggleBookUnits", function(e) {
     e.preventDefault();
     $('.ox-sidebar:not(#ox-BookUnits)').addClass('--hidden');
+    $('#ox-BookResourcesList').addClass('--hidden');
     $('#ox-BookUnits').toggleClass('--hidden');
-    $(this).toggleClass('--active').sibilings().removeClass('--active');
+
+    $(this).toggleClass('--active').siblings().removeClass('--active');
 
     if ($('#ox-BookUnits').hasClass('--hidden')) {
       $('#ox-BookThumbs').addClass('--hidden');
@@ -1344,7 +1346,7 @@ $(document).ready(function () {
   $("body").on("click", ".ox-js--toggleBookResources", function(e) {
     e.preventDefault();
     
-    $(this).toggleClass('--active').sibilings().removeClass('--active');
+    $(this).toggleClass('--active').siblings().removeClass('--active');
     
     if (!$('#ox-BookResources').hasClass('--hidden')) {
       $('#ox-BookResourcesList').addClass('--hidden');
@@ -1353,6 +1355,8 @@ $(document).ready(function () {
 
     $('.ox-sidebar:not(#ox-BookResources)').addClass('--hidden');
     $('#ox-BookResources').toggleClass('--hidden');
+    $('#ox-BookThumbs').addClass('--hidden');
+
 
 
   });
