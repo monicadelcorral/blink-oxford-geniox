@@ -54,6 +54,10 @@ oxfApp.text.oxford_geniox_exam_online_unlocked_1 = "Vas a bloquear esta prueba."
 oxfApp.text.oxford_geniox_exam_online_unlocked_2 = "Esto significa que dejará de ser visible para tus alumnos y perderán cualquier progreso realizado.";
 oxfApp.text.oxford_geniox_unlock = "Desbloquear";
 oxfApp.text.oxford_geniox_lock = "Bloquear";
+oxfApp.text.oxford_geniox_test = "Test de unidad";
+oxfApp.text.oxford_geniox_start_test = "Hacer test";
+oxfApp.text.oxford_geniox_start_test_1 = "Vas a realizar el test del resumen.";
+oxfApp.text.oxford_geniox_start_test_2 = "Una vez dentro, no podrás volver al resumen hasta que no se entregue.";
 
 
 oxfApp.allExams = [];
@@ -541,6 +545,28 @@ oxfApp.initBookHTML = function () {
   oxfApp.initBookUnitsSidebar();
 };
 
+oxfApp.initActivitySlides = function() {
+  //Is abstract
+  var data = oxfApp.courseData;
+  var unit = _.findWhere(data.units, {id: window.idtema.toString()});
+  var subunit = _.findWhere(unit.subunits, {id: window.idclase.toString()});
+
+  var unitTags = unit.tags,
+      unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
+  var isAbstract =
+      unitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0;
+
+  if (isAbstract) {
+    oxfApp.abstractsLastSlide();
+  }
+
+  blink.events.on('slider:changed', function() {
+    if (isAbstract) {
+      oxfApp.abstractsLastSlide();
+    }
+  });
+
+}
 
 oxfApp.blockDropdown = function (block) {
   var data = oxfApp.courseData;
@@ -1104,6 +1130,26 @@ oxfApp.loadHomeGeniox = function () {
 
 };
 
+oxfApp.abstractsLastSlide = function() {
+  var totalSlides = blink.activity.currentStyle.Slider.$items.length,
+    currentSection = blink.activity.currentSection,
+    isLastSlide = (totalSlides === currentSection+2);
+
+  var $next = $('.right.slider-control');
+  var $review = $('#slider-item-'+currentSection).find('.review');
+
+  if (isLastSlide && !$review.hasClass('ox-review--test')) {
+    var buttonModalTest = '<button class="btn ox-btn--end ox-js--modalTest">'+oxfApp.text.oxford_geniox_test+'</button>';
+    var reviewAppend = '<div class="ox-review--test__inner">'+buttonModalTest+'</div>';
+
+    $review.addClass('ox-review--test').append(reviewAppend);
+  }
+  if (isLastSlide) {
+    $next.hide();
+  } else {
+    $next.show();
+  }
+}
 
 oxfApp.getExamsNotifications = function() {
   if (!oxfApp.config.isStudent || !oxfApp.courseData.hasExams) return;
@@ -1153,6 +1199,28 @@ oxfApp.toggleLockActivity = function(idcurso) {
   onCursoCambiarBloqueado(idclase, idcurso);
 }
 
+oxfApp.startTestFromAbstract = function() {
+  var data = oxfApp.courseData;
+  var unit = _.findWhere(data.units, {id: window.idtema.toString()});
+  var subunit = _.findIndex(unit.subunits, {id: window.idclase.toString()});
+
+  var test = unit.subunits[subunit+1];
+
+  var onclick = test.onclickTitle;
+  var onclickfunction = eval(onclick)
+  if (typeof onclickfunction == 'function') {
+    onclickfunction();
+  }
+
+}
+
+oxfApp.modalStartTest = function() {
+  $('#ox-modal-starttest').remove();
+
+  var modal = '<div class="ox-modal in ox-modal--alert" id="ox-modal-starttest"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_start_test_1+'</p><p>'+oxfApp.text.oxford_geniox_start_test_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-starttest\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel ox-js--startTest">'+oxfApp.text.oxford_geniox_start_test+'</button></div></div></div>';
+
+  $('body').append(modal);
+}
 
 oxfApp.modalEvauExamLocked = function() {
   $('#ox-modal-evauexamlocked').remove();
@@ -1196,6 +1264,7 @@ $(document).ready(function () {
 
     if (coverID && oxfApp.courseData !== "") {      
       var isBookCover = idclase.toString() === coverID;
+      var ishtmlBook = $('body').hasClass('body_htmlBook');
 
       if (isBookCover) {
         oxfApp.config.canLockActivities = !oxfApp.config.isStudent;
@@ -1203,6 +1272,8 @@ $(document).ready(function () {
         oxfApp.secondLevelView();
         oxfApp.getExamsNotifications();
 
+      } else if (!ishtmlBook) {
+        oxfApp.initActivitySlides();
       }
  
       clearInterval(intervalLoadHome);
@@ -1362,19 +1433,29 @@ $(document).ready(function () {
     oxfApp.storage.setItem('currentBookPage', page);
   });
 
-    $("body").on("click", ".ox-js--toggleLock", function(e) {
-      e.preventDefault();
-      var isLocked = $(this).hasClass('--locked');
-      var idcurso = $(this).attr('data-id');
 
-      if (isLocked) {
-        oxfApp.modalOnlineExamLocked(idcurso);
-      } else {
-        oxfApp.modalOnlineExamUnlocked(idcurso);
-      }
-      e.stopPropagation();
-    })
+  $("body").on("click", ".ox-js--toggleLock", function(e) {
+    e.preventDefault();
+    var isLocked = $(this).hasClass('--locked');
+    var idcurso = $(this).attr('data-id');
 
+    if (isLocked) {
+      oxfApp.modalOnlineExamLocked(idcurso);
+    } else {
+      oxfApp.modalOnlineExamUnlocked(idcurso);
+    }
+    e.stopPropagation();
+  });
 
+  $("body").on("click", ".ox-js--modalTest", function(e) {
+    e.preventDefault();
+    oxfApp.modalStartTest();
+
+  });
+
+  $("body").on("click", ".ox-js--startTest", function(e) {
+    e.preventDefault();
+    oxfApp.startTestFromAbstract();
+  });
 
 });

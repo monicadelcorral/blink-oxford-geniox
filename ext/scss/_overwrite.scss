@@ -458,3 +458,63 @@
     background-color: $color_b_2;
     color: $color_white;
 }
+
+
+// Slides activities 
+
+.ox-body-slide .radio-option label.filter-label.respuesta_ok::before {
+    border-color: $color_b_13!important;
+    background-color: $color_b_13_lighter!important;
+}
+
+.ox-body-slide .radio-option label.filter-label.respuesta_ko::before {
+    border-color: $color_b_17!important;
+    background-color: $color_b_17_lighter!important;
+}
+
+
+.ox-body-slide #actividad .workspace.multiple-choice .opcion,
+.ox-body-slide #actividad .workspace.multiple-choice .opcion.respuesta_ok, 
+.ox-body-slide #actividad .workspace.multiple-choice .opcion.solucion,
+.ox-body-slide #actividad .workspace.multiple-choice .opcion.respuesta_ko {
+    > *  {
+        border-width: 2px;
+        border-radius: 5px;
+    }
+
+}
+
+.bck-dropdown.right-fb-dropdown,
+.bck-dropdown.wrong-fb-dropdown {
+    border-radius: 20px;
+    .bck-dropdown-titulo {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.36;
+        color: $color_white;
+    }
+
+    .bck-dropdown-icon {
+        margin-right: -10px;
+
+        .fa:before {
+            content: "\f055";
+            color: $color_white;
+        }
+    }
+
+    .bck-dropdown-content {
+        background: $color_white;
+        border-radius: 0 0 20px 20px;
+        margin: 0;
+    }
+}
+.bck-dropdown.right-fb-dropdown {
+    background: $color_b_13;
+    border-color: $color_b_13;
+    
+}
+.bck-dropdown.wrong-fb-dropdown {
+    background: $color_b_17;
+    border-color: $color_b_17;
+}

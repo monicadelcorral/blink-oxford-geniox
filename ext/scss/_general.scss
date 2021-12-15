@@ -125,6 +125,15 @@
         color: $color_b_16;
     }
 
+    .ox-modal__footer {
+        justify-content: center;
+        margin: 0 -20px;
+        .ox-button {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+
     &--lockstatus {
         .ox-modal__message {
             background-image: url(images/locked.svg);
@@ -137,14 +146,12 @@
                 background-size: 35px 50px;
             }
         }
+    }
 
-        .ox-modal__footer {
-            justify-content: center;
-            margin: 0 -20px;
-            .ox-button {
-                margin-left: 20px;
-                margin-right: 20px;
-            }
+    &--alert {
+        .ox-modal__message {
+            background-image: url(images/warning.svg);
+            background-size: 56px 48px;
         }
     }
 }

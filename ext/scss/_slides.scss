@@ -1,0 +1,13 @@
+.btn.ox-btn--end {
+    background: $color_b_3;
+}
+
+.ox-review--test {
+    &__inner {
+        min-width: 900px;
+        max-width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
