@@ -435,6 +435,7 @@
 .ox-footer {
     padding-top: 12px;
     padding-bottom: 12px;
+    min-height: 50px;
 }
 .ox-footer__credits ul {
     @include font-size(1.5);
