@@ -626,6 +626,10 @@
   border-color: #b92525;
 }
 
+.ox-topbar .ox-button--icon--close {
+  display: none !important;
+}
+
 .ox-button--2 {
   background-color: #02285c;
   color: #fff;

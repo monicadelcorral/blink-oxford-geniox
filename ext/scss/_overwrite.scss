@@ -518,3 +518,9 @@
     background: $color_b_17;
     border-color: $color_b_17;
 }
+
+.ox-topbar {
+    .ox-button--icon--close {
+        display: none!important;
+    }
+}
