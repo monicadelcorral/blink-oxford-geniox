@@ -209,7 +209,7 @@ oxfApp.minHeightSlides = function() {
         minHeight = oxfApp.windowHeight - offsetTop - belowBarHeight;
 
     $minHeightTarget.css('min-height', minHeight);
-    $heightCanvas.css('height', minHeight - 4);
+    $heightCanvas.css('height', minHeight - 12);
   }
 
   var $minHeightContent = $('#actividad .content');
@@ -575,6 +575,12 @@ oxfApp.initActivitySlides = function() {
   if (isAbstract) {
     oxfApp.abstractsLastSlide();
   }
+
+  blink.events.on('activity:loaded', function() {
+    if (isAbstract) {
+      oxfApp.abstractsLastSlide();
+    }
+  });
 
   blink.events.on('slider:changed', function() {
     if (isAbstract) {
