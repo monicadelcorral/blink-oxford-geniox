@@ -297,14 +297,14 @@
   /*transition: opacity .3s linear;*/
   /*max-height: 100%;*/
 }
-#ox-module-bys:not(.ox-visible) {
+#ox-module-bys:not(.--visible) {
   bottom: calc(var(--st) * -1 + 20px);
 }
-#ox-module-bys:not(.ox-visible) .ox-container {
+#ox-module-bys:not(.--visible) .ox-container {
   max-width: 100%;
   padding: 0;
 }
-#ox-module-bys.ox-visible {
+#ox-module-bys.--visible {
   top: 0;
   top: var(--st);
   left: 0;
@@ -322,29 +322,29 @@
   scrollbar-color: #777777 #fff;
   scrollbar-width: thin;
 }
-#ox-module-bys.ox-visible::-webkit-scrollbar {
+#ox-module-bys.--visible::-webkit-scrollbar {
   width: 6px;
 }
-#ox-module-bys.ox-visible::-webkit-scrollbar-track {
+#ox-module-bys.--visible::-webkit-scrollbar-track {
   background: transparent;
 }
-#ox-module-bys.ox-visible::-webkit-scrollbar-thumb {
+#ox-module-bys.--visible::-webkit-scrollbar-thumb {
   background-color: #777777;
   border-radius: 20px;
 }
-#ox-module-bys.ox-visible > .ox-container {
+#ox-module-bys.--visible > .ox-container {
   max-height: 100%;
   justify-content: flex-start;
   align-items: flex-start;
 }
-#ox-module-bys.ox-visible .ox-module__content {
+#ox-module-bys.--visible .ox-module__content {
   opacity: 1;
   pointer-events: auto;
   display: block;
   flex-grow: 2;
   padding-bottom: 100px;
 }
-#ox-module-bys.ox-visible .ox-floatingbubble__footer {
+#ox-module-bys.--visible .ox-floatingbubble__footer {
   width: 100%;
   height: 70px;
   position: fixed;
@@ -355,13 +355,13 @@
   opacity: 1;
   top: calc(var(--st) + 100vh - 160px);
 }
-#ox-module-bys.ox-visible .ox-module__header {
+#ox-module-bys.--visible .ox-module__header {
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 0;
   padding-right: 0;
 }
-#ox-module-bys.ox-visible .ox-module__header .ox-title {
+#ox-module-bys.--visible .ox-module__header .ox-title {
   font-size: 30px;
   line-height: 1.36;
   font-weight: bold;
@@ -370,7 +370,7 @@
   text-transform: uppercase;
   top: auto;
 }
-#ox-module-bys.ox-visible .ox-module__header .ox-link {
+#ox-module-bys.--visible .ox-module__header .ox-link {
   opacity: 1;
   position: relative;
   top: 25px;
@@ -378,7 +378,7 @@
   width: auto;
   color: #313131;
 }
-#ox-module-bys.ox-visible .ox-module__header .ox-link::before {
+#ox-module-bys.--visible .ox-module__header .ox-link::before {
   content: "";
   display: inline-block;
   width: 24px;

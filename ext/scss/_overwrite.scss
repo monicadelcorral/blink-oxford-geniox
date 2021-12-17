@@ -204,7 +204,7 @@
         /*max-height: 100%;*/
     }
 
-    &:not(.ox-visible) {
+    &:not(.--visible) {
         bottom: calc(var(--st) * -1 + 20px);
 
         .ox-container {
@@ -213,7 +213,7 @@
         }
     }
 
-    &.ox-visible {
+    &.--visible {
         top: 0;
         top: var(--st);
         left: 0;

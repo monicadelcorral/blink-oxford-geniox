@@ -1085,7 +1085,7 @@ oxfApp.loadHomeGeniox = function () {
 
   var styleNode = document.createElement("style");
   var styleText = document.createTextNode(
-    "#ox-module-bys:not(.ox-visible) {background-color: " +
+    "#ox-module-bys:not(.--visible) {background-color: " +
       backgroundColor +
       "; border-color: " +
       borderColor +
@@ -1106,6 +1106,8 @@ oxfApp.loadHomeGeniox = function () {
     .wrapAll(
       '<div class="ox-floatingbubble__footer"><div class="ox-container"></div></div>'
     );
+
+  oxfApp.storage.setItem("ox-module-bys", "false");
 
   var $scrollable = $(".ox-page");
 
@@ -1267,7 +1269,7 @@ $(document).ready(function () {
       var ishtmlBook = $('body').hasClass('body_htmlBook');
 
       if (isBookCover) {
-        oxfApp.config.canLockActivities = !oxfApp.config.isStudent;
+        oxfApp.config.canLockActivities = (typeof oxfApp.courseData.canLockActivity !== 'undefined' && oxfApp.courseData.canLockActivity);
         oxfApp.loadHomeGeniox();
         oxfApp.secondLevelView();
         oxfApp.getExamsNotifications();
@@ -1284,16 +1286,16 @@ $(document).ready(function () {
     e.preventDefault();
 
     var block = $(this).closest(".ox-floatingbubble"),
-      shown = block.hasClass("ox-visible"),
+      shown = block.hasClass("--visible"),
       text = shown
         ? $(this).attr("data-text-hidden")
         : $(this).attr("data-text-shown");
 
     if (shown) {
-      block.removeClass("ox-visible");
+      block.removeClass("--visible");
       $("body").removeClass("ox-bubbleVisible");
     } else {
-      block.addClass("ox-visible");
+      block.addClass("--visible");
       $("body").addClass("ox-bubbleVisible");
     }
 
