@@ -458,7 +458,6 @@ oxfApp.initBookUnitsSidebar = function() {
   $bookwrapper.append(bookUnitsSidebarUnits).append(bookUnitsSidebarResources);
 
   blink.events.on('digitalbook:viewerLoaded', (function() {
-    $('body').addClass('ox-book-loaded');
     if (oxfApp.storage.getItem('currentBookPage') !== null) {
       var page = oxfApp.storage.getItem('currentBookPage');
       bpdf.changePageDesktop.set(page);
@@ -470,7 +469,20 @@ oxfApp.initBookUnitsSidebar = function() {
       $('.ox-sidebar__list a[data-target]').parent().removeClass('--current');
       $('.ox-sidebar__list [data-target="'+target+'"]').parent().addClass('--current');
     }
+    $('body').addClass('ox-book-loaded');
+
   }));
+  blink.events.on('digitalbook:finishedRendering', (function() {
+    //Show / Hide pins
+    if (oxfApp.getBoolean(oxfApp.storage.getItem('showPins'))) {
+      blink.activity.currentStyle.showPins(true);
+    } else {
+      blink.activity.currentStyle.showPins(false);
+    }
+
+  }));
+
+  
 }
 
 oxfApp.initBookHTML = function () {
@@ -490,8 +502,12 @@ oxfApp.initBookHTML = function () {
     oxfApp.icons.resources +
     '<span>'+oxfApp.text.oxford_geniox_resourcesperunit + '</span>' +
     "</a>";
+
+      
+  var showPinsChecked = oxfApp.getBoolean(oxfApp.storage.getItem('showPins')) ? 'checked="checked"' : '';
+
   var bookMenuPin =
-    '<label class="ox-switch"><input type="checkbox" value="ox-show-pin"><span class="ox-switch__slider"></span><span class="ox-switch__label">' +
+    '<label class="ox-switch"><input type="checkbox" value="ox-show-pin" '+showPinsChecked+' class="ox-js--showPin"><span class="ox-switch__slider"></span><span class="ox-switch__label">' +
     oxfApp.text.oxford_geniox_showpins +
     "</span></label>";
 
@@ -537,12 +553,12 @@ oxfApp.initBookHTML = function () {
     "</div></div>";
 
   //FIX Close button
-
   $('#close-back-wrapper-button').addClass('ox--js-closeActivity');
 
   $bookwrapper.prepend(barAbove).append(barNavigation).append(viewnotsupported);
 
   oxfApp.initBookUnitsSidebar();
+
 };
 
 oxfApp.initActivitySlides = function() {
@@ -1472,6 +1488,20 @@ $(document).ready(function () {
       }
       e.preventDefault();
       e.stopPropagation();
+    }
+  });
+
+  $("body").on("change", ".ox-js--showPin", function(e) {
+
+    var isChecked = $(this).is(":checked");
+
+    if (isChecked) {
+      blink.activity.currentStyle.showPins(true);
+      oxfApp.storage.setItem("showPins", "true");
+
+    } else {
+      blink.activity.currentStyle.showPins(false);
+      oxfApp.storage.setItem("showPins", "false");
     }
   });
 
