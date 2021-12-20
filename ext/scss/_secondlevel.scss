@@ -8,8 +8,8 @@
     box-shadow: 0 0 15px 0 #02285c29;
     background: $color-white;
     position: fixed;
-    bottom: 0;
-    bottom: calc(var(--st) * -1);
+    bottom: 24px;
+    //bottom: calc(var(--st) * -1);
     width: 100%;
     left: 0;
     z-index: 100;
@@ -338,4 +338,12 @@
             }
         }
     }
+}
+
+
+
+// Hack to avoid blank space when scrolling
+
+.ox-body-resourcessection .ox-page {
+    transform: none!important;
 }

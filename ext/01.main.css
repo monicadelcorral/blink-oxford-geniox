@@ -213,7 +213,6 @@
 }
 
 .ox-page {
-  scroll-behavior: smooth;
   height: calc(100% - 68px);
 }
 
@@ -1320,8 +1319,7 @@ input:checked + .ox-switch__slider:before {
   box-shadow: 0 0 15px 0 #02285c29;
   background: #fff;
   position: fixed;
-  bottom: 0;
-  bottom: calc(var(--st) * -1);
+  bottom: 24px;
   width: 100%;
   left: 0;
   z-index: 100;
@@ -1616,6 +1614,10 @@ input:checked + .ox-switch__slider:before {
   background-position: center center;
   background-repeat: no-repeat;
   background-image: url(images/download.svg);
+}
+
+.ox-body-resourcessection .ox-page {
+  transform: none !important;
 }
 
 .btn.ox-btn--end {
