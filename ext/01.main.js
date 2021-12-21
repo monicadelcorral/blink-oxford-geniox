@@ -47,7 +47,7 @@ oxfApp.text.oxford_geniox_resource_text_general = textweb('oxford_geniox_resourc
 oxfApp.text.oxford_geniox_resource_text_activity = textweb('oxford_geniox_resource_text_activity'); //"Ver actividad";
 oxfApp.text.oxford_geniox_resource_text_document = textweb('oxford_geniox_resource_text_document'); //"Ver documento";
 oxfApp.text.oxford_geniox_resource_text_video = textweb('oxford_geniox_resource_text_video'); //"Ver vídeo";
-oxfApp.text.geniox_new = textweb('geniox_new'); //"¡Nuevo!";
+oxfApp.text.oxford_geniox_new = textweb('oxford_geniox_new'); //"¡Nuevo!";
 oxfApp.text.oxford_geniox_exam_online_locked_1 = textweb('oxford_geniox_exam_online_locked_1'); //"Vas a desbloquear esta prueba.";
 oxfApp.text.oxford_geniox_exam_online_locked_2 = textweb('oxford_geniox_exam_online_locked_2'); //"Esto significa que será visible para tus alumnos y tendrán acceso a ella.";
 oxfApp.text.oxford_geniox_exam_online_unlocked_1 = textweb('oxford_geniox_exam_online_unlocked_1'); //"Vas a bloquear esta prueba.";
@@ -1024,7 +1024,7 @@ oxfApp.secondLevelView = function () {
             
              var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
                 isNew = !gradeBadge && oxfApp.config.isStudent,
-                badge = (isNew) ? '<span class="ox-resource__tag">'+oxfApp.text.geniox_new+'</span><div class="ox-gradebadge ox-activity-new"><span class="ox-gradebadge__inner"></span></div>' : gradeBadge,                
+                badge = (isNew) ? '<span class="ox-resource__tag">'+oxfApp.text.oxford_geniox_new+'</span><div class="ox-gradebadge ox-activity-new"><span class="ox-gradebadge__inner"></span></div>' : gradeBadge,                
                 gradeBadgeWrapper = (badge) ? '<span class="ox-resource__grade">'+badge+'</span>' : '';
             
             var isLocked = subunit.lock === oxfApp.config.activityLocked;
