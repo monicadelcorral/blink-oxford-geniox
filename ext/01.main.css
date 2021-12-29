@@ -777,7 +777,7 @@
   bottom: 10px;
   margin-top: 0;
   background-color: #9da09e;
-  z-index: 2000;
+  z-index: 1050;
   margin-left: -25px;
 }
 .ox-body-book .slider-control .ox-slider-control-text,
@@ -1217,7 +1217,7 @@ input:checked + .ox-switch__slider:before {
   background-repeat: no-repeat;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--actividad a::after {
-  background-image: url(images/resource-activity.svg);
+  background-image: none;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--level-1 {
   background-color: #e6f5f5;
@@ -1227,7 +1227,8 @@ input:checked + .ox-switch__slider:before {
   content: none;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--archivo a::after {
-  background-image: url(images/resource-view.svg);
+  background-image: url(images/resource-activity.svg);
+  background-size: 18px auto;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--video a::after {
   background-image: url(images/resource-video.svg);

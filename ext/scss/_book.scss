@@ -12,7 +12,7 @@
     bottom: 10px;
     margin-top: 0;
     background-color: #9da09e;
-    z-index: 2000;
+    z-index: 1050;
     margin-left: -25px;
 
     .ox-slider-control-text {
@@ -456,7 +456,7 @@
             &.--actividad {
                 a {
                     &::after {
-                        background-image: url(images/resource-activity.svg);
+                        background-image: none;
                     }
                 }
             }
@@ -473,7 +473,8 @@
             &.--archivo {
                 a {
                     &::after {
-                        background-image: url(images/resource-view.svg);
+                        background-image: url(images/resource-activity.svg);
+                        background-size: 18px auto;
                     }
                 }
             }
