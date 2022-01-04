@@ -1298,6 +1298,9 @@ $(document).ready(function () {
   var intervalLoadHome = setInterval(initGeniox, 250);
 
   function initGeniox() {
+
+    if ($('body').hasClass('edit')) return;
+
     var coverID = oxfApp.config.coverID;
 
     if (coverID && oxfApp.courseData !== "") {      
