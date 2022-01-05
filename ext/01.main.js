@@ -58,7 +58,7 @@ oxfApp.text.oxford_geniox_test = textweb('oxford_geniox_test'); //"Test de unida
 oxfApp.text.oxford_geniox_start_test = textweb('oxford_geniox_start_test'); //"Hacer test";
 oxfApp.text.oxford_geniox_start_test_1 = textweb('oxford_geniox_start_test_1'); //"Vas a realizar el test del resumen.";
 oxfApp.text.oxford_geniox_start_test_2 = textweb('oxford_geniox_start_test_2'); //"Una vez dentro, no podrás volver al resumen hasta que no se entregue.";
-
+oxfApp.text.oxford_geniox_complete_activity = "Debes completar la actividad para continuar leyendo el resumen.";
 
 oxfApp.allExams = [];
 oxfApp.newExams = [];
@@ -569,9 +569,11 @@ oxfApp.initActivitySlides = function() {
 
   var unitTags = unit.tags,
       unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
+  var isExam = oxfApp.checkIsAbstractExam();
   var isAbstract =
-      unitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0;
-
+      (unitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0) && !isExam;
+    
+      
   if (isAbstract) {
     oxfApp.abstractsLastSlide();
   }
@@ -1238,10 +1240,30 @@ oxfApp.startTestFromAbstract = function() {
 
 }
 
+oxfApp.checkIsAbstractExam = function() {
+  var data = oxfApp.courseData;
+  var unit = _.findWhere(data.units, {id: window.idtema.toString()});
+  var subunit = _.findIndex(unit.subunits, {id: window.idclase.toString()});
+
+
+  var prevSubunit = unit.subunits[subunit - 1];
+  var isExam = (prevSubunit && prevSubunit.level === "6" && subunit.type !== 'archivo');
+
+  return isExam;
+}
+
 oxfApp.modalStartTest = function() {
   $('#ox-modal-starttest').remove();
 
   var modal = '<div class="ox-modal in ox-modal--alert" id="ox-modal-starttest"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_start_test_1+'</p><p>'+oxfApp.text.oxford_geniox_start_test_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-starttest\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel ox-js--startTest">'+oxfApp.text.oxford_geniox_start_test+'</button></div></div></div>';
+
+  $('body').append(modal);
+}
+
+oxfApp.modalCompleteActivity = function() {
+  $('#ox-modal-completeactivity').remove();
+
+  var modal = '<div class="ox-modal in ox-modal--alert" id="ox-modal-completeactivity"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_complete_activity+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.closeModalCustom(\'ox-modal-completeactivity\')">'+oxfApp.text.oxford_geniox_accept+'</button></div></div></div>';
 
   $('body').append(modal);
 }
@@ -1527,5 +1549,12 @@ $(document).ready(function () {
       oxfApp.storage.setItem("showPins", "false");
     }
   });
+
+	$('body').on('click', '.slider-control', function(e) {
+		if ($(this).is('.not-allowed')) {
+      e.preventDefault();
+      oxfApp.modalCompleteActivity();
+    }
+	});
 
 });

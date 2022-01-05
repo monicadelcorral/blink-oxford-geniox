@@ -1633,4 +1633,13 @@ input:checked + .ox-switch__slider:before {
   align-items: center;
 }
 
+.ox-body-slide .ox-navigation-wrapper {
+  bottom: 0;
+}
+
+.ox-body-slide.ox-html_content .slider-control,
+.ox-body-slide.ox-html_content .slider-control:focus {
+  margin-top: -40px;
+}
+
 /*# sourceMappingURL=01.main.css.map */
