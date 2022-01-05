@@ -61,6 +61,7 @@ oxfApp.text.oxford_geniox_start_test = textweb('oxford_geniox_start_test'); //"H
 oxfApp.text.oxford_geniox_start_test_1 = textweb('oxford_geniox_start_test_1'); //"Vas a realizar el test del resumen.";
 oxfApp.text.oxford_geniox_start_test_2 = textweb('oxford_geniox_start_test_2'); //"Una vez dentro, no podrás volver al resumen hasta que no se entregue.";
 oxfApp.text.oxford_geniox_complete_activity = "Debes completar la actividad para continuar leyendo el resumen.";
+oxfApp.text.oxford_geniox_grade_label = "Nota:";
 
 oxfApp.allExams = [];
 oxfApp.newExams = [];
@@ -1000,6 +1001,10 @@ oxfApp.secondLevelView = function () {
                 lockStatus = subunit.lock,
                 description = subunit.description;
 
+                var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
+                    badge = gradeBadge,                
+                    gradeBadgeWrapper = (badge) ? '<span class="ox-resource__grade"><span class="ox-resource__grade__label">'+oxfApp.text.oxford_geniox_grade_label+'</span> '+badge+'</span>' : '';
+
                 var visibilityByUser = (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent));
                 var lock = (lockStatus !== oxfApp.config.activityLocked) ? 'unlocked' : 'locked';
                 var userType = (!oxfApp.config.canLockActivities) ? 'student' : 'not-student';
@@ -1009,7 +1014,7 @@ oxfApp.secondLevelView = function () {
 
                 var onClickbyUser = (oxfApp.config.canLockActivities) ? 'onclick="'+onclickTitle+'"' : onClickbyLockStatus;
                 if (visibilityByUser) {
-                  subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--3 --'+userType+' --'+type+' --'+lock+'"><a href="javascript:void(0)" class="ox-resource__inner" '+onClickbyUser+'><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div></div>'+viewButton+'</a>'+lockedButton+'</article>';
+                  subunitsItems += '<article class="ox-resource ox-resource--card ox-resource--card--3 --'+userType+' --'+type+' --'+lock+'"><a href="javascript:void(0)" class="ox-resource__inner" '+onClickbyUser+'><div class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3><div class="ox-resource__description">'+description+'</div>'+gradeBadgeWrapper+'</div>'+viewButton+'</a>'+lockedButton+'</article>';
                 }
                 
             }

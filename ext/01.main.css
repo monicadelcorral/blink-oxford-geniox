@@ -1458,6 +1458,9 @@ input:checked + .ox-switch__slider:before {
   font-weight: bold;
   line-height: 1.42;
   color: #02285c;
+  height: auto;
+  min-height: 34px;
+  margin: 0 0 8px 0;
 }
 .ox-resource--card--3 .ox-button--lock {
   position: absolute;
@@ -1575,6 +1578,61 @@ input:checked + .ox-switch__slider:before {
 
 .ox-resourceslist .ox-index-empty {
   min-height: 100vh;
+}
+
+.ox-resource--card .ox-resource__grade {
+  position: relative;
+}
+.ox-resource--card .ox-resource__grade__label {
+  position: absolute;
+  top: 3px;
+  left: 10px;
+  z-index: 10;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.42;
+  text-align: left;
+  color: #001d1f;
+}
+.ox-resource--card .ox-gradebadge {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.42;
+  text-align: left;
+  color: #001d1f;
+  background: #fff;
+  border: 0;
+  border-radius: 20px;
+  width: auto;
+  height: 20px;
+  padding: 2px 8px 2px 50px;
+  position: relative;
+  margin: 0;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  box-shadow: none;
+}
+.ox-resource--card .ox-gradebadge span {
+  width: auto;
+  min-width: 0;
+  position: relative;
+  top: 1px;
+}
+.ox-resource--card .ox-gradebadge.ox-activity-ok {
+  background-color: #d0eac6;
+  color: #001d1f;
+}
+.ox-resource--card .ox-gradebadge.ox-activity-ok span {
+  color: #001d1f;
+}
+.ox-resource--card .ox-gradebadge.ox-activity-ko {
+  background-color: rgba(185, 37, 37, 0.2);
+  color: #001d1f;
+}
+.ox-resource--card .ox-gradebadge.ox-activity-ko span {
+  color: #001d1f;
 }
 
 .btn.ox-btn--end {
