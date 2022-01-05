@@ -17,6 +17,8 @@ oxfApp.config.evauAbstracts = "evau_abstracts";
 oxfApp.config.evauExams = "evau_exams";
 oxfApp.config.examsOnline = "exams_online";
 
+oxfApp.config.oxfordExamsId = 0;
+
 oxfApp.config.canLockActivities = false;
 oxfApp.config.activityLocked = 8;
 
@@ -759,6 +761,13 @@ oxfApp.blockExams = function() {
     var itemAction = (itemsChildrenLength == 1) ? 'onclick="'+itemOnclickTitle+'"' : 'data-unitid="'+itemID+'"',
         itemClass = (itemsChildrenLength > 1 || itemsChildrenLength == 0) ? ' ox--js-goto-resourceslist' : '';
 
+    if (isExamOxford) {
+      var itemAction =  '',
+          itemClass = ' ox--js-goto-oxfordexams';
+      
+      oxfApp.config.oxfordExamsId = itemID;
+    }    
+
     if (isExamOxford && oxfApp.examOxfordData) {
 
       var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
@@ -1074,6 +1083,33 @@ oxfApp.secondLevelView = function () {
 
     }
 
+  } else if (currentHash.startsWith(oxfApp.config.tree[5].hash)) { //Oxford Exams
+
+    $('.ox-page--oxfordexamssection').addClass('loading');
+
+    var resourceInfo = oxfApp.getResourcesInfo(oxfApp.config.oxfordExamsId);
+    var buttonBack = '<button class="ox-link ox-link--goback ox--js-gohome">'+oxfApp.icons.goback+oxfApp.text.oxford_zona_recursos_2020_goback+'</button>';
+    var contentnavBar = '<div class="ox-resourcessection-navbar"><div class="ox-container"><div class="ox-resourcessection-navbar__inner">'+buttonBack+'</div></div></div>';
+
+    var contentTitle = resourceInfo[1].title,
+        contentDescription = resourceInfo[1].description,
+        contentSubtitle = (typeof contentDescription.split(';')[0] !== 'undefined') ? contentDescription.split(';')[0] : contentDescription;
+
+    var contentHeader = '<header class="ox-resourcessection-header"><div class="ox-container"><div class="ox-resourcessection-header__inner"><div class="ox-resourcessection-header__title"><h1 class="ox-title ox-title--3">'+contentTitle+'</h1></div><div class="ox-resourcessection-header__description"><h2 class="ox-subtitle">'+contentSubtitle+'</h2></div></div></div></header>';
+
+    var intervalLoadResourcesNotCustom = setInterval(function() {
+      if ($('.ox-page--oxfordexamssection .ox-module--header').length) {
+        $('.ox-page--oxfordexamssection .ox-module--header').remove();
+        $('.ox-page--oxfordexamssection').prepend(contentHeader).append(contentnavBar);
+               
+        oxfApp.headerColorsGeniox(unitID);
+        
+        $('.ox-page--oxfordexamssection').removeClass('loading');
+        clearInterval(intervalLoadResourcesNotCustom);
+      }
+     
+    }, 250);
+
   }
 
 }
@@ -1180,7 +1216,7 @@ oxfApp.abstractsLastSlide = function() {
 oxfApp.getExamsNotifications = function() {
   if (!oxfApp.config.isStudent || !oxfApp.courseData.hasExams) return;
 
-  // Get all the examns 
+  // Get all the exams 
 
   var units = oxfApp.courseData.units;
   var studentActivities = window.actividades;

@@ -1,4 +1,5 @@
-.ox-page--resourcessection { 
+.ox-page--resourcessection,
+.ox-page--oxfordexamssection { 
     &.loading {
         visibility: hidden;
     }
@@ -8,7 +9,7 @@
     box-shadow: 0 0 15px 0 #02285c29;
     background: $color-white;
     position: fixed;
-    bottom: 24px;
+    bottom: 0;
     //bottom: calc(var(--st) * -1);
     width: 100%;
     left: 0;
@@ -344,6 +345,24 @@
 
 // Hack to avoid blank space when scrolling
 
-.ox-body-resourcessection .ox-page {
+.ox-body-resourcessection .ox-page,
+.ox-body-oxfordexamssection .ox-page {
     transform: none!important;
+}
+
+
+// Oxford exam view
+
+.ox-examblock-wrapper {
+    padding-top: 32px;
+    padding-bottom: 64px;
+}
+
+
+
+.ox-index-empty__inner::before {
+    content: none;
+}
+.ox-resourceslist .ox-index-empty {
+    min-height: 100vh;
 }

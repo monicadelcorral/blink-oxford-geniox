@@ -571,65 +571,6 @@
   color: #fff;
 }
 
-.ox-body-slide .radio-option label.filter-label.respuesta_ok::before {
-  border-color: #8bcb71 !important;
-  background-color: #d0eac6 !important;
-}
-
-.ox-body-slide .radio-option label.filter-label.respuesta_ko::before {
-  border-color: #b92525 !important;
-  background-color: rgba(185, 37, 37, 0.2) !important;
-}
-
-.ox-body-slide #actividad .workspace.multiple-choice .opcion > *,
-.ox-body-slide #actividad .workspace.multiple-choice .opcion.respuesta_ok > *,
-.ox-body-slide #actividad .workspace.multiple-choice .opcion.solucion > *,
-.ox-body-slide #actividad .workspace.multiple-choice .opcion.respuesta_ko > * {
-  border-width: 2px;
-  border-radius: 5px;
-}
-
-.bck-dropdown.right-fb-dropdown,
-.bck-dropdown.wrong-fb-dropdown {
-  border-radius: 20px;
-}
-.bck-dropdown.right-fb-dropdown .bck-dropdown-titulo,
-.bck-dropdown.wrong-fb-dropdown .bck-dropdown-titulo {
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.36;
-  color: #fff;
-}
-.bck-dropdown.right-fb-dropdown .bck-dropdown-icon,
-.bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon {
-  margin-right: -10px;
-}
-.bck-dropdown.right-fb-dropdown .bck-dropdown-icon .fa:before,
-.bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon .fa:before {
-  content: "";
-  color: #fff;
-}
-.bck-dropdown.right-fb-dropdown .bck-dropdown-content,
-.bck-dropdown.wrong-fb-dropdown .bck-dropdown-content {
-  background: #fff;
-  border-radius: 0 0 20px 20px;
-  margin: 0;
-}
-
-.bck-dropdown.right-fb-dropdown {
-  background: #8bcb71;
-  border-color: #8bcb71;
-}
-
-.bck-dropdown.wrong-fb-dropdown {
-  background: #b92525;
-  border-color: #b92525;
-}
-
-.ox-topbar .ox-button--icon--close {
-  display: none !important;
-}
-
 .ox-button--2 {
   background-color: #02285c;
   color: #fff;
@@ -1312,7 +1253,8 @@ input:checked + .ox-switch__slider:before {
   visibility: hidden !important;
 }
 
-.ox-page--resourcessection.loading {
+.ox-page--resourcessection.loading,
+.ox-page--oxfordexamssection.loading {
   visibility: hidden;
 }
 
@@ -1320,7 +1262,7 @@ input:checked + .ox-switch__slider:before {
   box-shadow: 0 0 15px 0 #02285c29;
   background: #fff;
   position: fixed;
-  bottom: 24px;
+  bottom: 0;
   width: 100%;
   left: 0;
   z-index: 100;
@@ -1617,8 +1559,22 @@ input:checked + .ox-switch__slider:before {
   background-image: url(images/download.svg);
 }
 
-.ox-body-resourcessection .ox-page {
+.ox-body-resourcessection .ox-page,
+.ox-body-oxfordexamssection .ox-page {
   transform: none !important;
+}
+
+.ox-examblock-wrapper {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.ox-index-empty__inner::before {
+  content: none;
+}
+
+.ox-resourceslist .ox-index-empty {
+  min-height: 100vh;
 }
 
 .btn.ox-btn--end {
@@ -1640,6 +1596,65 @@ input:checked + .ox-switch__slider:before {
 .ox-body-slide.ox-html_content .slider-control,
 .ox-body-slide.ox-html_content .slider-control:focus {
   margin-top: -40px;
+}
+
+.ox-body-slide .radio-option label.filter-label.respuesta_ok::before {
+  border-color: #8bcb71 !important;
+  background-color: #d0eac6 !important;
+}
+
+.ox-body-slide .radio-option label.filter-label.respuesta_ko::before {
+  border-color: #b92525 !important;
+  background-color: rgba(185, 37, 37, 0.2) !important;
+}
+
+.ox-body-slide #actividad .workspace.multiple-choice .opcion > *,
+.ox-body-slide #actividad .workspace.multiple-choice .opcion.respuesta_ok > *,
+.ox-body-slide #actividad .workspace.multiple-choice .opcion.solucion > *,
+.ox-body-slide #actividad .workspace.multiple-choice .opcion.respuesta_ko > * {
+  border-width: 2px;
+  border-radius: 5px;
+}
+
+.bck-dropdown.right-fb-dropdown,
+.bck-dropdown.wrong-fb-dropdown {
+  border-radius: 20px;
+}
+.bck-dropdown.right-fb-dropdown .bck-dropdown-titulo,
+.bck-dropdown.wrong-fb-dropdown .bck-dropdown-titulo {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.36;
+  color: #fff;
+}
+.bck-dropdown.right-fb-dropdown .bck-dropdown-icon,
+.bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon {
+  margin-right: -10px;
+}
+.bck-dropdown.right-fb-dropdown .bck-dropdown-icon .fa:before,
+.bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon .fa:before {
+  content: "";
+  color: #fff;
+}
+.bck-dropdown.right-fb-dropdown .bck-dropdown-content,
+.bck-dropdown.wrong-fb-dropdown .bck-dropdown-content {
+  background: #fff;
+  border-radius: 0 0 20px 20px;
+  margin: 0;
+}
+
+.bck-dropdown.right-fb-dropdown {
+  background: #8bcb71;
+  border-color: #8bcb71;
+}
+
+.bck-dropdown.wrong-fb-dropdown {
+  background: #b92525;
+  border-color: #b92525;
+}
+
+.ox-topbar .ox-button--icon--close {
+  display: none !important;
 }
 
 /*# sourceMappingURL=01.main.css.map */
