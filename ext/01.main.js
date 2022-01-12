@@ -1599,3 +1599,329 @@ $(document).ready(function () {
 	});
 
 });
+
+
+// ******************************************
+// ADDED BY BLINK FOR ADDING RESOURCE FEATURE
+// ******************************************
+
+
+// Lanza el modal de subida de recursos personalizado para Geniox
+oxfApp.newResourceGeniox = function(target = event.currentTarget){
+
+  var $target = $(target),
+      isEdit = $target.hasClass('ox-button--edit'),
+      idCourse = new URL(window.location.href).searchParams.get('idcurso'),
+      idTema = window.location.hash.replace(/[^\d]*/, ''),
+      idClass = $target.attr('data-id'),
+      isResource = true,
+      style = blink.activity && blink.activity.currentStyle,
+      template = (style && style.uploadResourcesTpl) && style.uploadResourcesTpl,
+      $modal = $('#remote-modal');
+
+  dlgCreateNewEditClass(idCourse, idTema, idClass ? idClass : null, 1, null, isResource, null, null, null, template);
+
+  // Añadimos/Quitamos la clase 'resources-modal'
+  $modal.one('show.bs.modal', function() {
+    oxfApp.insertUnitSelect(); // Modificamos el modal para añadir el selector de temas
+    $modal.addClass('resources-modal').addClass('genioxResourcesUpload');
+    $modal.one('hidden.bs.modal', function() {
+      $modal.removeClass('resources-modal');
+    })
+  });
+  // Si es creación de recurso -> se añade la tag level3...
+  if (!isEdit) {
+    var idSubunit = $target.attr('data-subunitid'),
+        defaultTag = 'level3_resource' + (!idSubunit ? '' : '_' + idSubunit);
+
+    // Añadimos la tag 'level3...' al mostrar el modal.
+    $modal.one('shown.bs.modal', function() {
+      var $tagsTarget = $("#hiddenTags");
+      $tagsTarget.val() == "[]" && $tagsTarget.val('');
+
+      blink.theme.setTag(defaultTag , "hidden", $tagsTarget);
+    });
+  }
+};
+
+// Función para modificar los elementos del modal genérico de subida de archivos por los que necesitamos
+oxfApp.insertUnitSelect = function(){
+let $keywords = $("#keywords");
+$keywords
+  .parent()
+  .addClass("form-select")
+  .prepend(`<div class=custom-select><label for="selects">${textweb('oxford_geniox_select_resource_unit')}</label><select id='selects' class='placeholder'></select></div>`);
+$keywords.remove();
+
+$("body").addClass("upload-resources-modal");
+
+$selects = $("#selects");
+// Pendiente eliminar "home_nblocks_home", "ebook_content" del array, sólo está para pruebas con mi libro local
+let unit_tags = ["home_nblocks_box", "block_ebook"];
+for(i = 0; i < oxfApp.courseData.units.length; i++){
+  var unit = oxfApp.courseData.units[i];
+  if(jQuery.inArray(unit.tags, unit_tags) !== -1){
+    $selects.append(`<option value=${unit.id}>${unit.title}</option>`)
+  }
+}
+$selects.prepend(`<option value=0 selected>${textweb('oxford_geniox_select_resource_unit_label')}</option>`)
+
+$selects.on("change", () => {
+  if(parseInt($selects.val()) === 0){
+    $selects.addClass("placeholder");
+  }else{
+    $selects.removeClass("placeholder");
+  }
+})
+
+oxfApp.customizeSelects();
+
+const checkFields = () => {
+
+  let $nombre = $("#nombre").val(),
+      error = "",
+      result = true;
+
+  if($nombre.length > 100){
+    error = "invalid_name";
+  }else if($nombre.length === 0){
+    error = "no_file_name";
+  }else if($("#files").html().length === 0){
+    error = "no_file_loaded";
+  }else{
+    result = false;
+  }
+
+  result && $("#resourceForm").find(".tab-content").find(".tab-pane").append(`<span class="error-msg">${textweb("oxford_geniox_select_resource_error_" + error)}</span>`);
+  return result;
+}
+
+//Anulamos el evento genérico del botón y lo sustituimos por un ajax específico para este modal 
+$("#botonOK").off().on("click", () => {
+
+  $(".error-msg").remove(); 
+  if(!checkFields()){
+    blink.ajax("/LMS/ajax.php?op=activity.executeneweditclass&idcurso=" + window.idcurso + "&justrefresh=1", 
+    (result) => {
+      if(result.startsWith("RELOAD")){
+        let $modal_dialog = $(".modal-dialog"),
+        $modal_content = $modal_dialog.find(".modal-body");
+        
+        $modal_dialog.addClass("modal-resource-success").find(".modal-header").hide();
+        $modal_content.html(`<div class="upload-resource-success"><div class="ok-circle"></div><p>${textweb("oxford_geniox_select_resource_upload_success_1")}<p><p>${textweb("oxford_geniox_select_resource_upload_success_2")}<p></div>`);
+        $("#resources-buttons").html(`<button id="botonOK" class="btn btn-default" type="button">${textweb('oxford_geniox_select_resource_upload_success_accept')}</button>`);
+
+        $("#botonOK").off().on("click", () => {
+          $("#remote-modal").addClass("hidden");
+          $("#modal-backdrop").addClass("hidden");
+        });
+      }
+    },
+    {
+      async: true,
+      data: {
+        recurso: 1,
+        tipoclase: 7,
+        url: file_upload_results.url,
+        hidden: 1,
+        idtema: $selects.val(),
+        nombre: $("#nombre").val(),
+      },
+    });
+  }
+});
+
+
+}
+
+var file_upload_results = {};
+
+// Modificamos la función _createUploadFile para guardar por separado los datos del archivo subido y poder usarlos en nuestro código
+function _createUploadFile(idButton, settings) {
+var mediatype = null;
+if (typeof getCurrentMediaType === "function") {
+  mediatype = getCurrentMediaType();
+}
+var $progressContainer = $('#progress-'+idButton).parents('.progress-container'),
+  $fileInputButton = $('#'+idButton).parent('.fileinput-button'),
+  $uploadProgress = $('.'+idButton).find('.fs-upload-progress'),
+  // Url del ajax del upload handler.
+  url =  prefijoURL+'/LMS/ajax.php?op=uploadFile.upload' + (mediatype ? '&mediatype=' + mediatype : ''),
+  // Cálculo del límite de tamaño en bytes.
+  file_size_limit = changeToBytes(settings.file_size_limit),
+  // Cálculo de la expresión regular de extensiones permitidas
+  file_types_array = settings.file_types.match(/[0-9a-z]+/g),
+  file_types = "(\.|\/)(";
+
+_.each(file_types_array, function(elem, i) {
+  file_types += i > 0 ? "|" : "";
+  file_types += elem;
+});
+
+file_types += ")$";
+var dropZone = ( ($('#'+idButton).parents('.tab-pane').length>0) ? $('#'+idButton).parents('.tab-pane') : $(document) );
+var optionsUpload = {
+  url: url,
+  dataType: 'json',
+  maxFileSize: file_size_limit,
+  acceptFileTypes: new RegExp(file_types, "i"), //file_types,
+  formData: settings.post_params,
+  dropZone: dropZone,
+  done: function (e, data) {
+    var result = data && data.result;
+    file_upload_results = result.files[0];
+
+    if (!result) {
+      // Protección por si no viene respuesta.
+      return optionsUpload.fail(false, {errorThrown: 'Error'});
+    }
+
+    $.each(result.files, function(index, file) {
+      $files = $('#files').empty();
+      $('<p/>').text(file.name).appendTo('#files');
+    });
+
+    // Alert informativo si el LIBRO DIGITAL de subida supera el tamaño de MFSIDZE
+    if(typeof settings.isDigitalBookType !== "undefined" && typeof result.files[0].size !== "undefined" && settings.isDigitalBookType && result.files[0].size > MFSIDZE) {
+      var formatedValueMaxSize = MFSIDZE / 1024 / 1024;
+      _showAlert(textweb("upload_error_15", [formatedValueMaxSize]));
+    }
+
+    // Callback de la subida.
+    settings.upload_success_handler(result.files[0], result.files[0].ruta, idButton);
+    $progressContainer.addClass('hidden'); // Ocultar la barra de progreso.
+    $fileInputButton.removeClass('disabled'); // Habilitar botón de subida.
+
+  },
+  fail: function (e, data) {
+    var msg = "";
+    if(data.jqXHR && data.jqXHR.responseText){
+      msg = data.jqXHR.responseText;
+      standardAJAX(msg);
+    }else{
+      msg = data.errorThrown;
+      $uploadProgress.text(msg);
+    }
+    blink.log.warning(msg);
+    $progressContainer.addClass('hidden'); // Ocultar la barra de progreso.
+    $fileInputButton.removeClass('disabled'); // Habilitar botón de subida.
+  },
+  progressall: function (e, data) {
+    var progress = parseInt(data.loaded / data.total * 100, 10);
+    $progressContainer.find('.progress-bar').css('width',  progress + '%');
+  },
+  processfail: function (e, data) {
+    blink.log.warning('Error: ' + data.files[data.index].error);
+
+    $progressContainer.addClass('hidden'); // Ocultar la barra de progreso.
+    $fileInputButton.removeClass('disabled'); // Habilitar botón de subida.
+
+    $.each(data.files, function (index, file) {
+      $('<p/>').text(file.error).appendTo($uploadProgress);
+    });
+  },
+  process: function (e, data) {
+    blink.log.info('Processing ' + data.files[data.index].name);
+
+    $uploadProgress.empty(); // Vaciar el texto indicador de progreso.
+    $progressContainer.removeClass('hidden'); // Mostrar la barra de progreso.
+    $fileInputButton.addClass('disabled'); // Deshabilitar botón de subida
+  }
+};
+
+// Si no se soporta la subida de jQuery, dehabilitar.
+$('#'+idButton)
+  .fileupload(optionsUpload)
+  .prop('disabled', !$.support.fileInput)
+  .parent()
+    .addClass($.support.fileInput ? undefined : 'disabled');
+}
+
+// Función para personalizar los select por CSS 
+oxfApp.customizeSelects = () => {
+var x, i, j, l, ll, selElmnt, a, b, c, d;
+/*look for any elements with the class "custom-select":*/
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /*for each element, create a new DIV that will act as the selected item:*/
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /*for each element, create a new DIV that will contain the option list:*/
+  d = document.createElement("DIV");
+  d.setAttribute("class", "select-items-container");
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /*for each option in the original select element,
+    create a new DIV that will act as an option item:*/
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  d.appendChild(b);
+  x[i].appendChild(d);
+  a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      $(".select-items").toggle("select-hide");
+      this.nextSibling.classList.toggle("no-hidden");
+      this.classList.toggle("select-arrow-active");
+    });
+}
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+
+document.addEventListener("click", closeAllSelect);
+}
+
+oxfApp.newResourceGeniox(".ox-contentsection-header")
