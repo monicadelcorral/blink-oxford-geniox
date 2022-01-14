@@ -176,6 +176,13 @@
   order: 2;
 }
 
+.ox-grid--5items-square .ox-card .ox-card__inner .ox-title--3 {
+  font-size: 12px;
+  color: #313131;
+  line-height: 1.35;
+  font-weight: bold;
+}
+
 .ox-card__inner {
   justify-content: flex-start;
   align-items: flex-start;

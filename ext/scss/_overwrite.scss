@@ -65,6 +65,19 @@
     }
 }
 
+.ox-grid--5items-square {
+    .ox-card {
+        .ox-card__inner {
+            .ox-title--3 {
+                @include font-size(1.2);
+                color: $color_b_5;
+                line-height: 1.35;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
 .ox-card__inner {
     justify-content: flex-start;
     align-items: flex-start;
