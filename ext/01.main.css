@@ -1687,28 +1687,69 @@ input:checked + .ox-switch__slider:before {
 }
 .bck-dropdown.right-fb-dropdown .bck-dropdown-icon,
 .bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon {
-  margin-right: -10px;
+  margin-right: -16px;
+  margin-top: 6px;
+}
+.bck-dropdown.right-fb-dropdown .bck-dropdown-icon .fa,
+.bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon .fa {
+  padding: 0;
 }
 .bck-dropdown.right-fb-dropdown .bck-dropdown-icon .fa:before,
 .bck-dropdown.wrong-fb-dropdown .bck-dropdown-icon .fa:before {
-  content: "";
+  content: "";
   color: #fff;
+  border-radius: 24px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .bck-dropdown.right-fb-dropdown .bck-dropdown-content,
 .bck-dropdown.wrong-fb-dropdown .bck-dropdown-content {
   background: #fff;
   border-radius: 0 0 20px 20px;
   margin: 0;
+  padding: 20px;
 }
 
+.fb_solucion .bck-dropdown.right-fb-dropdown,
 .bck-dropdown.right-fb-dropdown {
   background: #8bcb71;
   border-color: #8bcb71;
 }
 
-.bck-dropdown.wrong-fb-dropdown {
+.bck-dropdown.wrong-fb-dropdown,
+.fb_solucion .bck-dropdown.wrong-fb-dropdown {
   background: #b92525;
   border-color: #b92525;
+}
+
+.fb_right, .fb_wrong, .fb_solucion {
+  justify-content: flex-start;
+}
+
+.workspace.multiple-choice .fb_right, .workspace.multiple-choice .fb_wrong, .workspace.multiple-choice .fb_solucion {
+  margin-bottom: 20px;
+  max-width: 374px;
+}
+.workspace.multiple-choice .fb_right .bck-dropdown.right-fb-dropdown,
+.workspace.multiple-choice .fb_right .bck-dropdown.wrong-fb-dropdown, .workspace.multiple-choice .fb_wrong .bck-dropdown.right-fb-dropdown,
+.workspace.multiple-choice .fb_wrong .bck-dropdown.wrong-fb-dropdown, .workspace.multiple-choice .fb_solucion .bck-dropdown.right-fb-dropdown,
+.workspace.multiple-choice .fb_solucion .bck-dropdown.wrong-fb-dropdown {
+  min-width: 100%;
+}
+
+.ox-body-slide #actividad .workspace.test li.fb_right, .ox-body-slide #actividad .workspace.test li.fb_wrong, .ox-body-slide #actividad .workspace.test li.fb_solution,
+.ox-body-slide #actividad .workspace.true-false li.fb_right,
+.ox-body-slide #actividad .workspace.true-false li.fb_wrong,
+.ox-body-slide #actividad .workspace.true-false li.fb_solution {
+  margin-bottom: 30px;
+  margin-top: -10px;
 }
 
 .ox-topbar .ox-button--icon--close {

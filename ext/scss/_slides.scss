@@ -51,6 +51,7 @@
 .bck-dropdown.right-fb-dropdown,
 .bck-dropdown.wrong-fb-dropdown {
     border-radius: 20px;
+
     .bck-dropdown-titulo {
         font-size: 14px;
         font-weight: bold;
@@ -59,11 +60,25 @@
     }
 
     .bck-dropdown-icon {
-        margin-right: -10px;
+        margin-right: -16px;
+        margin-top: 6px;
 
-        .fa:before {
-            content: "\f055";
-            color: $color_white;
+        .fa {
+            padding: 0;
+            &:before {
+                content: "\f067";
+                color: $color_white;
+                border-radius: 24px;
+                border: 2px solid $color_white;
+                border-radius: 30px;
+                width: 24px;
+                height: 24px;
+                display: block;
+                font-size: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 
@@ -71,16 +86,45 @@
         background: $color_white;
         border-radius: 0 0 20px 20px;
         margin: 0;
+        padding: 20px;
     }
 }
+
+.fb_solucion .bck-dropdown.right-fb-dropdown,
 .bck-dropdown.right-fb-dropdown {
     background: $color_b_13;
     border-color: $color_b_13;
-    
 }
-.bck-dropdown.wrong-fb-dropdown {
+
+.bck-dropdown.wrong-fb-dropdown,
+.fb_solucion .bck-dropdown.wrong-fb-dropdown {
     background: $color_b_17;
     border-color: $color_b_17;
+}
+
+.fb_right, .fb_wrong, .fb_solucion {
+    justify-content: flex-start;
+}
+
+.workspace.multiple-choice .fb_right, .workspace.multiple-choice .fb_wrong, .workspace.multiple-choice .fb_solucion {
+    margin-bottom: 20px;
+    max-width: 374px;
+
+    .bck-dropdown.right-fb-dropdown,
+    .bck-dropdown.wrong-fb-dropdown {
+        min-width: 100%;
+    }
+}
+.ox-body-slide #actividad .workspace.test li, 
+.ox-body-slide #actividad .workspace.true-false li {
+
+    &.fb_right,
+    &.fb_wrong,
+    &.fb_solution {
+        margin-bottom: 30px;
+        margin-top: -10px;
+    }
+
 }
 
 .ox-topbar {
