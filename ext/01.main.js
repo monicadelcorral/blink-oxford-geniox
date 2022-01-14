@@ -649,6 +649,17 @@ oxfApp.blockDropdown = function (block) {
   });
 };
 
+oxfApp.checkOxfordExamID = function() {
+  var data = oxfApp.courseData;
+
+  var oxfordExamUnit = data.units.filter(function(unit) {
+    var tags = typeof unit.tags !== "undefined" ? unit.tags.split(" ") : [];
+    return tags.indexOf(oxfApp.config.examOxford.toLowerCase()) > -1;
+  });
+
+  return oxfordExamUnit[0].id;
+}
+
 oxfApp.blockExams = function() {
   if (!oxfApp.config.isStudent) return;
 
@@ -766,7 +777,7 @@ oxfApp.blockExams = function() {
       var itemAction =  '',
           itemClass = ' ox--js-goto-oxfordexams';
       
-      oxfApp.config.oxfordExamsId = itemID;
+      oxfApp.config.oxfordExamsId = oxfApp.checkOxfordExamID();
     }    
 
     if (isExamOxford && oxfApp.examOxfordData) {
@@ -1092,7 +1103,8 @@ oxfApp.secondLevelView = function () {
 
     $('.ox-page--oxfordexamssection').addClass('loading');
 
-    var resourceInfo = oxfApp.getResourcesInfo(oxfApp.config.oxfordExamsId);
+    var oxfordExamId = oxfApp.checkOxfordExamID();
+    var resourceInfo = oxfApp.getResourcesInfo(oxfordExamId);
     var buttonBack = '<button class="ox-link ox-link--goback ox--js-gohome">'+oxfApp.icons.goback+oxfApp.text.oxford_zona_recursos_2020_goback+'</button>';
     var contentnavBar = '<div class="ox-resourcessection-navbar"><div class="ox-container"><div class="ox-resourcessection-navbar__inner">'+buttonBack+'</div></div></div>';
 
