@@ -359,6 +359,16 @@
 .ox-examblock-wrapper {
     padding-top: 32px;
     padding-bottom: 64px;
+
+    & + .ox-examblock-wrapper {
+        margin-top: -64px;
+    }
+
+    .ox-examblock {
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
 }
 
 

@@ -1582,6 +1582,12 @@ input:checked + .ox-switch__slider:before {
   padding-top: 32px;
   padding-bottom: 64px;
 }
+.ox-examblock-wrapper + .ox-examblock-wrapper {
+  margin-top: -64px;
+}
+.ox-examblock-wrapper .ox-examblock:last-child {
+  padding-bottom: 0;
+}
 
 .ox-index-empty__inner::before {
   content: none;

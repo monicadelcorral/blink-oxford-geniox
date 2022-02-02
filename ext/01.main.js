@@ -1118,10 +1118,48 @@ oxfApp.secondLevelView = function () {
 
     var contentHeader = '<header class="ox-resourcessection-header"><div class="ox-container"><div class="ox-resourcessection-header__inner"><div class="ox-resourcessection-header__title"><h1 class="ox-title ox-title--3">'+contentTitle+'</h1></div><div class="ox-resourcessection-header__description"><h2 class="ox-subtitle">'+contentSubtitle+'</h2></div></div></div></header>';
 
+    var contentBodyData = resourceInfo[1].data.subunits;
+    var contentBody = '';
+    var examBlock = '';
+
+    $.each(contentBodyData, function(i, exam) {
+      console.log("BBB", exam.title);
+
+      var title = exam.title;
+      var level = exam.level;
+      var onClick = exam.onclickTitle;
+
+      var prev = contentBodyData[i-1];
+      var next = contentBodyData[i+1];
+
+      if (level == 1) {
+        examBlock = '';
+      }
+      if (level == 6 && prev.level == 1) {
+        var generalTitle = prev.title;
+        var section = i - 1;
+
+        examBlock = '<section class="ox-examblock-wrapper" data-section="'+section+'"><div class="ox-container"><div class="ox-examblock-wrapper__inner"><article class="ox-examblock"><button class="ox-examblock__title ox--js-togglecontent">'+generalTitle+'</button><div class="ox-examblock__content"><div class="ox-examblock__content__inner"><div class="ox-examblock__content__help">'+oxfApp.text.oxford_zona_recursos_2020_helpExam+'</div>';
+      } 
+
+      if (level == 6) {
+        examBlock += '<div><a href="javascript:void(0)" onclick="'+onClick+'">'+title+'</a></div>';
+      }
+
+      if (level == 6 && (!next || next.level == 1)) {
+        examBlock += '</div></div></article></div></div></section>';
+      }
+      
+      contentBody += examBlock;
+    });
+
+    console.log(contentBody);
+
     var intervalLoadResourcesNotCustom = setInterval(function() {
-      if ($('.ox-page--oxfordexamssection .ox-module--header').length) {
+      if ($('.ox-page--oxfordexamssection .ox-module--header').length && $('.ox-page--oxfordexamssection .ox-examblock-wrapper').length) {
         $('.ox-page--oxfordexamssection .ox-module--header').remove();
-        $('.ox-page--oxfordexamssection').prepend(contentHeader).append(contentnavBar);
+        $('.ox-page--oxfordexamssection .ox-examblock-wrapper').remove();
+        $('.ox-page--oxfordexamssection').prepend(contentHeader).append(contentBody).append(contentnavBar);
 
         oxfApp.headerColorsGeniox(unitID);
 
