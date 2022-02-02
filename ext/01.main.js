@@ -565,10 +565,9 @@ oxfApp.initBookHTML = function () {
 };
 
 oxfApp.initActivitySlides = function() {
-  //Is abstract
+
   var data = oxfApp.courseData;
   var unit = _.findWhere(data.units, {id: window.idtema.toString()});
-  var subunit = _.findWhere(unit.subunits, {id: window.idclase.toString()});
 
   var unitTags = unit.tags,
       unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
@@ -576,10 +575,6 @@ oxfApp.initActivitySlides = function() {
   var isAbstract =
       (unitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0) && !isExam;
 
-
-  if (isAbstract) {
-    oxfApp.abstractsLastSlide();
-  }
 
   blink.events.on('activity:loaded', function() {
     if (isAbstract) {
@@ -1123,7 +1118,6 @@ oxfApp.secondLevelView = function () {
     var examBlock = '';
 
     $.each(contentBodyData, function(i, exam) {
-      console.log("BBB", exam.title);
 
       var title = exam.title;
       var level = exam.level;
@@ -1153,15 +1147,14 @@ oxfApp.secondLevelView = function () {
       contentBody += examBlock;
     });
 
-    console.log(contentBody);
-
     var intervalLoadResourcesNotCustom = setInterval(function() {
       if ($('.ox-page--oxfordexamssection .ox-module--header').length && $('.ox-page--oxfordexamssection .ox-examblock-wrapper').length) {
-        $('.ox-page--oxfordexamssection .ox-module--header').remove();
+        //$('.ox-page--oxfordexamssection .ox-module--header').remove();
         $('.ox-page--oxfordexamssection .ox-examblock-wrapper').remove();
-        $('.ox-page--oxfordexamssection').prepend(contentHeader).append(contentBody).append(contentnavBar);
+        //$('.ox-page--oxfordexamssection').prepend(contentHeader).append(contentBody).append(contentnavBar);
+        $('.ox-page--oxfordexamssection').append(contentBody);
 
-        oxfApp.headerColorsGeniox(unitID);
+        //oxfApp.headerColorsGeniox(unitID);
 
         $('.ox-page--oxfordexamssection').removeClass('loading');
         clearInterval(intervalLoadResourcesNotCustom);
@@ -1252,7 +1245,8 @@ oxfApp.loadHomeGeniox = function () {
 };
 
 oxfApp.abstractsLastSlide = function() {
-  var totalSlides = blink.activity.currentStyle.Slider.$items.length,
+  var style = blink.activity && blink.activity.currentStyle;
+  var totalSlides = style.Slider.$items.length,
     currentSection = blink.activity.currentSection,
     isLastSlide = (totalSlides === currentSection+2);
 
