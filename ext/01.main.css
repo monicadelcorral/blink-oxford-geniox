@@ -1260,6 +1260,10 @@ input:checked + .ox-switch__slider:before {
   visibility: hidden !important;
 }
 
+.body_htmlBook.edit #libro-digital iframe {
+  visibility: visible !important;
+}
+
 .ox-page--resourcessection.loading,
 .ox-page--oxfordexamssection.loading {
   visibility: hidden;

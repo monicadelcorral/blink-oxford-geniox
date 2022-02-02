@@ -598,3 +598,9 @@
         visibility: hidden!important;
     }
 }
+
+.body_htmlBook.edit #libro-digital {
+    iframe {
+        visibility: visible!important;
+    }
+}
