@@ -148,6 +148,20 @@
         }
     }
 
+    &--visibilitystatus {
+        .ox-modal__message {
+            background-image: url(images/icon-eye-hidden.svg);
+            background-size: 75px 64px;
+        }
+
+        &.--unlocked {
+            .ox-modal__message {
+                background-image: url(images/icon-eye-visible.svg);
+                background-size: 75px 48px;
+            }
+        }
+    }
+
     &--alert {
         .ox-modal__message {
             background-image: url(images/warning.svg);

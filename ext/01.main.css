@@ -710,6 +710,14 @@
   background-image: url(images/unlocked.svg);
   background-size: 35px 50px;
 }
+.ox-modal--visibilitystatus .ox-modal__message {
+  background-image: url(images/icon-eye-hidden.svg);
+  background-size: 75px 64px;
+}
+.ox-modal--visibilitystatus.--unlocked .ox-modal__message {
+  background-image: url(images/icon-eye-visible.svg);
+  background-size: 75px 48px;
+}
 .ox-modal--alert .ox-modal__message {
   background-image: url(images/warning.svg);
   background-size: 56px 48px;
