@@ -237,6 +237,7 @@
 
 .ox-bubbleVisible .ox-page {
   overflow: hidden;
+  height: 100vh;
 }
 
 #ox-module-bys {
@@ -320,7 +321,7 @@
   border: 0;
   border-radius: 0;
   flex-direction: column;
-  max-height: calc(100vh - 62px);
+  max-height: 100vh;
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: auto;
@@ -352,14 +353,14 @@
 }
 #ox-module-bys.--visible .ox-floatingbubble__footer {
   width: 100%;
-  height: 70px;
+  height: 45px;
   position: fixed;
   bottom: 0;
   left: 0;
   background: #fff;
   box-shadow: 0 0 15px 0 #02285c29;
   opacity: 1;
-  top: calc(var(--st) + 100vh - 160px);
+  top: calc(var(--st) + 100vh - 89px);
 }
 #ox-module-bys.--visible .ox-module__header {
   padding-top: 20px;
@@ -379,20 +380,22 @@
 #ox-module-bys.--visible .ox-module__header .ox-link {
   opacity: 1;
   position: relative;
-  top: 25px;
+  top: 14px;
   left: 0;
   width: auto;
   color: #313131;
+  font-weight: 600;
+  font-style: italic;
 }
 #ox-module-bys.--visible .ox-module__header .ox-link::before {
   content: "";
   display: inline-block;
-  width: 24px;
-  height: 20px;
+  width: 14px;
+  height: 18px;
   background: url(images/goback.svg) 0 0 no-repeat;
   background-size: contain;
-  margin-right: 4px;
-  margin-top: -4px;
+  margin-right: 8px;
+  margin-top: 2px;
 }
 #ox-module-bys .ox-list--1 {
   color: #2ba2b7;
