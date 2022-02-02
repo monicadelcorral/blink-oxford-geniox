@@ -461,8 +461,8 @@ oxfApp.initBookUnitsSidebar = function() {
               var level = resource.level;
               var onClick = resource.onclickTitle;
               var visible = resource.lock !== oxfApp.config.activityLocked;
-              var visibility = (visible) ? 'visible' : 'hidden';
-              var button = '<button class="ox-button ox-button--icon ox-button--icon-visibility ox-js--toggleResourceVisibility '+visibility+'" idclase="'+id+'" data-visibility="'+visibility+'"></button>';
+              var visibility = (visible) ? 'visible' : 'not-visible';
+              var button = '<button class="ox-button ox-button--icon ox-button--icon-visibility ox-js--toggleResourceVisibility --'+visibility+'" idclase="'+id+'" data-visibility="'+visibility+'"></button>';
               if (oxfApp.config.isStudent && visible) {
                 var resource = '<li class="ox-sidebar__list__item --'+type+' --level-'+level+'"><a href="javascript:void(0)" onclick="'+onClick+'">'+title+'</a></li>';
                 resourceList += resource;

@@ -619,6 +619,25 @@
   display: none;
 }
 
+.ox-button--icon-visibility {
+  width: 24px;
+  height: 22px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.ox-button--icon-visibility.disabled, .ox-button--icon-visibility:disabled {
+  opacity: 1;
+}
+.ox-button--icon-visibility.--not-visible {
+  background-image: url(images/icon-eye-hidden-2.svg);
+  background-size: 24px auto;
+}
+.ox-button--icon-visibility.--visible {
+  background-image: url(images/icon-eye-visible-2.svg);
+  background-size: 24px auto;
+}
+
 .ox-button--view {
   color: #548fde;
 }
@@ -1157,6 +1176,12 @@ input:checked + .ox-switch__slider:before {
 .ox-sidebar__resources__wrapper .ox-sidebar__list li {
   border-bottom-color: #e6f5f5;
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.ox-sidebar__resources__wrapper .ox-sidebar__list li a {
+  flex-grow: 2;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li a::before {
   content: none;
@@ -1174,6 +1199,9 @@ input:checked + .ox-switch__slider:before {
   background-size: 24px auto;
   background-position: center center;
   background-repeat: no-repeat;
+}
+.ox-sidebar__resources__wrapper .ox-sidebar__list li .ox-button {
+  min-width: 24px;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--actividad a::after {
   background-image: none;

@@ -46,6 +46,29 @@
     }
 }
 
+.ox-button--icon-visibility {
+    &.disabled,
+    &:disabled {
+        opacity: 1;
+    }
+
+    width: 24px;
+    height: 22px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &.--not-visible {
+        background-image: url(images/icon-eye-hidden-2.svg);
+        background-size: 24px auto;
+    }
+
+    &.--visible {
+        background-image: url(images/icon-eye-visible-2.svg);
+        background-size: 24px auto;
+    }
+}
+
 .ox-button--view {
     color: $color_b_15;
 

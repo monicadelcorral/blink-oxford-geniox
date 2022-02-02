@@ -430,10 +430,15 @@
         li {
             border-bottom-color: $color_b_11;
             position: relative;
-
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+        
             a {
+                flex-grow: 2;
+
                 &::before {
-                content: none;
+                    content: none;
                 }
 
                 &:after {
@@ -452,6 +457,9 @@
                 }
             }
 
+            .ox-button {
+                min-width: 24px;
+            }
 
             &.--actividad {
                 a {
