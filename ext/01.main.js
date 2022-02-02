@@ -1016,7 +1016,7 @@ oxfApp.secondLevelView = function () {
                 var visibilityByUser = (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent));
                 var lock = (lockStatus !== oxfApp.config.activityLocked) ? 'unlocked' : 'locked';
                 var userType = (!canLockActivities) ? 'student' : 'not-student';
-                var lockedButton = canLockActivities ? '<button class="ox-button ox-button--lock --'+lock+' ox-js--toggleLock" data-status="'+lock+'"><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>' : '<button class="ox-button ox-button--lock --'+lock+'" disabled><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>';
+                var lockedButton = canLockActivities ? '<button data-id="'+window.idcurso+'" idclase="'+id+'" class="ox-button ox-button--lock --'+lock+' ox-js--toggleLock" data-status="'+lock+'"><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>' : '<button data-id="'+window.idcurso+'" idclase="'+id+'" class="ox-button ox-button--lock --'+lock+'" disabled><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>';
                 var viewButton = '<span class="ox-button ox-button--view"><span class="ox-button__icon --lock">'+oxfApp.icons.eye+'</span></span>';
                 var onClickbyLockStatus = (lock === 'unlocked') ? 'onclick="'+onclickTitle+'"' : 'onclick="oxfApp.modalEvauExamLocked()"';
 
@@ -1112,7 +1112,6 @@ oxfApp.secondLevelView = function () {
         contentSubtitle = (typeof contentDescription.split(';')[0] !== 'undefined') ? contentDescription.split(';')[0] : contentDescription;
 
     var contentHeader = '<header class="ox-resourcessection-header"><div class="ox-container"><div class="ox-resourcessection-header__inner"><div class="ox-resourcessection-header__title"><h1 class="ox-title ox-title--3">'+contentTitle+'</h1></div><div class="ox-resourcessection-header__description"><h2 class="ox-subtitle">'+contentSubtitle+'</h2></div></div></div></header>';
-
     var contentBodyData = resourceInfo[1].data.subunits;
     var contentBody = '';
     var examBlock = '';
@@ -1308,10 +1307,9 @@ oxfApp.showExamsNotifications = function() {
 
 }
 
-oxfApp.toggleLockActivity = function(idcurso) {
-  var idclase = window.idclase;
+oxfApp.toggleLockActivity = function(idclase, callback) {
 	idcurso = idcurso || window.idcurso;
-  onCursoCambiarBloqueado(idclase, idcurso);
+  blink.activity.currentStyle.onCursoCambiarBloqueado(idclase, idcurso, callback);
 }
 
 oxfApp.startTestFromAbstract = function() {
@@ -1365,18 +1363,18 @@ oxfApp.modalEvauExamLocked = function() {
   $('body').append(modal);
 }
 
-oxfApp.modalOnlineExamLocked = function() {
+oxfApp.modalOnlineExamLocked = function(idclase) {
   $('#ox-modal-onlineexamlocked').remove();
 
-  var modal = '<div class="ox-modal in ox-modal--lockstatus --locked" id="ox-modal-onlineexamlocked"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_online_locked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_online_locked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-onlineexamlocked\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.toggleLockActivity()">'+oxfApp.text.oxford_geniox_unlock+'</button></div></div></div>';
+  var modal = '<div class="ox-modal in ox-modal--lockstatus --locked" id="ox-modal-onlineexamlocked"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_online_locked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_online_locked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-onlineexamlocked\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.toggleLockActivity(' + idclase + ', oxfApp.closeModalCustom )">'+oxfApp.text.oxford_geniox_unlock+'</button></div></div></div>';
 
   $('body').append(modal);
 }
 
-oxfApp.modalOnlineExamUnlocked = function() {
+oxfApp.modalOnlineExamUnlocked = function(idclase) {
   $('#ox-modal-onlineexamunlocked').remove();
 
-  var modal = '<div class="ox-modal in ox-modal--lockstatus --unlocked" id="ox-modal-onlineexamunlocked"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-onlineexamunlocked\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.toggleLockActivity()">'+oxfApp.text.oxford_geniox_lock+'</button></div></div></div>';
+  var modal = '<div class="ox-modal in ox-modal--lockstatus --unlocked" id="ox-modal-onlineexamunlocked"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-onlineexamunlocked\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.toggleLockActivity(' + idclase + ', oxfApp.closeModalCustom )">'+oxfApp.text.oxford_geniox_lock+'</button></div></div></div>';
 
   $('body').append(modal);
 }
@@ -1386,13 +1384,13 @@ oxfApp.modalOnlineExamUnlocked = function() {
 oxfApp.modaltoggleResourceVisiblity = function() {
   $('#ox-modal-visiblityresource').remove();
 
-  var modal = '<div class="ox-modal in ox-modal--visiblity" id="ox-modal-visiblityresource"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-onlineexamunlocked\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.toggleLockActivity()">'+oxfApp.text.oxford_geniox_lock+'</button></div></div></div>';
+  var modal = '<div class="ox-modal in ox-modal--visiblity" id="ox-modal-visiblityresource"><div class="ox-modal__inner"><div class="ox-modal__message"><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_1+'</p><p>'+oxfApp.text.oxford_geniox_exam_online_unlocked_2+'</p></div><div class="ox-modal__footer"><button class="ox-button ox-button--2 ox-button--cancel ox-button--secondary" onclick="oxfApp.closeModalCustom(\'ox-modal-onlineexamunlocked\')">'+oxfApp.text.oxford_geniox_cancel+'</button><button class="ox-button ox-button--2 ox-button--cancel" onclick="oxfApp.toggleLockActivity(' + idclase + ')">'+oxfApp.text.oxford_geniox_lock+'</button></div></div></div>';
 
   $('body').append(modal);
 }*/
 
 oxfApp.modalCreateResource = function() {
-  //oxfApp.newResource("#ox-BookResources");  
+  //oxfApp.newResource("#ox-BookResources");
   oxfApp.newResourceGeniox(".ox-contentsection-header");
 }
 
@@ -1595,11 +1593,12 @@ $(document).ready(function () {
     e.preventDefault();
     var isLocked = $(this).hasClass('--locked');
     var idcurso = $(this).attr('data-id');
+    var idclase = $(this).attr('idclase');
 
     if (isLocked) {
-      oxfApp.modalOnlineExamLocked(idcurso);
+      oxfApp.modalOnlineExamLocked(idclase);
     } else {
-      oxfApp.modalOnlineExamUnlocked(idcurso);
+      oxfApp.modalOnlineExamUnlocked(idclase);
     }
     e.stopPropagation();
   });
