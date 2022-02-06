@@ -638,12 +638,38 @@
   background-size: 24px auto;
 }
 
+.ox-button--download {
+  color: #548fde;
+}
+.ox-button--download svg {
+  width: 16px;
+  height: auto;
+}
+.ox-button--download .ox-button__text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+}
+.ox-button--download:hover {
+  color: #548fde;
+}
+
 .ox-button--view {
   color: #548fde;
 }
 .ox-button--view svg {
   width: 24px;
   height: auto;
+}
+.ox-button--view:hover {
+  color: #548fde;
 }
 
 .ox-badge {
@@ -1518,11 +1544,15 @@ input:checked + .ox-switch__slider:before {
   right: 18px;
   top: 10px;
 }
+.ox-resource--card--3 .ox-button--download,
 .ox-resource--card--3 .ox-button--view {
   position: absolute;
   z-index: 10;
   right: 18px;
   bottom: 10px;
+}
+.ox-resource--card--3 .ox-button--download {
+  z-index: 100;
 }
 
 .ox-resource--exam {

@@ -69,12 +69,33 @@
     }
 }
 
+.ox-button--download {
+    color: $color_b_15;
+
+    svg {
+        width: 16px;
+        height: auto;
+    }
+
+    .ox-button__text {
+        @include screen-reader-text;
+    }
+
+    &:hover {
+        color: $color_b_15;
+    }
+}
+
 .ox-button--view {
     color: $color_b_15;
 
     svg {
         width: 24px;
         height: auto;
+    }
+
+    &:hover {
+        color: $color_b_15;
     }
 }
 
