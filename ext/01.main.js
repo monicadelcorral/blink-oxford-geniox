@@ -1062,7 +1062,7 @@ oxfApp.secondLevelView = function () {
                 var lockedButton = canLockActivities ? '<button data-id="'+window.idcurso+'" idclase="'+id+'" class="ox-button ox-button--lock --'+lock+' ox-js--toggleLock" data-status="'+lock+'"><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>' : '<button data-id="'+window.idcurso+'" idclase="'+id+'" class="ox-button ox-button--lock --'+lock+'" disabled><span class="ox-button__icon --locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --unlocked">'+oxfApp.icons.lockUnlock+'</span></button>';
                 //var viewButton = '<span class="ox-button ox-button--view"><span class="ox-button__icon">'+oxfApp.icons.eye+'</span></span>';
                 var downloadableSubunit = subunits[i + 1];
-                var isDownloadable = downloadableSubunit && downloadableSubunit.type === 'archivo';
+                var isDownloadable = typeof downloadableSubunit !== 'undefined' && downloadableSubunit.type === 'archivo';
                 var downloadButton = (isDownloadable) ? '<a class="ox-button ox-button--download" href="'+downloadableSubunit.fileurl+'" download><span class="ox-button__text">'+oxfApp.text.oxford_geniox_downloadFile+'</span><span class="ox-button__icon">'+oxfApp.icons.download+'</span></a>' : '';
                 var onClickbyLockStatus = (lock === 'unlocked') ? 'onclick="'+onclickTitle+'"' : 'onclick="oxfApp.modalEvauExamLocked()"';
 
