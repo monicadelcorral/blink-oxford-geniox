@@ -360,6 +360,12 @@ oxfApp.createSearchBar = function () {
   return barSearch;
 };
 
+oxfApp.customGenioxHTMLContent = function() {
+  var closeButton = '<div class="ox-container"><a href="javascript:void(0)" class="ox-link ox-link--goback ox--js-closeActivity">'+oxfApp.icons.goback+oxfApp.text.oxford_zona_recursos_2020_exit+'</a></div>';
+  $('.ox-navigation-wrapper').append(closeButton);
+
+}
+
 oxfApp.initBookUnitsSidebar = function() {
   var data = oxfApp.courseData;
   var currentBook = -1;
@@ -606,17 +612,23 @@ oxfApp.initActivitySlides = function() {
 
   var data = oxfApp.courseData;
   var unit = _.findWhere(data.units, {id: window.idtema.toString()});
+  var subunit = _.findWhere(unit.subunits, {id: window.idclase.toString()});
 
-  var unitTags = unit.tags,
-      unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
+  var subunitTags = subunit.tags,
+      subunitTagsArray = typeof subunitTags !== "undefined" ? subunitTags.split(" ") : [];
   var isExam = oxfApp.checkIsAbstractExam();
+  
   var isAbstract =
-      (unitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0) && !isExam;
-
+      (subunitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0) && !isExam;          
+  var isHTMLContent = (subunitTagsArray.indexOf(oxfApp.config.slideContent) >= 0 || subunitTagsArray.indexOf(oxfApp.config.tagCredits) >= 0);
 
   blink.events.on('activity:loaded', function() {
     if (isAbstract) {
       oxfApp.abstractsLastSlide();
+    }
+
+    if (isHTMLContent) {
+      oxfApp.customGenioxHTMLContent();
     }
   });
 
@@ -694,8 +706,6 @@ oxfApp.checkOxfordExamID = function() {
 }
 
 oxfApp.blockExams = function() {
-  if (!oxfApp.config.isStudent) return;
-
   var data = oxfApp.courseData;
 
   var $blockCreated = null;
@@ -806,14 +816,11 @@ oxfApp.blockExams = function() {
     var itemAction = (itemsChildrenLength == 1) ? 'onclick="'+itemOnclickTitle+'"' : 'data-unitid="'+itemID+'"',
         itemClass = (itemsChildrenLength > 1 || itemsChildrenLength == 0) ? ' ox--js-goto-resourceslist' : '';
 
-    if (isExamOxford) {
+    if (isExamOxford && oxfApp.examOxfordData && !oxfApp.config.isStudent) {
       var itemAction =  '',
           itemClass = ' ox--js-goto-oxfordexams';
 
       oxfApp.config.oxfordExamsId = itemID;
-    }
-
-    if (isExamOxford && oxfApp.examOxfordData) {
 
       var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
       $blockCreated.append(itemCard);

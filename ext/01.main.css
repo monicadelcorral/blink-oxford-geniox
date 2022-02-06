@@ -1709,11 +1709,30 @@ input:checked + .ox-switch__slider:before {
 
 .ox-body-slide .ox-navigation-wrapper {
   bottom: 0;
+  box-shadow: 0 0 15px 0 #02285c29;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 18px 0;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
+  color: #4D4D4D;
 }
 
 .ox-body-slide.ox-html_content .slider-control,
 .ox-body-slide.ox-html_content .slider-control:focus {
   margin-top: -40px;
+}
+.ox-body-slide.ox-html_content .slider-control.right,
+.ox-body-slide.ox-html_content .slider-control:focus.right {
+  transform: translate(130%, 0) !important;
+}
+.ox-body-slide.ox-html_content .slider-control.left,
+.ox-body-slide.ox-html_content .slider-control:focus.left {
+  transform: translate(-130%, 0) !important;
 }
 
 .ox-body-slide .radio-option label.filter-label.respuesta_ok::before {
