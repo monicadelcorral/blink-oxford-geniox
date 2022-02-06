@@ -614,17 +614,22 @@ oxfApp.initActivitySlides = function() {
   var unit = _.findWhere(data.units, {id: window.idtema.toString()});
   var subunit = _.findWhere(unit.subunits, {id: window.idclase.toString()});
 
+  var unitTags = unit.tags,
+      unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
+
+
   var subunitTags = subunit.tags,
       subunitTagsArray = typeof subunitTags !== "undefined" ? subunitTags.split(" ") : [];
   var isExam = oxfApp.checkIsAbstractExam();
   
   var isAbstract =
-      (subunitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0) && !isExam;          
+      (unitTagsArray.indexOf(oxfApp.config.evauAbstracts) >= 0) && !isExam;          
   var isHTMLContent = (subunitTagsArray.indexOf(oxfApp.config.slideContent) >= 0 || subunitTagsArray.indexOf(oxfApp.config.tagCredits) >= 0);
 
   blink.events.on('activity:loaded', function() {
     if (isAbstract) {
       oxfApp.abstractsLastSlide();
+      oxfApp.customGenioxFeedback();
     }
 
     if (isHTMLContent) {
@@ -635,6 +640,13 @@ oxfApp.initActivitySlides = function() {
   blink.events.on('slider:changed', function() {
     if (isAbstract) {
       oxfApp.abstractsLastSlide();
+      oxfApp.customGenioxFeedback();
+    }
+  });
+
+  blink.events.on('slide:update:correct', function() {
+    if (isAbstract) {
+      oxfApp.customGenioxFeedback();
     }
   });
 
@@ -1308,6 +1320,27 @@ oxfApp.abstractsLastSlide = function() {
     $next.hide();
   } else {
     $next.show();
+  }
+}
+
+oxfApp.customGenioxFeedback = function() {
+
+  var activeSlide = window.activeSlide;
+  console.log(activeSlide);
+  if (!activeSlide) return;
+  var currentSlide = window['t'+activeSlide+'_slide'],
+      attempts	= currentSlide.intentos,
+      maxAttempts = currentSlide.numMaxIntentos;
+  
+      var allRight = !$('#transp'+activeSlide).find('.respuesta_ko').length;
+
+  console.log("AAA", attempts, maxAttempts, allRight);
+  if (maxAttempts > attempts && !allRight) {
+    $('#transp'+activeSlide).addClass('ox-trying');
+    $('#transp'+activeSlide).removeClass('ox-no-attempts');
+  } else {
+    $('#transp'+activeSlide).removeClass('ox-trying');
+    $('#transp'+activeSlide).addClass('ox-no-attempts');
   }
 }
 

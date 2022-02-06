@@ -1865,4 +1865,8 @@ input:checked + .ox-switch__slider:before {
   display: none !important;
 }
 
+.ox-trying .fb_right {
+  display: none !important;
+}
+
 /*# sourceMappingURL=01.main.css.map */
