@@ -146,6 +146,14 @@
         overflow: hidden;
         height: 100vh;
     }
+
+    .ox-footer {
+        display: none!important;
+    }
+}
+
+.ox-general::after {
+    content: none;
 }
 
 // Bubble Help for teachers

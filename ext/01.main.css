@@ -239,6 +239,13 @@
   overflow: hidden;
   height: 100vh;
 }
+.ox-bubbleVisible .ox-footer {
+  display: none !important;
+}
+
+.ox-general::after {
+  content: none;
+}
 
 #ox-module-bys {
   position: fixed;
