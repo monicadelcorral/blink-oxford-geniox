@@ -763,11 +763,11 @@
   background-size: 35px 50px;
 }
 .ox-modal--visibilitystatus .ox-modal__message {
-  background-image: url(images/icon-eye-hidden.svg);
+  background-image: url(images/icon-eye-visible.svg);
   background-size: 75px 64px;
 }
 .ox-modal--visibilitystatus.--unlocked .ox-modal__message {
-  background-image: url(images/icon-eye-visible.svg);
+  background-image: url(images/icon-eye-hidden.svg);
   background-size: 75px 48px;
 }
 .ox-modal--alert .ox-modal__message {
@@ -1235,6 +1235,11 @@ input:checked + .ox-switch__slider:before {
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li .ox-button {
   min-width: 24px;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 100;
 }
 .ox-sidebar__resources__wrapper .ox-sidebar__list li.--actividad a::after {
   background-image: none;
