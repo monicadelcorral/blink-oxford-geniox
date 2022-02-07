@@ -734,7 +734,7 @@ oxfApp.blockExams = function() {
     if (isExamGenerator && data.units[i - 1]) {
         placeholder = i - 1;
         $blockCreated = $('#ox-nblock-'+placeholder+' .ox-module__content .ox-grid');
-
+        $blockCreated.empty();
       return false;
     }
 
@@ -794,7 +794,6 @@ oxfApp.blockExams = function() {
       if (!isPrepend) {
         $page[0].appendChild($blockCreated);
         $blockCreated = $($blockCreated).find('.ox-grid');
-
       }
 
   }
@@ -803,11 +802,10 @@ oxfApp.blockExams = function() {
     var unitTags = unit.tags,
         unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
 
-
+    var isExamGenerator = (unitTagsArray.indexOf(oxfApp.config.examGenerator) >= 0);
     var isExamGenerated = (unitTagsArray.indexOf(oxfApp.config.examGenerated) >= 0);
     var isExamOxford = (unitTagsArray.indexOf(oxfApp.config.examOxford) >= 0);
     var isExamOnline = (unitTagsArray.indexOf(oxfApp.config.examsOnline) >= 0);
-
 
     var item = unit,
     itemTitle = item.title,
@@ -828,6 +826,47 @@ oxfApp.blockExams = function() {
     var itemAction = (itemsChildrenLength == 1) ? 'onclick="'+itemOnclickTitle+'"' : 'data-unitid="'+itemID+'"',
         itemClass = (itemsChildrenLength > 1 || itemsChildrenLength == 0) ? ' ox--js-goto-resourceslist' : '';
 
+    if (isExamGenerator && !oxfApp.config.isStudent) {
+      if (oxfApp.config.canGenerateExam) {
+        var itemAction =  'onclick="oxfApp.onGenerateExam()"',
+            itemClass = '';
+      } else {
+        var itemAction = '',
+            itemClass = '',
+            gridClass = 'ox-generator--disabled',
+            itemBackgroundStyleClass = '',
+            itemBackgroundStyle = '',
+            itemBgStyle = '',
+            itemDescription = oxfApp.text.oxford_zona_recursos_2020_nogenerator,
+            color = '',
+            itemTitle = '';
+      }
+
+      var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
+      $blockCreated.append(itemCard);
+
+    }
+
+    if (isExamGenerated) {
+      var itemAction =  '',
+          itemClass = ' ox--js-goto-generatedexams';
+      
+      if (oxfApp.config.isStudent) {
+
+        var imageActivity = item.resources.filter(obj => {
+          return obj.type === 'img'
+        })[0];
+
+        itemBackgroundStyle = (imageActivity) ? 'background-image: url(\''+imageActivity.fileurl+'\');' : itemBackgroundStyle;
+        itemBackgroundStyleClass = (imageActivity) ? 'ox-wimage' : itemBackgroundStyleClass;
+
+      }
+
+      var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
+      $blockCreated.append(itemCard);
+
+    }
+
     if (isExamOxford && oxfApp.examOxfordData && !oxfApp.config.isStudent) {
       var itemAction =  '',
           itemClass = ' ox--js-goto-oxfordexams';
@@ -843,11 +882,10 @@ oxfApp.blockExams = function() {
       $blockCreated.append(itemCard);
     }
 
-    if ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford) {
-
+    if ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || (isExamOxford)) {
       var gridLength = $blockCreated.find('.ox-grid__item').length;
 
-      var template = (gridLength == 3) ? oxfApp.getTemplate('1_left_2_right')[0] : (gridLength == 2) ? oxfApp.getTemplate('1_left_1_square_right')[0] : oxfApp.getTemplate('1_rectangle')[0];
+      var template = (gridLength == 4) ? oxfApp.getTemplate('4_rectangle_inline')[0] : (gridLength == 3) ? oxfApp.getTemplate('1_left_2_right')[0] : (gridLength == 2) ? oxfApp.getTemplate('1_left_1_square_right')[0] : oxfApp.getTemplate('1_rectangle')[0];
       $blockCreated.closest('.ox-grid').removeClass(function (index, css) {
         return (css.match (/(^|\s)ox-grid--\S+/g) || []).join(' ');
      }).addClass('ox-grid--'+template);
@@ -1326,7 +1364,7 @@ oxfApp.abstractsLastSlide = function() {
 oxfApp.customGenioxFeedback = function() {
 
   var activeSlide = window.activeSlide;
-  console.log(activeSlide);
+
   if (!activeSlide) return;
   var currentSlide = window['t'+activeSlide+'_slide'],
       attempts	= currentSlide.intentos,
@@ -1334,7 +1372,6 @@ oxfApp.customGenioxFeedback = function() {
   
       var allRight = !$('#transp'+activeSlide).find('.respuesta_ko').length;
 
-  console.log("AAA", attempts, maxAttempts, allRight);
   if (maxAttempts > attempts && !allRight) {
     $('#transp'+activeSlide).addClass('ox-trying');
     $('#transp'+activeSlide).removeClass('ox-no-attempts');
