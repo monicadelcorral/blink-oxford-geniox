@@ -1969,6 +1969,7 @@ oxfApp.insertUnitSelect = function(){
           hidden: 1,
           idtema: $selects.val(),
           nombre: $("#nombre").val(),
+          tags: `{"hidden_resource_${new Date().getTime()}": "hidden_resource_${new Date().getTime()}"}`,        
         },
       });
     }
