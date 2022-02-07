@@ -234,6 +234,44 @@ oxfApp.minHeightSlides = function() {
 
 }
 
+//Utils: Detect URL parameter hashFrom and add it
+oxfApp.getURL = function(str) {
+  var url = str.substring(
+    str.indexOf("'") + 1, 
+    str.lastIndexOf("'")
+  );
+  var pre = str.substring(
+    0,
+    str.indexOf("'"), 
+  );
+  var post = str.substring(
+    str.lastIndexOf("'")
+  );
+  return [url, pre, post];
+}
+
+oxfApp.updateOnclickTitle = function(onclicktitle, hashFrom) {
+
+  var url = oxfApp.getURL(onclicktitle)[0];
+  var pre = oxfApp.getURL(onclicktitle)[1];
+  var post = oxfApp.getURL(onclicktitle)[2];
+
+  var base = window.location.origin;
+
+  var completeUrl = new URL(url, base);
+  var params = new URLSearchParams(completeUrl.search);
+  
+  params.set('hashFrom', hashFrom);
+  params.toString();
+
+  params = pre+"'?"+params+post;
+
+  return params;
+
+}
+
+
+
 // Header colors
 
 oxfApp.headerColorsGeniox = function(unitID) {
@@ -1139,8 +1177,8 @@ oxfApp.secondLevelView = function () {
             var title = subunit.title,
                 id = subunit.id,
                 onclickTitle = subunit.onclickTitle,
+                customOnclickTitle = oxfApp.updateOnclickTitle(onclickTitle, 'resources_'+unitID),
                 onlyVisibleTeachers = subunit.onlyVisibleTeachers;
-
 
              var gradeBadge = (oxfApp.config.isStudent) ? oxfApp.getGradeBagde(id) : false,
                 isNew = !gradeBadge && oxfApp.config.isStudent,
@@ -1153,7 +1191,7 @@ oxfApp.secondLevelView = function () {
             var actionsTeachers = (canLockActivities) ? '<button class="ox-button ox-button--toggleVisibility ox-js--toggleLock '+classLocked+'" data-id="'+id+'"><span class="ox-button__icon --icon-locked">'+oxfApp.icons.lockLocked+'</span><span class="ox-button__icon --icon-unlocked">'+oxfApp.icons.lockUnlock+'</span><span class="ox-button__text">'+oxfApp.text.oxford_geniox_toggleVisibility+'</span></button>' : '';
 
             if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
-              subunitsItems += '<article class="ox-resource ox-resource--exam"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+onclickTitle+'"><span class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3></span></a>'+gradeBadgeWrapper+actionsTeachers+'</article>';
+              subunitsItems += '<article class="ox-resource ox-resource--exam"><a href="javascript:void(0)" class="ox-resource__inner" onclick="'+customOnclickTitle+'"><span class="ox-resource__body"><h3 class="ox-resource__title">'+title+'</h3></span></a>'+gradeBadgeWrapper+actionsTeachers+'</article>';
             }
 
 
