@@ -1508,16 +1508,15 @@ oxfApp.toggleLockStatus = function(id) {
 }
 
 oxfApp.createNewResourceInList = function(resource, unitId) {
+  if (typeof resource === 'undefined') return;
 
-  var html = '';
   var header = $('.ox-sidebar__list[data-parent="'+unitId+'"] .--own-resources-header').length,
-      resourceList;
-  // if (header.length === 0) {
-  //   var headerHTML = '<li class="ox-sidebar__list__item  --level-1 --own-resources-header"><a href="javascript:void(0);">'+oxfApp.text.oxford_geniox_teacher_resources+'</a></li>';
-  //   resourceList += headerHTML;
-
-  //   header = true;
-  // }
+      resourceList = '';
+  if (header.length === 0) {
+      var headerHTML = '<li class="ox-sidebar__list__item  --level-1 --own-resources-header"><a href="javascript:void(0);">'+oxfApp.text.oxford_geniox_teacher_resources+'</a></li>';
+      resourceList += headerHTML;
+      header = ["1"];
+  }
 
   var title = resource.title;
   var id = resource.id;
@@ -1528,10 +1527,10 @@ oxfApp.createNewResourceInList = function(resource, unitId) {
   var visibility = (visible) ? 'visible' : 'not-visible';
   var button = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--icon ox-button--icon-visibility ox-js--toggleResourceVisibility --'+visibility+'" idclase="'+id+'" data-visibility="'+visibility+'"></button>' : '';
   if (oxfApp.config.isStudent && visible || !oxfApp.config.isStudent) {
-    html = '<li class="ox-sidebar__list__item --'+type+' --level-'+level+'"><a href="javascript:void(0)" onclick="'+onClick+'">'+title+'</a>'+button+'</li>';
+    resourceList += '<li class="ox-sidebar__list__item --'+type+' --level-'+level+'"><a href="javascript:void(0)" onclick="'+onClick+'">'+title+'</a>'+button+'</li>';
   }
 
-  $('.ox-sidebar__list[data-parent="'+unitId+'"] .--own-resources-header').append(html);
+  $('.ox-sidebar__list[data-parent="'+unitId+'"]').append(resourceList);
   
 }
 
@@ -2004,9 +2003,11 @@ oxfApp.insertUnitSelect = function(){
           });
 
           loadJSON(function(json) {
-            console.log(json);
+            oxfApp.log("JSON", json);
             oxfApp.courseData = json;
-            console.log(oxfApp.courseData);
+            var resourceId = file_upload_results.appId;
+            var unit = _.findWhere(json.units, {id: select});
+            var resource = _.findWhere(unit.resources, {id: resourceId});
 
             // A partir de file_upload_results.appId, que contiene el id de la actividad asociada al recurso 
             // cuando se hace la subida de este, tiene que sacar la actividad del courseData que acaba de actualizar, 
