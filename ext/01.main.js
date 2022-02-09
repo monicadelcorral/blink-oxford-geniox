@@ -2003,7 +2003,7 @@ oxfApp.insertUnitSelect = function(){
           });
 
           loadJSON(function(json) {
-            oxfApp.log("JSON", json);
+            oxfApp.console("JSON", json);
             oxfApp.courseData = json;
             var resourceId = file_upload_results.appId;
             var unit = _.findWhere(json.units, {id: select});
