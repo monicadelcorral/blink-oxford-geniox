@@ -764,21 +764,44 @@ oxfApp.blockExams = function() {
   var placeholder = 0;
   var $page = $('.ox-page--home');
 
+  var examGeneratorMain = false;
+  var examBlocks = [];
+
   $.each(data.units, function (i, unit) {
     var unitTags = unit.tags,
     unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
 
     var isExamGenerator = (unitTagsArray.indexOf(oxfApp.config.examGenerator) >= 0);
+    var isExamGenerated = (unitTagsArray.indexOf(oxfApp.config.examGenerated) >= 0);
+    var isExamOxford = (unitTagsArray.indexOf(oxfApp.config.examOxford) >= 0);
+    var isExamOnline = (unitTagsArray.indexOf(oxfApp.config.examsOnline) >= 0);
 
 
-    if (isExamGenerator && data.units[i - 1]) {
-        placeholder = i - 1;
-        $blockCreated = $('#ox-nblock-'+placeholder+' .ox-module__content .ox-grid');
-        $blockCreated.empty();
-      return false;
+    if (isExamGenerator && !examGeneratorMain) {
+        examBlocks.push(i);
+        examGeneratorMain = true;
+    }
+
+
+    if (isExamGenerated) {
+        examBlocks.push(i);
+    }
+
+    if (isExamOxford) {
+        examBlocks.push(i);
+    }
+
+    if (isExamOnline) {
+        examBlocks.push(i);
     }
 
   });
+
+  if (examBlocks.length && data.units[examBlocks[0] - 1]) {
+    placeholder = examBlocks[0] - 1;
+    $blockCreated = $('#ox-nblock-'+placeholder+' .ox-module__content .ox-grid');
+    $blockCreated.empty();
+  }
 
   if (!$blockCreated.length) {
     var unit = oxfApp.courseData.units[placeholder],
@@ -838,6 +861,8 @@ oxfApp.blockExams = function() {
 
   }
 
+  examGeneratorMain = false;
+
   $.each(data.units, function (i, unit) {
     var unitTags = unit.tags,
         unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
@@ -866,7 +891,7 @@ oxfApp.blockExams = function() {
     var itemAction = (itemsChildrenLength == 1) ? 'onclick="'+itemOnclickTitle+'"' : 'data-unitid="'+itemID+'"',
         itemClass = (itemsChildrenLength > 1 || itemsChildrenLength == 0) ? ' ox--js-goto-resourceslist' : '';
 
-    if (isExamGenerator && !oxfApp.config.isStudent) {
+    if (isExamGenerator && !oxfApp.config.isStudent && !examGeneratorMain) {
       if (oxfApp.config.canGenerateExam) {
         var itemAction =  'onclick="oxfApp.onGenerateExam()"',
             itemClass = '';
@@ -881,7 +906,7 @@ oxfApp.blockExams = function() {
             color = '',
             itemTitle = '';
       }
-
+      examGeneratorMain = true;
       var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
       $blockCreated.append(itemCard);
 
@@ -922,7 +947,7 @@ oxfApp.blockExams = function() {
       $blockCreated.append(itemCard);
     }
 
-    if ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || (isExamOxford)) {
+    if ($blockCreated && ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford)) {
       var gridLength = $blockCreated.find('.ox-grid__item').length;
 
       var template = (gridLength == 4) ? oxfApp.getTemplate('4_rectangle_inline')[0] : (gridLength == 3) ? oxfApp.getTemplate('1_left_2_right')[0] : (gridLength == 2) ? oxfApp.getTemplate('1_left_1_square_right')[0] : oxfApp.getTemplate('1_rectangle')[0];
