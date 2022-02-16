@@ -17,6 +17,7 @@ oxfApp.config.cardView = "cards_view";
 oxfApp.config.evauAbstracts = "evau_abstracts";
 oxfApp.config.evauExams = "evau_exams";
 oxfApp.config.examsOnline = "exams_online";
+oxfApp.config.ebookExamsGenerator = "block_ebook_exams_generator";
 
 oxfApp.config.oxfordExamsId = 0;
 
@@ -436,8 +437,10 @@ oxfApp.initBookUnitsSidebar = function() {
   var bookResources = "";
 
   $.each(data.units, function(i, unit) {
+    var tags = typeof unit.tags !== 'undefined' ? unit.tags : [];
+    var isBookExamGenerator = tags.indexOf(oxfApp.config.ebookExamsGenerator) >= 0;
 
-    if (i > currentBookIndex) {
+    if (i > currentBookIndex && !isBookExamGenerator) {
 
       var unitTags = unit.tags,
       unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
