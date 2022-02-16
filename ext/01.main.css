@@ -1480,6 +1480,8 @@ input:checked + .ox-switch__slider:before {
   -webkit-overflow-scrolling: touch;
   scrollbar-color: #777777 #fff;
   scrollbar-width: thin;
+  margin-right: -15px;
+  padding-right: 10px;
 }
 .ox-resource--card .ox-resource__description::-webkit-scrollbar {
   width: 6px;

@@ -146,6 +146,8 @@
         color: $color_darkgray;
         height: 68px;
         @include scrollable();
+        margin-right: -15px;
+        padding-right: 10px;
     }
 
     .ox-resource__textlink {
