@@ -74,6 +74,7 @@ oxfApp.text.oxford_geniox_teacher_resources = "Recursos del profesor";
 
 oxfApp.allExams = [];
 oxfApp.newExams = [];
+oxfApp.newExamsOnline = [];
 
 
 // Get template
@@ -943,6 +944,7 @@ oxfApp.blockExams = function() {
     }
 
     if (isExamOnline) {
+      itemClass += ' ox--exams-online';
       var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
       $blockCreated.append(itemCard);
     }
@@ -1452,7 +1454,9 @@ oxfApp.getExamsNotifications = function() {
   // Get all the exams
 
   var units = oxfApp.courseData.units;
-  var studentActivities = window.actividades;
+  
+  //var studentActivities = window.actividades;
+  var studentActivities = [];
 
   $.each(units, function(i, unit) {
     var isExams = unit.isExams;
@@ -1465,7 +1469,13 @@ oxfApp.getExamsNotifications = function() {
           var id = subunit.id;
           oxfApp.allExams.push(id);
           if (typeof studentActivities[id] === 'undefined') {
-            oxfApp.newExams.push(id);
+            var tags = typeof unit.tags !== "undefined" ? unit.tags.split(" ") : [];
+            //If is ONLINE 
+            if (tags.indexOf(oxfApp.config.examsOnline.toLowerCase()) >= 0) {
+              oxfApp.newExamsOnline.push(id);
+            } else {
+              oxfApp.newExams.push(id);
+            }            
           }
 
         }
@@ -1479,11 +1489,22 @@ oxfApp.getExamsNotifications = function() {
 oxfApp.showExamsNotifications = function() {
   var newExamsLength = oxfApp.newExams.length;
 
+  // Generated exams
   if (newExamsLength) {
     var target = $('.ox-card .ox--js-goto-generatedexams').parent();
     var badge = '<span class="ox-badge --notification">'+newExamsLength+'</span>';
 
     target.append(badge);
+  }
+
+  // Online Exam
+  var newExamsOnlineLength = oxfApp.newExamsOnline.length;
+
+  if (newExamsOnlineLength) {
+    var targetOnline = $('.ox-card .ox--exams-online').parent();
+    var badgeOnline = '<span class="ox-badge --notification">'+newExamsOnlineLength+'</span>';
+
+    targetOnline.append(badgeOnline);
   }
 
 }
