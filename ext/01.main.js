@@ -437,22 +437,25 @@ oxfApp.initBookUnitsSidebar = function() {
   var bookResources = "";
 
   $.each(data.units, function(i, unit) {
-    var tags = typeof unit.tags !== 'undefined' ? unit.tags : [];
-    var isBookExamGenerator = tags.indexOf(oxfApp.config.ebookExamsGenerator) >= 0;
+    var unitTags = unit.tags,
+    unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
+    var isBookExamGenerator = unitTagsArray.indexOf(oxfApp.config.ebookExamsGenerator) >= 0;
 
     if (i > currentBookIndex && !isBookExamGenerator) {
+      
+      var isBlockEbook = unitTagsArray.indexOf(oxfApp.config.tagBlockEbook) >= 0;
 
-      var unitTags = unit.tags,
-      unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
-
-      if (unitTagsArray.indexOf(oxfApp.config.tagBlockEbook) >= 0) {
+      if (isBlockEbook) {
         var unitID = unit.id;
 
         var unitTitle = unit.title,
         onlyVisibleTeachers = unit.onlyVisibleTeachers;
 
         if (!onlyVisibleTeachers || (onlyVisibleTeachers && !oxfApp.config.isStudent)) {
-          var unitItem = '<li><a href="javascript:void(0)" title="'+unitTitle+'" data-target="'+unitID+'">'+unitTitle+'</a></li>';
+          var noResources = unit.subunits.length < 2 && !unit.resources.length;
+          var noResourcesClass = (noResources) ? '--no-resources' : '';
+
+          var unitItem = '<li><a href="javascript:void(0)" title="'+unitTitle+'" data-target="'+unitID+'" class="'+noResourcesClass+'">'+unitTitle+'</a></li>';
           bookUnits += unitItem;
 
           var subunit = unit.subunits[0];
@@ -1788,6 +1791,10 @@ $(document).ready(function () {
   $("body").on("click", ".ox-js--openResourcesList a", function(e) {
     e.preventDefault();
     var target = $(this).attr('data-target');
+    var noResources = $(this).hasClass('--no-resources');
+
+    if (noResources) return false;
+
     if ($('[data-parent="'+target+'"]').hasClass('--hidden')) {
       $('#ox-BookResourcesList').removeClass('--hidden');
       $('[data-parent="'+target+'"]').removeClass('--hidden').siblings().addClass('--hidden');

@@ -1125,6 +1125,12 @@ input:checked + .ox-switch__slider:before {
   transform: translate(-50%, -50%) rotate(-90deg);
   z-index: 10;
 }
+#ox-BookResources .ox-sidebar__list a.--no-resources {
+  cursor: default;
+}
+#ox-BookResources .ox-sidebar__list a.--no-resources::before {
+  content: none;
+}
 .ox-sidebar__list li:hover a,
 .ox-sidebar__list li.--current a,
 .ox-sidebar__list li.--active a {

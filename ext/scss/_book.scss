@@ -369,6 +369,17 @@
                 transform: translate(-50%, -50%) rotate(-90deg);
                 z-index: 10;
             }
+
+
+            &.--no-resources {
+                #ox-BookResources & {
+                    cursor: default;
+                    &::before {
+                        content: none;
+                    }
+                }
+
+            }
         }
         li:hover,
         li.--current,
