@@ -764,7 +764,7 @@ oxfApp.checkOxfordExamID = function() {
 oxfApp.blockExams = function() {
   var data = oxfApp.courseData;
 
-  var $blockCreated = null;
+  var $blockCreated = '';
   var placeholder = 0;
   var $page = $('.ox-page--home');
 
