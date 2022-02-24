@@ -337,6 +337,10 @@ oxfApp.headerColorsGeniox = function(unitID) {
           bgcolor = value.replace(oxfApp.config.resourceHeaderBackgroundTag, '#');
           hasCustomColors = true;
         }
+        if (oxfApp.startsWith(value, oxfApp.config.headerBackgroundTag)) {
+          bgcolor = value.replace(oxfApp.config.headerBackgroundTag, '#');
+          hasCustomColors = true;
+        }
         if (oxfApp.startsWith(value, oxfApp.config.breadcrumbColorTag)) {
           color = value.replace(oxfApp.config.breadcrumbColorTag, '#');
           hasCustomColors = true;
