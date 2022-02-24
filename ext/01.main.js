@@ -509,7 +509,7 @@ oxfApp.initBookUnitsSidebar = function() {
             if (isTeacherResource) {
 
               if (!header) {
-                var headerHTML = '<li class="ox-sidebar__list__item  --level-1 --own-resources-header"><a href="javascript:void(0);">'+oxfApp.text.oxford_geniox_teacher_resources+'</a></li>';
+                var headerHTML = oxfApp.getResourcesHeader();
                 resourceList += headerHTML;
 
                 header = true;
@@ -1562,28 +1562,36 @@ oxfApp.toggleLockStatus = function(id) {
 oxfApp.createNewResourceInList = function(resource, unitId) {
   if (typeof resource === 'undefined') return;
 
-  var header = $('.ox-sidebar__list[data-parent="'+unitId+'"] .--own-resources-header').length,
+  var $parent = $('.ox-sidebar__list[data-parent="' + unitId + '"]'),
+      header = $parent.find('.--own-resources-header'),
       resourceList = '';
+
   if (header.length === 0) {
-      var headerHTML = '<li class="ox-sidebar__list__item  --level-1 --own-resources-header"><a href="javascript:void(0);">'+oxfApp.text.oxford_geniox_teacher_resources+'</a></li>';
+      var headerHTML = oxfApp.getResourcesHeader();
       resourceList += headerHTML;
       header = ["1"];
   }
 
-  var title = resource.title;
-  var id = resource.id;
-  var type = "own";
-  var level = 6;
-  var onClick = resource.onclickTitle;
-  var visible = resource.lock !== oxfApp.config.activityLocked;
-  var visibility = (visible) ? 'visible' : 'not-visible';
-  var button = (!oxfApp.config.isStudent) ? '<button class="ox-button ox-button--icon ox-button--icon-visibility ox-js--toggleResourceVisibility --'+visibility+'" idclase="'+id+'" data-visibility="'+visibility+'"></button>' : '';
+  var title = resource.title,
+      id = resource.id,
+      type = "own",
+      level = 6,
+      onClick = resource.onclickTitle,
+      visibility = resource.lock !== oxfApp.config.activityLocked
+          ? 'visible'
+          : 'not-visible',
+      button = (!oxfApp.config.isStudent)
+          ? '<button class="ox-button ox-button--icon ox-button--icon-visibility ox-js--toggleResourceVisibility --' + visibility + '" idclase="' + id + '" data-visibility="' + visibility + '"></button>'
+          : '';
   if (oxfApp.config.isStudent && visible || !oxfApp.config.isStudent) {
-    resourceList += '<li class="ox-sidebar__list__item --'+type+' --level-'+level+'"><a href="javascript:void(0)" onclick="'+onClick+'">'+title+'</a>'+button+'</li>';
+    resourceList += '<li class="ox-sidebar__list__item --' + type + ' --level-' + level + '"><a href="javascript:void(0)" onclick="' + onClick + '">' + title + '</a>' + button + '</li>';
   }
 
-  $('.ox-sidebar__list[data-parent="'+unitId+'"]').append(resourceList);
-  
+  $parent.append(resourceList);
+}
+
+oxfApp.getResourcesHeader = function() {
+	return '<li class="ox-sidebar__list__item  --level-1 --own-resources-header"><ul><li><a href="javascript:void(0);">' + oxfApp.text.oxford_geniox_teacher_resources + '</a></li></ul></li>';
 }
 
 
@@ -1931,7 +1939,7 @@ $(document).ready(function () {
 
 
 // Lanza el modal de subida de recursos personalizado para Geniox
-oxfApp.newResourceGeniox = function(target = event.currentTarget){
+oxfApp.newResourceGeniox = function(target = event.currentTarget) {
 
   var $target = $(target),
       isEdit = $target.hasClass('ox-button--edit'),
@@ -1949,11 +1957,14 @@ oxfApp.newResourceGeniox = function(target = event.currentTarget){
   $modal.one('show.bs.modal', function() {
     oxfApp.inserTitle();
     oxfApp.insertUnitSelect(); // Modificamos el modal para añadir el selector de temas
-    $modal.addClass('resources-modal').addClass('genioxResourcesUpload');
-    $modal.one('hidden.bs.modal', function() {
-      $modal.removeClass('resources-modal');
-    })
+
+    $modal
+    	.addClass('resources-modal genioxResourcesUpload')
+    	.one('hidden.bs.modal', function() {
+	      $modal.removeClass('resources-modal');
+	    });
   });
+
   // Si es creación de recurso -> se añade la tag level3...
   if (!isEdit) {
     var idSubunit = $target.attr('data-subunitid'),
@@ -1962,7 +1973,8 @@ oxfApp.newResourceGeniox = function(target = event.currentTarget){
     // Añadimos la tag 'level3...' al mostrar el modal.
     $modal.one('shown.bs.modal', function() {
       var $tagsTarget = $("#hiddenTags");
-      $tagsTarget.val() == "[]" && $tagsTarget.val('');
+
+      $tagsTarget.val() === "[]" && $tagsTarget.val('');
 
       blink.theme.setTag(defaultTag , "hidden", $tagsTarget);
     });
@@ -1974,8 +1986,9 @@ oxfApp.inserTitle = function(){
 }
 
 // Función para modificar los elementos del modal genérico de subida de archivos por los que necesitamos
-oxfApp.insertUnitSelect = function(){
+oxfApp.insertUnitSelect = function() {
   let $keywords = $("#keywords");
+
   $keywords
     .parent()
     .addClass("form-select")
@@ -1989,31 +2002,30 @@ oxfApp.insertUnitSelect = function(){
   let unit_tags = ["block_ebook"],
       first_to_ignore = true;
 
-  for(i = 0; i < oxfApp.courseData.units.length; i++){
-    var units = oxfApp.courseData.units[i],
-        already_in_select = false;
-
-    for(j = 0; j < unit_tags.length; j++){
-      if(!already_in_select && units?.tags?.indexOf(unit_tags[j]) > -1){
-        already_in_select = true;
-        if(!first_to_ignore){
-          $selects.append(`<option value=${units.id}>${units.title}</option>`)
-        }else{
-          first_to_ignore = false;
+      for(i = 0; i < oxfApp.courseData.units.length; i++) {
+        var units = oxfApp.courseData.units[i],
+            already_in_select = false;
+    
+        for (j = 0; j < unit_tags.length; j++) {
+          if (!already_in_select && units?.tags?.indexOf(unit_tags[j]) > -1) {
+            already_in_select = true;
+    
+            if (!first_to_ignore) {
+              $selects.append(`<option value=${units.id}>${units.title}</option>`);
+            } else {
+              first_to_ignore = false;
+            }
+          }
         }
       }
-    }
-  }
-
-  $selects.prepend(`<option value=0 selected>${textweb('oxford_geniox_select_resource_unit_label')}</option>`)
-
-  $selects.on("change", () => {
-    if(parseInt($selects.val()) === 0){
-      $selects.addClass("placeholder");
-    }else{
-      $selects.removeClass("placeholder");
-    }
-  })
+    
+      $selects.prepend(`<option value=0 selected>${textweb('oxford_geniox_select_resource_unit_label')}</option>`);
+    
+      $selects.on("change", () => {
+        parseInt($selects.val()) === 0
+          ? $selects.addClass("placeholder")
+          : $selects.removeClass("placeholder");
+      });    
 
   oxfApp.customizeSelects();
 
@@ -2023,68 +2035,98 @@ oxfApp.insertUnitSelect = function(){
         error = "",
         result = true;
 
-    if($nombre.length > 100){
-      error = "invalid_name";
-    }else if($nombre.length === 0){
-      error = "no_file_name";
-    }else if($("#files").html().length === 0){
-      error = "no_file_loaded";
-    }else{
-      result = false;
-    }
-
-    result && $("#resourceForm").find(".tab-content").find(".tab-pane").append(`<span class="error-msg">${textweb("oxford_geniox_select_resource_error_" + error)}</span>`);
-    return result;
+        if ($nombre.length > 100) {
+          error = "invalid_name";
+        } else if ($nombre.length === 0) {
+          error = "no_file_name";
+        } else if ($("#files").html().length === 0) {
+          error = "no_file_loaded";
+        } else {
+          result = false;
+        }
+        // ¿ No se quiere comprobar si $selects.val() === 0 ?
+        // Si no se selecciona unidad ($selects.val() === 0) no se muestra ningún error ni se da feedback de ningún tipo.
+    
+        result &&
+          $("#resourceForm")
+            .find(".tab-content")
+            .find(".tab-pane")
+              .append(`<span class="error-msg">${textweb("oxford_geniox_select_resource_error_" + error)}</span>`);
+    
+        return result;
   }
 
   //Anulamos el evento genérico del botón y lo sustituimos por un ajax específico para este modal
   $("#botonOK").off().on("click", (e) => {
-
     $(".error-msg").remove();
-    if(!checkFields()){
-      blink.ajax("/LMS/ajax.php?op=activity.executeneweditclass&idcurso=" + window.idcurso + "&justrefresh=1",
-      (result) => {
-        if(result.startsWith("RELOAD")){ 
-          var select = $("#selects").val();
-          let $modal_dialog = $(".modal-dialog"),
-          $modal_content = $modal_dialog.find(".modal-body");
 
-          $modal_dialog.addClass("modal-resource-success").find(".modal-header").hide();
-          $modal_content.html(`<div class="upload-resource-success"><div class="ok-circle"></div><p>${textweb("oxford_geniox_select_resource_upload_success_1")}<p><p>${textweb("oxford_geniox_select_resource_upload_success_2")}<p></div>`);
-          $("#resources-buttons").html(`<button id="botonOK" class="btn btn-default" type="button">${textweb('oxford_geniox_select_resource_upload_success_accept')}</button>`);
+    if (!checkFields()) {
+      var name = $("#nombre").val(),
+          targetUnitId = $selects.val();
 
-          $("#botonOK").off().on("click", () => {
-            $("#remote-modal").addClass("hidden");
-            $("#modal-backdrop").addClass("hidden");
-          });
+      blink.ajax(
+        "/LMS/ajax.php?op=activity.executeneweditclass&idcurso=" + window.idcurso + "&justrefresh=1",
+        (result) => {
+          if (result.startsWith("RELOAD")) {
+            var select = $("#selects").val(),
+                $modal_dialog = $(".modal-dialog"),
+                $modal_content = $modal_dialog.find(".modal-body"),
+                modalSuccessClass = 'modal-resource-success';
 
-          loadJSON(function(json) {
-            oxfApp.console("JSON", json);
-            oxfApp.courseData = json;
-            var resourceId = file_upload_results.appId;
-            var unit = _.findWhere(json.units, {id: select});
-            var resource = _.findWhere(unit.resources, {id: resourceId});
+            $modal_dialog
+              .addClass(modalSuccessClass)
+              .find(".modal-header")
+                .hide();
+            $modal_content.html(`<div class="upload-resource-success"><div class="ok-circle"></div><p>${textweb("oxford_geniox_select_resource_upload_success_1")}</p><p>${textweb("oxford_geniox_select_resource_upload_success_2")}</p></div>`);
+            $("#resources-buttons").html(`<button id="botonOK" class="btn btn-default" type="button">${textweb('oxford_geniox_select_resource_upload_success_accept')}</button>`);
 
-            // A partir de file_upload_results.appId, que contiene el id de la actividad asociada al recurso 
-            // cuando se hace la subida de este, tiene que sacar la actividad del courseData que acaba de actualizar, 
-            // y mandarlo como parámetro a su función, que debe ser llamada ahí. 
+            $("#botonOK").off().on("click", () => {
+              $("#remote-modal, #modal-backdrop").addClass("hidden");
+              $modal_dialog.removeClass(modalSuccessClass);
+            });
 
-            oxfApp.createNewResourceInList(resource, select); // resource -> por definir. select = id del tema al que se asoció el recurso
-          });
-        }
-      },
-      {
-        async: true,
-        data: {
-          recurso: 1,
-          tipoclase: 7,
-          url: file_upload_results.url,
-          hidden: 1,
-          idtema: $selects.val(),
-          nombre: $("#nombre").val(),
-          tags: `{"hidden_resource_${new Date().getTime()}": "hidden_resource_${new Date().getTime()}"}`,        
+            loadJSON(function(json) {
+              oxfApp.courseData = json;
+              /*
+                var resourceId = file_upload_results.appId,
+                  unit = _.findWhere(json.units, {id: select}),
+                  resource = _.findWhere(unit.resources, {id: resourceId});
+
+              // A partir de file_upload_results.appId, que contiene el id de la actividad asociada al recurso
+              // cuando se hace la subida de este, tiene que sacar la actividad del courseData que acaba de actualizar,
+              // y mandarlo como parámetro a su función, que debe ser llamada ahí.
+
+              oxfApp.createNewResourceInList(resource, select);
+              */
+
+              var targetUnitResources = json.units.filter((unit) => unit.id === targetUnitId)[0].resources,
+                  resource = targetUnitResources[targetUnitResources.length - 1];
+
+              blink.theme.onCursoCambiarBloqueado(resource.id, idcurso, function(state) {
+               // BK-26292 como es de nueva creación, el recurso siempre vendrá como locked.
+               // No obstante, comprobamos que sea así, y cambiamos la propiedad lock para que
+               // no sea necesario volver a llamar al cursoJson actualizado.
+               state === 'lock'
+                   && (resource.lock = oxfApp.config.activityLocked);
+
+               oxfApp.createNewResourceInList(resource, targetUnitId);
+              })
+            });
+          }
         },
-      });
+        {
+          async: true,
+          data: {
+            recurso: 1,
+            tipoclase: 7,
+            url: file_upload_results.url,
+            hidden: 1,
+            idtema: targetUnitId,
+            nombre: name,
+            hiddenTags: `{"resource_${new Date().getTime()}": "resource_${new Date().getTime()}", "resource_blocked": "resource_blocked"}`,
+          },
+        }
+      );
     }
   });
 }
@@ -2177,6 +2219,8 @@ function _createUploadFile(idButton, settings) {
     },
     process: function (e, data) {
       blink.log.info('Processing ' + data.files[data.index].name);
+
+       $("#resourceForm").find(".tab-content .tab-pane .error-msg").remove();
 
       $uploadProgress.empty(); // Vaciar el texto indicador de progreso.
       $progressContainer.removeClass('hidden'); // Mostrar la barra de progreso.
