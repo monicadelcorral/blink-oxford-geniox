@@ -155,6 +155,44 @@ oxfApp.getTemplate = function (templateName) {
       ];
   }
 };
+
+
+oxfApp.getTemplateByLength = function (length) {
+  switch (length) {
+    case 1:
+      return ["1col ox-grid--lowerheight", 1];
+      break;
+    case 2:
+      return ["2items", 2];
+      break;
+    case 3:
+      return ["3items", 3];
+      break;
+    case 4:
+      return ["4items-nowrap", 4];
+      break;
+    case 5:
+      return ["5items-bis", 5];
+      break;
+    case 6:
+      return ["6items", 6];
+      break;
+    case 7:
+      return ["7items", 7];
+      break;
+    case 9:
+      return ["9items", 9];
+      break;
+    case 12:
+      return ["12items", 12];
+      break;
+    default:
+      return [
+        oxfApp.config.templateDefault,
+        oxfApp.config.templateDefaultTotal,
+      ];
+  }
+};
 // Get text for downloadble file
 
 oxfApp.getTextbyFileType = function (type) {
@@ -774,6 +812,9 @@ oxfApp.blockExams = function() {
   var examGeneratorMain = false;
   var examBlocks = [];
 
+  var unitTemplate = oxfApp.config.templateDefault,
+      unitTemplateTotal = oxfApp.config.templateDefaultTotal;
+
   $.each(data.units, function (i, unit) {
     var unitTags = unit.tags,
     unitTagsArray = typeof unitTags !== "undefined" ? unitTags.split(" ") : [];
@@ -820,9 +861,7 @@ oxfApp.blockExams = function() {
           unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
 
       var unitBg = oxfApp.config.backgroundDefault,
-          unitBgImage = (typeof unit.image !== 'undefined') ? unit.image : '',
-          unitTemplate = oxfApp.config.templateDefault,
-          unitTemplateTotal = oxfApp.config.templateDefaultTotal;
+          unitBgImage = (typeof unit.image !== 'undefined') ? unit.image : '';
 
       if (unitTagsArray.length) {
 
@@ -832,7 +871,7 @@ oxfApp.blockExams = function() {
           if (oxfApp.startsWith(value, oxfApp.config.nBlockBoxBg)) {
             unitBg = value.replace(oxfApp.config.nBlockBoxBg, '#');
           } else if (oxfApp.startsWith(value, oxfApp.config.nBlockBoxTemplate)) {
-            unitTemplateVal = value.replace(oxfApp.config.nBlockBoxTemplate, '');
+            var unitTemplateVal = value.replace(oxfApp.config.nBlockBoxTemplate, '');
             unitTemplate = oxfApp.getTemplate(unitTemplateVal)[0];
             unitTemplateTotal = oxfApp.getTemplate(unitTemplateVal)[1];
           }
@@ -957,11 +996,14 @@ oxfApp.blockExams = function() {
 
     if ($blockCreated && ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford)) {
       var gridLength = $blockCreated.find('.ox-grid__item').length;
-
-      var template = (gridLength == 4) ? oxfApp.getTemplate('4_rectangle_inline')[0] : (gridLength == 3) ? oxfApp.getTemplate('1_left_2_right')[0] : (gridLength == 2) ? oxfApp.getTemplate('1_left_1_square_right')[0] : oxfApp.getTemplate('1_rectangle')[0];
-      $blockCreated.closest('.ox-grid').removeClass(function (index, css) {
-        return (css.match (/(^|\s)ox-grid--\S+/g) || []).join(' ');
-     }).addClass('ox-grid--'+template);
+      var templateLength = oxfApp.getTemplate(unitTemplate)[1];
+      if (templateLength !== gridLength) {
+        var template = oxfApp.getTemplateByLength(gridLength)[0];
+        $blockCreated.closest('.ox-grid').removeClass(function (index, css) {
+          return (css.match (/(^|\s)ox-grid--\S+/g) || []).join(' ');
+       }).addClass('ox-grid--'+template);
+      }
+    
     }
 
 
