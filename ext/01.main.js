@@ -83,75 +83,76 @@ oxfApp.newExamsOnline = [];
 oxfApp.getTemplate = function (templateName) {
   switch (templateName) {
     case "1_rectangle":
-      return ["1col ox-grid--lowerheight", 1];
+      return ["1col ox-grid--lowerheight", 99, 1];
       break;
     case "1_left_1_square_right":
-      return ["2items", 2];
+      return ["2items", 99, 2];
       break;
     case "1_square_left_1_right":
-      return ["2items-reverse", 2];
+      return ["2items-reverse", 99, 2];
       break;
     case "2_rectangle":
-      return ["2col ox-grid--lowerheight", 2];
+      return ["2col ox-grid--lowerheight", 99, 2];
       break;
     case "2_left_1_right":
-      return ["3items-reverse", 3];
+      return ["3items-reverse", 99, 3];
       break;
     case "1_left_2_right":
-      return ["3items", 3];
+      return ["3items", 99, 3];
       break;
     case "3rectangle":
-      return ["3col ox-grid--lowerheight", 3];
+      return ["3col ox-grid--lowerheight", 99, 3];
       break;
     case "3_rectangle":
-      return ["3col ox-grid--lowerheight", 3];
+      return ["3col ox-grid--lowerheight", 99, 3];
       break;
     case "3_square":
-      return ["3col", 3];
+      return ["3col", 99, 3];
       break;
     case "4_square":
-      return ["4col ox-grid--lowerheight", 4];
+      return ["4col ox-grid--lowerheight", 99, 4];
       break;
     case "4_rectangle":
-      return ["4items", 4];
+      return ["4items", 99, 4];
       break;
     case "1_square_left_4_right":
-      return ["5items", 5];
+      return ["5items", 99, 5];
       break;
     case "1_rectangle_left_4_right":
-      return ["5items-bis", 5];
+      return ["5items-bis", 99, 5];
       break;
     case "6_rectangle":
-      return ["6items", 6];
+      return ["6items", 99, 6];
       break;
     case "1_left_2_centre_4right":
-      return ["7items", 7];
+      return ["7items", 99, 7];
       break;
     case "1_left_8_right":
-      return ["9items", 9];
+      return ["9items", 99, 9];
       break;
     case "12_square":
-      return ["12items", 12];
+      return ["12items", 99, 12];
       break;
     case "template1": //OLD
-      return ["7items", 7];
+      return ["7items", 99, 7];
       break;
     case "template2": //OLD
-      return ["2items-reverse", 2];
+      return ["2items-reverse", 99, 2];
       break;
     case "5_square": //NEW
-      return ["5items-square", 5];
+      return ["5items-square", 99, 5];
       break;
     case "4_rectangle_inline": //NEW
-      return ["4items-nowrap", 4];
+      return ["4items-nowrap", 99, 4];
       break;
     case "1_left_1_square_right_ebook": //NEW
-      return ["2items", 50];
+      return ["2items", 99, 99];
       break;
     default:
       return [
         oxfApp.config.templateDefault,
-        oxfApp.config.templateDefaultTotal,
+        99,
+        oxfApp.config.templateDefaultTotal
       ];
   }
 };
@@ -160,35 +161,36 @@ oxfApp.getTemplate = function (templateName) {
 oxfApp.getTemplateByLength = function (length) {
   switch (length) {
     case 1:
-      return ["1col ox-grid--lowerheight", 1];
+      return ["1col ox-grid--lowerheight", 99, 1];
       break;
     case 2:
-      return ["2items", 2];
+      return ["2items", 99, 2];
       break;
     case 3:
-      return ["3items", 3];
+      return ["3items", 99, 3];
       break;
     case 4:
-      return ["4items-nowrap", 4];
+      return ["4items-nowrap", 99, 4];
       break;
     case 5:
-      return ["5items-bis", 5];
+      return ["5items-bis", 99, 5];
       break;
     case 6:
-      return ["6items", 6];
+      return ["6items", 99, 6];
       break;
     case 7:
-      return ["7items", 7];
+      return ["7items", 99, 7];
       break;
     case 9:
-      return ["9items", 9];
+      return ["9items", 99, 9];
       break;
     case 12:
-      return ["12items", 12];
+      return ["12items", 99, 12];
       break;
     default:
       return [
         oxfApp.config.templateDefault,
+        99,
         oxfApp.config.templateDefaultTotal,
       ];
   }
@@ -999,7 +1001,7 @@ oxfApp.blockExams = function() {
 
     if ($blockCreated && ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford)) {
       var gridLength = $blockCreated.find('.ox-grid__item').length,
-          templateLength = oxfApp.getTemplate(unitTemplate)[1];
+          templateLength = oxfApp.getTemplate(unitTemplate)[2];
       
       if (templateLength !== gridLength) {
         var template = oxfApp.getTemplateByLength(gridLength)[0];
@@ -1017,7 +1019,7 @@ oxfApp.prepareToEbooks = function () {
 
   $.each(data.units, function (index, unit) {
     var unitID = unit.id;
-    var tags = (typeof unit.tags !== 'undefined') ? unit.tags : [];
+    var tags = (typeof unit.tags !== 'undefined') ? unit.tags.split(" ") : [];
 
     var pattern = oxfApp.config.tagBlockEbook;
     var pattern2 = oxfApp.config.tagBlockEbooks;
@@ -1033,9 +1035,9 @@ oxfApp.prepareToEbooks = function () {
       $('.ox-card__inner[onclick="' + onclick + '"]')
         .closest(".ox-grid__item:not(:first-child)")
         .remove();
-
-
     }
+
+    // Remove hidden content in Ebook module 
 
     if (index > 1) {
       var prevIndex = index - 1;
@@ -1051,8 +1053,10 @@ oxfApp.prepareToEbooks = function () {
           .closest(".ox-grid__item")
           .nextAll(".ox-grid__item--empty")
           .remove();
-      }
+      } 
     }
+
+    // Add click to Ebook cover
 
     var isEbookCover = tags.indexOf(pattern2) >= 0;
 
@@ -1063,6 +1067,19 @@ oxfApp.prepareToEbooks = function () {
         $('.ox-card__inner[data-unitid="' + unitID + '"]').removeClass('ox--js-goto-resourceslist').attr('onclick', nextEbook.onclickTitle);
       }
     }
+
+    // Remove empty items out of grid in other modules
+    var tagTemplate = tags.filter(function isTemplate(value) {
+      return oxfApp.startsWith(value, oxfApp.config.nBlockBoxTemplate);
+    });
+
+    var templateData = oxfApp.getTemplate(tagTemplate);
+    var templateMax = templateData[2];
+
+    var lastItem = $('#ox-nblock-'+index).find('.ox-grid__item').eq(templateMax);
+
+    lastItem.nextAll(".ox-grid__item--empty").remove();
+
   });
 };
 
