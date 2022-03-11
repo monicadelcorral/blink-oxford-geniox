@@ -812,6 +812,7 @@ oxfApp.blockExams = function() {
 
   var $blockCreated = '';
   var placeholder = 0;
+  var nextPlaceholder = 0;
   var $page = $('.ox-page--home');
 
   var examGeneratorMain = false;
@@ -854,6 +855,13 @@ oxfApp.blockExams = function() {
     placeholder = examBlocks[0] - 1;
     $blockCreated = $('#ox-nblock-'+placeholder+' .ox-module__content .ox-grid');
     $blockCreated.empty();
+
+    var mainBlocks = data.units.filter((unit, ix) => {
+      var tags = (typeof unit.tags !== 'undefined') ? unit.tags.split(" ") : [];
+      return tags.indexOf(oxfApp.config.nBlockBox) > -1 && ix > placeholder;
+    })
+    nextPlaceholder = mainBlocks[0].number - 1;
+
   }
 
   if (!$blockCreated.length) {
@@ -922,6 +930,8 @@ oxfApp.blockExams = function() {
     var isExamGenerated = (unitTagsArray.indexOf(oxfApp.config.examGenerated) >= 0);
     var isExamOxford = (unitTagsArray.indexOf(oxfApp.config.examOxford) >= 0);
     var isExamOnline = (unitTagsArray.indexOf(oxfApp.config.examsOnline) >= 0);
+
+    var isOtherItem = (!isExamGenerator && !isExamGenerated && !isExamOxford && !isExamOnline && i < nextPlaceholder && i > placeholder);
 
     var item = unit,
     itemTitle = item.title,
@@ -999,10 +1009,20 @@ oxfApp.blockExams = function() {
       $blockCreated.append(itemCard);
     }
 
-    if ($blockCreated && ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford)) {
+    if (isOtherItem) {
+      var singleActivity = unit.subunits.length === 1;
+      itemAction = (singleActivity) ? 'onclick="'+unit.subunits[0].onclickTitle+'"' : 'data-unitid="'+itemID+'"';
+      itemClass = (singleActivity) ? '' : 'ox--js-goto-resourceslist';
+
+      
+      var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
+      $blockCreated.append(itemCard); 
+    }
+
+    if ($blockCreated && ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford || isOtherItem)) {
       var gridLength = $blockCreated.find('.ox-grid__item').length,
           templateLength = oxfApp.getTemplate(unitTemplate)[2];
-      
+
       if (templateLength !== gridLength) {
         var template = oxfApp.getTemplateByLength(gridLength)[0];
 
