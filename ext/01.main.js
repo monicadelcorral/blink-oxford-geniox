@@ -949,6 +949,16 @@ oxfApp.blockExams = function() {
     itemBgStyle = '';
     var color = (i % 2 == 0) ? oxfApp.config.colorsPairs_1 : oxfApp.config.colorsPairs_2;
 
+    // Get background color
+    var bgcolorTag = unitTagsArray.filter((tag) => {
+      return oxfApp.startsWith(tag, oxfApp.config.boxBg);
+    });
+
+    if (bgcolorTag.length) {
+      itemBg = bgcolorTag[0].replace(oxfApp.config.boxBg, '#');
+      itemBgStyle = 'background-color: '+itemBg+';';
+    }
+    
     // Get action
     var itemsChildrenLength = item.subunits.length;
     var itemOnclickTitle = (itemsChildrenLength == 1) ? item.subunits[0].onclickTitle : '';
