@@ -507,13 +507,16 @@ oxfApp.initBookUnitsSidebar = function() {
           var pags = Array.isArray(subunit.pags) ? subunit.pags : [];
           var subunitThumb = "";
           var subunitId = subunit.id;
+          var offset = (typeof subunit.offset !== 'undefined') ? subunit.offset : 0;
 
           $.each(pags, function(i, pag) {
-            if (i % 2) {
+            var ioffset = i + offset;
+            if (ioffset % 2) {
               return;
             }
             var thumb = (pag) ? pag.thumb : [];
-            var pageIndex = i + 1;
+
+            var pageIndex = ioffset + 1;
             var thumbNext = (pags[pageIndex]) ? pags[pageIndex].thumb : '';
             var page = pag.label;
             var page = (page === null || page === "null") ? "0" : page;
