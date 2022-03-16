@@ -510,17 +510,19 @@ oxfApp.initBookUnitsSidebar = function() {
           var offset = (typeof subunit.offset !== 'undefined') ? subunit.offset : 0;
 
           $.each(pags, function(i, pag) {
-            var ioffset = i + offset;
-            if (ioffset % 2) {
+           
+            if (i % 2) {
               return;
             }
-            var thumb = (pag) ? pag.thumb : [];
 
-            var pageIndex = ioffset + 1;
+            var thumb = (pag) ? pag.thumb : [];
+            var ioffset = i + offset;
+            var pageIndex = i + 1;
             var thumbNext = (pags[pageIndex]) ? pags[pageIndex].thumb : '';
-            var page = pag.label;
-            var page = (page === null || page === "null") ? "0" : page;
-            var pageNext = (pags[pageIndex]) ?  '-'+pags[pageIndex].label : '';
+            var pageLabel = pag.label;
+            var page = (pageLabel === null || pageLabel === "null") ? offset : pageLabel + offset;
+            var pageNextLabel = (pags[pageIndex]) ? pags[pageIndex].label + offset : '';
+            var pageNext = (pags[pageIndex]) ?  '-'+pageNextLabel : '';
             var otherBook = (window.idclase !== Number(subunitId)) ? 'data-onclick="' + subunit.onclickTitle + '"': '';
 
             var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner ox-js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+pageNext+'</div></a></article>';
