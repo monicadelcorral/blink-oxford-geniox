@@ -1115,12 +1115,17 @@ oxfApp.prepareToEbooks = function () {
       return oxfApp.startsWith(value, oxfApp.config.nBlockBoxTemplate);
     });
 
+    if (!tagTemplate.length) return;
+    tagTemplate = tagTemplate[0].replace(oxfApp.config.nBlockBoxTemplate, '');
+
     var templateData = oxfApp.getTemplate(tagTemplate);
-    var templateMax = templateData[2];
-
-    var lastItem = $('#ox-nblock-'+index).find('.ox-grid__item').eq(templateMax);
-
-    lastItem.nextAll(".ox-grid__item--empty").remove();
+    var templateMax = templateData[2] - 1;
+    
+    console.log(tagTemplate, templateData)
+    var lastItem = $('#ox-nblock-'+index+' .ox-grid__item:eq('+templateMax+')');
+    console.log(index, templateMax, lastItem);
+    console.log($(lastItem));
+    $(lastItem).nextAll(".ox-grid__item--empty").remove();
 
   });
 };
