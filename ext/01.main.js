@@ -478,7 +478,8 @@ oxfApp.initBookUnitsSidebar = function() {
 
   var bookUnits = "";
   var bookThumbs = "";
-  var bookResources = "";
+  var bookResources = "";  
+  var globalIndex = 1;
 
   $.each(data.units, function(i, unit) {
     var unitTags = unit.tags,
@@ -507,21 +508,28 @@ oxfApp.initBookUnitsSidebar = function() {
           var pags = Array.isArray(subunit.pags) ? subunit.pags : [];
           var subunitThumb = "";
           var subunitId = subunit.id;
-          var offset = (typeof subunit.offset !== 'undefined') ? Number(subunit.offset) : 0;
+          var offset = (typeof subunit.offset !== 'undefined' && Number(subunit.offset) >= 0)
+          ? Number(subunit.offset) + 1
+          : 0;
 
-          $.each(pags, function(i, pag) {
-           
+        globalIndex += offset;
+
+          $.each(pags, function(i, pag) {           
             if (i % 2) {
               return;
             }
 
             var thumb = (pag) ? pag.thumb : [];
             var pageIndex = i + 1;
-            var thumbNext = (pags[pageIndex]) ? pags[pageIndex].thumb : '';
-            var pageLabel = Number(pag.label);
-            var page = (pageLabel === null || pageLabel === "null") ? offset : pageLabel + offset;
-            var pageNextLabel = (pags[pageIndex]) ? pags[pageIndex].label + offset : '';
-            var pageNext = (pags[pageIndex]) ?  '-'+pageNextLabel : '';
+            var nextPage = pags[pageIndex];
+            var thumbNext = (typeof nextPage !== "null" && nextPage)
+              ? nextPage.thumb
+              : '';
+            var page = globalIndex++;
+            var pageNext = (typeof nextPage !== "null" && nextPage)
+              ? '-' + globalIndex++
+              : '';
+
             var otherBook = (window.idclase !== Number(subunitId)) ? 'data-onclick="' + subunit.onclickTitle + '"': '';
 
             var thumbWithPage = '<article class="ox-thumb"><a href="javascript:void(0)" '+otherBook+' class="ox-thumb__inner ox-js--goToPageBook" data-book-id="'+subunitId+'" data-page="'+pageIndex+'"><div class="ox-thumb__media"><img src="'+thumb+'" alt=""><img src="'+thumbNext+'" alt="" /></div><div class="ox-thumb__page">'+oxfApp.text.oxford_geniox_pags + ' ' + page+pageNext+'</div></a></article>';
@@ -2089,32 +2097,42 @@ oxfApp.insertUnitSelect = function() {
   $selects = $("#selects");
 
   let unit_tags = ["block_ebook"],
-      first_to_ignore = true;
+  forbiddenTags = [oxfApp.config.ebookExamsGenerator]
+  first_to_ignore = true;
 
-      for(i = 0; i < oxfApp.courseData.units.length; i++) {
-        var units = oxfApp.courseData.units[i],
-            already_in_select = false;
-    
-        for (j = 0; j < unit_tags.length; j++) {
-          if (!already_in_select && units?.tags?.indexOf(unit_tags[j]) > -1) {
-            already_in_select = true;
-    
-            if (!first_to_ignore) {
-              $selects.append(`<option value=${units.id}>${units.title}</option>`);
-            } else {
-              first_to_ignore = false;
-            }
-          }
+  for (i = 0; i < oxfApp.courseData.units.length; i++) {
+    var unit = oxfApp.courseData.units[i],
+        already_in_select = false,
+        forbidden = false;
+
+    // Si la etiqueta está dentro de las no permitidas, no pintamos el tema.
+    for (j = 0; j < forbiddenTags.length; j++) {
+      var fbTag = forbiddenTags[j];
+      unit.tags && unit.tags.indexOf(fbTag) !== -1 && (forbidden = true);
+    }
+
+    for (j = 0; j < unit_tags.length; j++) {
+      var curTag = unit_tags[j];
+
+      if (!already_in_select && unit.tags && unit.tags.indexOf(curTag) > -1 && !forbidden) {
+        already_in_select = true;
+
+        if (!first_to_ignore) {
+          $selects.append(`<option value=${unit.id}>${unit.title}</option>`);
+        } else {
+          first_to_ignore = false;
         }
       }
-    
-      $selects.prepend(`<option value=0 selected>${textweb('oxford_geniox_select_resource_unit_label')}</option>`);
-    
-      $selects.on("change", () => {
-        parseInt($selects.val()) === 0
-          ? $selects.addClass("placeholder")
-          : $selects.removeClass("placeholder");
-      });    
+    }
+  }
+
+  $selects.prepend(`<option value=0 selected>${textweb('oxford_geniox_select_resource_unit_label')}</option>`);
+
+  $selects.on("change", () => {
+    parseInt($selects.val()) === 0
+      ? $selects.addClass("placeholder")
+      : $selects.removeClass("placeholder");
+  });    
 
   oxfApp.customizeSelects();
 
