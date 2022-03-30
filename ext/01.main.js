@@ -832,6 +832,7 @@ oxfApp.blockExams = function() {
 
   var unitTemplate = oxfApp.config.templateDefault,
       unitTemplateTotal = oxfApp.config.templateDefaultTotal;
+  var unitTemplateVal = oxfApp.config.templateDefault;
 
   $.each(data.units, function (i, unit) {
     var unitTags = unit.tags,
@@ -875,33 +876,14 @@ oxfApp.blockExams = function() {
     nextPlaceholder = mainBlocks[0].number - 1;
 
   }
-
   if (!$blockCreated.length) {
     var unit = oxfApp.courseData.units[placeholder],
         title = unit.title,
         color = (placeholder % 2 == 0) ? oxfApp.config.colorsPairs_1 : oxfApp.config.colorsPairs_2;
 
       // Get template and background
-      var unitTags = unit.tags,
-          unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
-
       var unitBg = oxfApp.config.backgroundDefault,
           unitBgImage = (typeof unit.image !== 'undefined') ? unit.image : '';
-
-      if (unitTagsArray.length) {
-
-        $.each(unitTagsArray, function(index, value) {
-          value = value.toLowerCase();
-
-          if (oxfApp.startsWith(value, oxfApp.config.nBlockBoxBg)) {
-            unitBg = value.replace(oxfApp.config.nBlockBoxBg, '#');
-          } else if (oxfApp.startsWith(value, oxfApp.config.nBlockBoxTemplate)) {
-            var unitTemplateVal = value.replace(oxfApp.config.nBlockBoxTemplate, '');
-            unitTemplate = oxfApp.getTemplate(unitTemplateVal)[0];
-            unitTemplateTotal = oxfApp.getTemplate(unitTemplateVal)[1];
-          }
-        });
-      }
 
       var colorClass = oxfApp.getColorClass(unitBg);
       var $blockCreated = document.createElement('section');
@@ -930,6 +912,23 @@ oxfApp.blockExams = function() {
         $blockCreated = $($blockCreated).find('.ox-grid');
       }
 
+  }
+
+  var unit = oxfApp.courseData.units[placeholder];
+  var unitTags = unit.tags,
+      unitTagsArray = (typeof unitTags !== 'undefined') ? unitTags.split(" ") : [];
+
+  if (unitTagsArray.length) {
+
+    $.each(unitTagsArray, function(index, value) {
+      value = value.toLowerCase();
+
+      if (oxfApp.startsWith(value, oxfApp.config.nBlockBoxTemplate)) {
+        unitTemplateVal = value.replace(oxfApp.config.nBlockBoxTemplate, '');
+        unitTemplate = oxfApp.getTemplate(unitTemplateVal)[0];
+        unitTemplateTotal = oxfApp.getTemplate(unitTemplateVal)[2];
+      }
+    });
   }
 
   examGeneratorMain = false;
@@ -1043,7 +1042,7 @@ oxfApp.blockExams = function() {
 
     if ($blockCreated && ((isExamGenerated && oxfApp.courseData.hasExams )|| isExamOnline || isExamOxford || isOtherItem)) {
       var gridLength = $blockCreated.find('.ox-grid__item').length,
-          templateLength = oxfApp.getTemplate(unitTemplate)[2];
+          templateLength = oxfApp.getTemplate(unitTemplateVal)[2];
 
       if (templateLength !== gridLength) {
         var template = oxfApp.getTemplateByLength(gridLength)[0];
@@ -1051,6 +1050,11 @@ oxfApp.blockExams = function() {
         $blockCreated.closest('.ox-grid').removeClass(function (index, css) {
           return (css.match (/(^|\s)ox-grid--\S+/g) || []).join(' ');
        }).addClass('ox-grid--'+template);
+      } else {
+
+        $blockCreated.closest('.ox-grid').removeClass(function (index, css) {
+          return (css.match (/(^|\s)ox-grid--\S+/g) || []).join(' ');
+       }).addClass('ox-grid--'+unitTemplate);
       }
     }
   });
@@ -1121,10 +1125,8 @@ oxfApp.prepareToEbooks = function () {
     var templateData = oxfApp.getTemplate(tagTemplate);
     var templateMax = templateData[2] - 1;
     
-    console.log(tagTemplate, templateData)
     var lastItem = $('#ox-nblock-'+index+' .ox-grid__item:eq('+templateMax+')');
-    console.log(index, templateMax, lastItem);
-    console.log($(lastItem));
+
     $(lastItem).nextAll(".ox-grid__item--empty").remove();
 
   });
