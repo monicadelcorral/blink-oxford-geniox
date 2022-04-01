@@ -588,6 +588,18 @@
   color: #fff;
 }
 
+.ox-grid--5items-bis .ox-grid__item:nth-child(2) .ox-card .ox-card__inner .ox-title--3, .ox-grid--5items-bis .ox-grid__item:nth-child(3) .ox-card .ox-card__inner .ox-title--3, .ox-grid--5items-bis .ox-grid__item:nth-child(4) .ox-card .ox-card__inner .ox-title--3, .ox-grid--5items-bis .ox-grid__item:nth-child(5) .ox-card .ox-card__inner .ox-title--3 {
+  font-size: 15px !important;
+}
+
+.ox-grid--12items .ox-grid__item .ox-title--3,
+.ox-grid--7items .ox-grid__item:nth-child(4) .ox-title--3,
+.ox-grid--7items .ox-grid__item:nth-child(5) .ox-title--3,
+.ox-grid--7items .ox-grid__item:nth-child(6) .ox-title--3,
+.ox-grid--7items .ox-grid__item:nth-child(7) .ox-title--3 {
+  font-size: 12px !important;
+}
+
 .ox-button--2 {
   background-color: #02285c;
   color: #fff;

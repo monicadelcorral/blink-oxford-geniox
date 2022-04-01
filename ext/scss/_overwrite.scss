@@ -484,3 +484,29 @@
     color: $color_white;
 }
 
+
+
+
+
+// TEXT IN LAYOUT
+
+.ox-grid--5items-bis .ox-grid__item {
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5) {
+        .ox-card .ox-card__inner .ox-title--3 {
+            font-size: 15px!important;
+        }
+    }
+}
+
+.ox-grid--12items .ox-grid__item ,
+.ox-grid--7items .ox-grid__item:nth-child(4), 
+.ox-grid--7items .ox-grid__item:nth-child(5), 
+.ox-grid--7items .ox-grid__item:nth-child(6), 
+.ox-grid--7items .ox-grid__item:nth-child(7) {
+    .ox-title--3 {
+        font-size: 12px!important;
+    }
+}
