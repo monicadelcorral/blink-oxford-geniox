@@ -798,10 +798,20 @@ oxfApp.blockDropdown = function (block) {
         } else if (oxfApp.startsWith(value, oxfApp.config.nBlockBoxContent)) {
           //nBlocks content
           var unitID = unit.id;
+          var subunitSingle = (unit.subunits.length == 1);
+
           var textAlign = oxfApp.getTextAlign(unitTagsArray);
-          $('.ox-card__inner[data-unitid="' + unitID + '"]').addClass(
-            textAlign
-          );
+          
+          if (subunitSingle) {
+            var onclick = unit.subunits[0].onclickTitle;
+            $('.ox-card__inner[onclick="' + onclick + '"]').addClass(
+              textAlign
+            );
+          } else {
+            $('.ox-card__inner[data-unitid="' + unitID + '"]').addClass(
+                textAlign
+            );
+          }
         }
       });
     }
