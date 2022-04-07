@@ -295,21 +295,23 @@ oxfApp.getURL = function(str) {
 
 oxfApp.updateOnclickTitle = function(onclicktitle, hashFrom) {
 
-  var url = oxfApp.getURL(onclicktitle)[0];
-  var pre = oxfApp.getURL(onclicktitle)[1];
-  var post = oxfApp.getURL(onclicktitle)[2];
+  var url = oxfApp.getURL(onclicktitle);
+
+  var main = url[0];
+  var pre = url[1];
+  var post = url[2];
 
   var base = window.location.origin;
 
-  var completeUrl = new URL(url, base);
+  var completeUrl = new URL(main, base);
   var params = new URLSearchParams(completeUrl.search);
   
   params.set('hashFrom', hashFrom);
   params.toString();
 
-  params = pre+"'?"+params+post;
-
-  return params;
+  var rewrittenUrl = pre+"'"+main+"?"+params+post;
+  
+  return rewrittenUrl;
 
 }
 
