@@ -965,8 +965,11 @@ oxfApp.blockExams = function() {
     itemBackgroundStyle = (typeof itemBackground !== 'undefined' && itemBackground !== '') ? 'background-image: url(\''+itemBackground+'\');' : '',
     itemBackgroundStyleClass = (typeof itemBackground !== 'undefined' && itemBackground !== '') ? 'ox-wimage' : 'ox-noimage',
     itemBg = '',
+    textAlign = oxfApp.getTextAlign(unitTagsArray),
+    itemClass = textAlign,
     gridClass = '',
     itemBgStyle = '';
+
     var color = (i % 2 == 0) ? oxfApp.config.colorsPairs_1 : oxfApp.config.colorsPairs_2;
 
     // Get background color
@@ -982,23 +985,23 @@ oxfApp.blockExams = function() {
     // Get action
     var itemsChildrenLength = item.subunits.length;
     var itemOnclickTitle = (itemsChildrenLength == 1) ? item.subunits[0].onclickTitle : '';
-    var itemAction = (itemsChildrenLength == 1) ? 'onclick="'+itemOnclickTitle+'"' : 'data-unitid="'+itemID+'"',
-        itemClass = (itemsChildrenLength > 1 || itemsChildrenLength == 0) ? ' ox--js-goto-resourceslist' : '';
+    var itemAction = (itemsChildrenLength == 1) ? 'onclick="'+itemOnclickTitle+'"' : 'data-unitid="'+itemID+'"';
+    itemClass += (itemsChildrenLength > 1 || itemsChildrenLength == 0) ? ' ox--js-goto-resourceslist' : '';
 
     if (isExamGenerator && !oxfApp.config.isStudent && !examGeneratorMain) {
       if (oxfApp.config.canGenerateExam) {
         var itemAction =  'onclick="oxfApp.onGenerateExam()"',
-            itemClass = '';
+            itemClass = textAlign;
       } else {
         var itemAction = '',
-            itemClass = '',
-            gridClass = 'ox-generator--disabled',
+            itemClass = textAlign,
             itemBackgroundStyleClass = '',
             itemBackgroundStyle = '',
             itemBgStyle = '',
             itemDescription = oxfApp.text.oxford_zona_recursos_2020_nogenerator,
             color = '',
             itemTitle = '';
+            gridClass += ' ox-generator--disabled';
       }
       examGeneratorMain = true;
       var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
@@ -1007,8 +1010,8 @@ oxfApp.blockExams = function() {
     }
 
     if (isExamGenerated) {
-      var itemAction =  '',
-          itemClass = ' ox--js-goto-generatedexams';
+      var itemAction =  '';
+      itemClass += ' ox--js-goto-generatedexams';
       
       if (oxfApp.config.isStudent) {
 
@@ -1027,8 +1030,8 @@ oxfApp.blockExams = function() {
     }
 
     if (isExamOxford && oxfApp.examOxfordData && !oxfApp.config.isStudent) {
-      var itemAction =  '',
-          itemClass = ' ox--js-goto-oxfordexams';
+      var itemAction =  '';
+      itemClass += ' ox--js-goto-oxfordexams';
 
       oxfApp.config.oxfordExamsId = itemID;
 
@@ -1045,7 +1048,7 @@ oxfApp.blockExams = function() {
     if (isOtherItem) {
       var singleActivity = unit.subunits.length === 1;
       itemAction = (singleActivity) ? 'onclick="'+unit.subunits[0].onclickTitle+'"' : 'data-unitid="'+itemID+'"';
-      itemClass = (singleActivity) ? '' : 'ox--js-goto-resourceslist';
+      itemClass += (singleActivity) ? '' : ' ox--js-goto-resourceslist';
 
       
       var itemCard = '<div class="ox-grid__item '+gridClass+'"><article class="ox-card '+itemBackgroundStyleClass+'" style="'+itemBackgroundStyle+itemBgStyle+'"><a class="ox-card__inner '+itemClass+'" href="javascript:void(0)" '+itemAction+'><h4 class="ox-title ox-title--5">'+itemDescription+'</h4><h3 class="ox-title ox-title--3" style="color: #'+color+'">'+itemTitle+'</h3></a></article></div>';
@@ -1405,7 +1408,7 @@ oxfApp.secondLevelView = function () {
     var contentBody = '';
     var examBlock = '';
 
-    $.each(contentBodyData, function(i, exam) {
+    $.each(contentBodyData, function(exam, i) {
 
       var title = exam.title;
       var level = exam.level;
